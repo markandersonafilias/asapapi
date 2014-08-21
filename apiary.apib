@@ -1,8 +1,8 @@
 FORMAT: 1A
 HOST: http://www.google.com
 
-# ASAP
-The ASAP API is a *registrar service* offering for ASAP resellers. 
+# ASAP Reseller API
+The ASAP Reseller API is a *registrar platform* offering for ASAP reseller website and services. 
 
 # Group Authorization
 General authorization handling
@@ -13,13 +13,13 @@ General authorization handling
 
         { 
         "result": "success",
-        "token": "eyJhbGciOiJSUzI1NiIsImtp…zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E"
+        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E"
         }
 
 ### Update JWT token to avoid expiration [PUT]
 + Request (application/json)
 
-        { "token": "eyJhbGciOiJSUzI1NiIsImtp…zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
+        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
 
 + Response 200 (application/json)
 
@@ -33,16 +33,24 @@ Product related resources of the **ASAP API**
 
 ## Product List [/products]
 ### List all products [GET]
++ Request
+
+        Authorization: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Response 200 (application/json)
 
         [{
           "id": 1, "name": "TLD", ...
         }, {
-          "id": 2, "title": "goMobi", ...
+          "id": 2, "name": "goMobi", ...
         }]
 
 ## Offers List [/offers]
 ### List product offers [GET]
++ Request
+
+        Authorization: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        
 + Response 200 (application/json)
 
         [{
