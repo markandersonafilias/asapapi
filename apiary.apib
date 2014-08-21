@@ -7,12 +7,12 @@ The ASAP Reseller API is a *registrar platform* offering for ASAP reseller websi
 # Group Authorization
 General authorization handling
 
-## Guest User Authentication [/v1/authenticate]
+## User Token Authentication [/v1/token]
 ### Request new JWT token [GET]
 + Response 200 (application/json)
 
         { 
-        "result": "success",
+        "success": 1,
         "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E"
         }
 
@@ -24,18 +24,37 @@ General authorization handling
 + Response 200 (application/json)
 
         { 
-        "result": "success"
+        "success": 1
         }
 
+## User Login [/v1/login]
+### Returning user login [POST]
++ Request (application/json)
+
+        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", "email": "bob@example.com", "password": "secret1" }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23, ... }
+
+## User Logout [/v1/logout]
+### Returning user logout [POST]
++ Request (application/json)
+
+        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
 
 # Group Products
 Product related resources of the **ASAP API**
 
-## Product List [/products]
+## Product List [/v1/products]
 ### List all products [GET]
 + Request
 
-        Authorization: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
 
 + Response 200 (application/json)
 
@@ -45,11 +64,11 @@ Product related resources of the **ASAP API**
           "id": 2, "name": "goMobi", ...
         }]
 
-## Offers List [/offers]
+## Offers List [/v1/offers]
 ### List product offers [GET]
 + Request
 
-        Authorization: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
         
 + Response 200 (application/json)
 
@@ -62,14 +81,15 @@ Product related resources of the **ASAP API**
 # Group Customers
 Customer related resources of the **ASAP API**
 
-## Customers [/customers]
+## Customers [/customers{?token}{?id}{?email}]
 Creating and managing customer objects
 
 ### Retrieve a customer [GET]
-+ Request (application/json)
++ Parameters
+    + token (required, string) ... JWT authentication token.
+    + id (optional, int) ... ID of the required customer.
+    + email (optional, string) ... Email address of the required customer.
 
-        { "email": "bob@example.com" }
-        
 + Response 200 (application/json)
 
         { "id": 1, ... }
