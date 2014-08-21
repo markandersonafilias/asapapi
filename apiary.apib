@@ -1,0 +1,102 @@
+FORMAT: 1A
+HOST: http://www.google.com
+
+# ASAP
+The ASAP API is a *registrar service* offering for ASAP resellers. 
+
+
+# Group Products
+Product related resources of the **ASAP API**
+
+## Product List [/products]
+### List all products [GET]
++ Response 200 (application/json)
+
+        [{
+          "id": 1, "name": "TLD", ...
+        }, {
+          "id": 2, "title": "goMobi", ...
+        }]
+
+## Offers List [/offers]
+### List product offers [GET]
++ Response 200 (application/json)
+
+        [{
+          "id": 1, "title": "Bundle #1", ...
+        }, {
+          "id": 2, "title": "Bundle #2", ...
+        }]
+
+# Group Customers
+Customer related resources of the **ASAP API**
+
+## Customer Creation [/customers]
+Creating new customer objects
+
+### Retrieve a customer [GET]
++ Request (application/json)
+
+        { "email": "bob@example.com" }
+        
++ Response 200 (application/json)
+
+        { "id": 1, ... }
+            
+### Create a new customer [POST]
++ Request (application/json)
+
+        { "email": "bob@example.com", "password": "secret1" }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23, ... }
+
+### Update customer record [PUT]
++ Request (application/json)
+
+        { "email": "bob@example.com", ... }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+
+
+-- TODO password reset request, password reset completion
+
+# Group Domains
+Domain related resources of the **ASAP API**
+
+## Search [/domain/search/{query}]
+Perform a domain name search, ("domain spinning")
+
++ Parameters
+    + query (required, string, `myshop.info`) ... String `query` of the base name to spin domains for. 
+
+### Retrieve list of suggestions [GET]
++ Response 200 (application/json)
+
+        { ... }
+
+## Domain info [/domain/{fqdn}]
+Retrieve and manage domain details using FQDN
+
++ Parameters
+    + fqdn (required, string, `myshop.info`) ... String `fqdn` of the fully qualified domain name.
+
+### Retrieve domain info, contacts, DNS records, nameservers [GET]
++ Response 200 (application/json)
+
+        { "success": 1 }
+
+### Update domain record [PUT]
++ Request (application/json)
+
+        { "fqdn": "myshop.info", ... }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+
+
+
