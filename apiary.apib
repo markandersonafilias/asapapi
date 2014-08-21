@@ -4,6 +4,29 @@ HOST: http://www.google.com
 # ASAP
 The ASAP API is a *registrar service* offering for ASAP resellers. 
 
+# Group Authorization
+General authorization handling
+
+## Guest User Authentication [/v1/authenticate]
+### Request new JWT token [GET]
++ Response 200 (application/json)
+
+        { 
+        "result": "success",
+        "token": "eyJhbGciOiJSUzI1NiIsImtp…zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E"
+        }
+
+### Update JWT token to avoid expiration [PUT]
++ Request (application/json)
+
+        { "token": "eyJhbGciOiJSUzI1NiIsImtp…zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
+
++ Response 200 (application/json)
+
+        { 
+        "result": "success"
+        }
+
 
 # Group Products
 Product related resources of the **ASAP API**
