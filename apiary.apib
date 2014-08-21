@@ -17,9 +17,10 @@ General authorization handling
         }
 
 ### Update JWT token to avoid expiration [PUT]
-+ Request (application/json)
++ Request
+    + Headers
 
-        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
 + Response 200 (application/json)
 
@@ -29,20 +30,26 @@ General authorization handling
 
 ## User Login [/v1/login]
 ### Returning user login [POST]
++ Request
+    + Headers
+
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
 + Request (application/json)
 
-        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", "email": "bob@example.com", "password": "secret1" }
+        { "email": "bob@example.com", "password": "secret1" }
         
 + Response 200 (application/json)
 
         { "success": 1, "id": 23, ... }
 
 ## User Logout [/v1/logout]
-### Returning user logout [POST]
-+ Request (application/json)
+### Returning user logout [GET]
++ Request
+    + Headers
 
-        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
-        
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
 + Response 200 (application/json)
 
         { "success": 1 }
@@ -53,9 +60,10 @@ Product related resources of the **ASAP API**
 ## Product List [/v1/products]
 ### List all products [GET]
 + Request
+    + Headers
 
-        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
-
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
 + Response 200 (application/json)
 
         [{
@@ -67,9 +75,10 @@ Product related resources of the **ASAP API**
 ## Offers List [/v1/offers]
 ### List product offers [GET]
 + Request
+    + Headers
 
-        { "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
-        
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
 + Response 200 (application/json)
 
         [{
@@ -81,20 +90,30 @@ Product related resources of the **ASAP API**
 # Group Customers
 Customer related resources of the **ASAP API**
 
-## Customers [/customers{?token}{?id}{?email}]
+## Customers [/customers{?id}{?email}]
 Creating and managing customer objects
 
 ### Retrieve a customer [GET]
 + Parameters
-    + token (required, string) ... JWT authentication token.
+    
     + id (optional, int) ... ID of the required customer.
     + email (optional, string) ... Email address of the required customer.
 
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+    
 + Response 200 (application/json)
 
         { "id": 1, ... }
 
 ### Create a new customer [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Request (application/json)
 
         { "email": "bob@example.com", "password": "secret1" }
@@ -104,6 +123,11 @@ Creating and managing customer objects
         { "success": 1, "id": 23, ... }
 
 ### Update customer record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Request (application/json)
 
         { "email": "bob@example.com", ... }
@@ -123,6 +147,11 @@ Perform a domain name search, ("domain spinning")
     + query (required, string, `myshop.info`) ... String `query` of the base name to spin domains for. 
 
 ### Retrieve list of suggestions [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Response 200 (application/json)
 
         { ... }
@@ -134,11 +163,21 @@ Retrieve and manage domain details using FQDN
     + fqdn (required, string, `myshop.info`) ... String `fqdn` of the fully qualified domain name.
 
 ### Retrieve domain info, contacts, DNS records, nameservers [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Response 200 (application/json)
 
         { "success": 1 }
 
 ### Update domain record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Request (application/json)
 
         { "fqdn": "myshop.info", ... }
@@ -152,6 +191,11 @@ TLD related resources of the **ASAP API**
 
 ## TLD List [/tlds]
 ### List all available TLDs [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Response 200 (application/json)
 
         [{
@@ -169,6 +213,11 @@ User related resources of the **ASAP API**
 Creating and managing user objects
 
 ### Retrieve a user [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Request (application/json)
 
         { "email": "bob@example.com" }
@@ -187,6 +236,11 @@ Creating and managing user objects
         { "success": 1, "id": 23, ... }
 
 ### Update user record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Request (application/json)
 
         { "email": "bob@example.com", ... }
