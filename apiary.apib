@@ -31,8 +31,8 @@ Product related resources of the **ASAP API**
 # Group Customers
 Customer related resources of the **ASAP API**
 
-## Customer Creation [/customers]
-Creating new customer objects
+## Customers [/customers]
+Creating and managing customer objects
 
 ### Retrieve a customer [GET]
 + Request (application/json)
@@ -42,7 +42,7 @@ Creating new customer objects
 + Response 200 (application/json)
 
         { "id": 1, ... }
-            
+
 ### Create a new customer [POST]
 + Request (application/json)
 
@@ -108,4 +108,40 @@ TLD related resources of the **ASAP API**
         }, {
           "id": 2, "tld": "info", ...
         }]
+
+
+
+# Group Users
+User related resources of the **ASAP API**
+
+## User [/users]
+Creating and managing user objects
+
+### Retrieve a user [GET]
++ Request (application/json)
+
+        { "email": "bob@example.com" }
+        
++ Response 200 (application/json)
+
+        { "id": 1, ... }
+            
+### Create a new user [POST]
++ Request (application/json)
+
+        { "email": "bob@example.com", "password": "secret1" }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23, ... }
+
+### Update user record [PUT]
++ Request (application/json)
+
+        { "email": "bob@example.com", ... }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+
 
