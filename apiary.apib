@@ -136,56 +136,6 @@ Creating and managing customer objects
 
         { "success": 1 }
 
-
-# Group Domains
-Domain related resources of the **ASAP API**
-
-## Search [/domain/search/{query}]
-Perform a domain name search, ("domain spinning")
-
-+ Parameters
-    + query (required, string, `myshop.info`) ... String `query` of the base name to spin domains for. 
-
-### Retrieve list of suggestions [GET]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        { ... }
-
-## Domain info [/domain/{fqdn}]
-Retrieve and manage domain details using FQDN
-
-+ Parameters
-    + fqdn (required, string, `myshop.info`) ... String `fqdn` of the fully qualified domain name.
-
-### Retrieve domain info, contacts, DNS records, nameservers [GET]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        { "success": 1 }
-
-### Update domain record [PUT]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "fqdn": "myshop.info", ... }
-        
-+ Response 200 (application/json)
-
-        { "success": 1 }
-
 # Group TLDs
 TLD related resources of the **ASAP API**
 
@@ -203,8 +153,6 @@ TLD related resources of the **ASAP API**
         }, {
           "id": 2, "tld": "info", ...
         }]
-
-
 
 # Group Users
 User related resources of the **ASAP API**
@@ -250,3 +198,100 @@ Creating and managing user objects
         { "success": 1 }
 
 
+# Group Domains
+Domain related resources of the **ASAP API**
+
+## Search [/domain/search/{query}]
+Perform a domain name search, ("domain spinning")
+
++ Parameters
+    + query (required, string, `myshop.info`) ... String `query` of the base name to spin domains for. 
+
+### Retrieve list of suggestions [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        { ... }
+
+## Domain creation [/domain/create/{fqdn}]
+
+## Domain info [/domain/{fqdn}]
+Retrieve and manage domain details using FQDN
+
++ Parameters
+    + fqdn (required, string, `myshop.info`) ... String `fqdn` of the fully qualified domain name.
+
+### Retrieve domain info, contacts, DNS records, nameservers [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        { "success": 1 }
+
+### Update domain contact records [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "fqdn": "myshop.info", ... }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+
+
+# Group Domains
+User related resources of the **ASAP API**
+
+## Domain [/domains/{fqdn}]
+Creating and managing domain objects
+
+### Retrieve a domain [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "fqd": "bob@example.com" }
+        
++ Response 200 (application/json)
+
+        { "id": 1, ... }
+            
+### Create a new user [POST]
++ Request (application/json)
+
+        { "email": "bob@example.com", "password": "secret1" }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23, ... }
+
+### Update user record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "email": "bob@example.com", ... }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+        
+        
+        
