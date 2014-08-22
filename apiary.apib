@@ -245,6 +245,19 @@ Perform a domain name suggestions search, ("domain spinning")
             "myshop.info", "myshophome.info", "myshopweb.organic", ...
         }
 
+## List My Domains [/domain/list]
+### Retrieve list of my domains [get]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        
++ Response 200 (application/json)
+
+        {
+            "myshop.info", "myshophome.info", "myshopweb.organic", ...
+        }
+        
 ## Domain creation [/domain/create]
 ### Domain Creation [post]
 Create a new domain name order
@@ -292,13 +305,13 @@ Create a new domain name order
 
         { "success": 1 }
 
-## Domain managerment [/domain/{domain}]
-Retrieve and manage domain details
+## Domain info [/domain/{domain}]
+Retrieve domain details
 
 + Parameters
     + domain (required, string, `myshop.info`) ... String of the domain name.
 
-### Retrieve domain info, contacts, DNS records, nameservers [GET]
+### Retrieve full domain info, contacts, DNS records, nameservers, domain lock [GET]
 + Request
     + Headers
     
@@ -308,20 +321,22 @@ Retrieve and manage domain details
 
         { "domain": "myshop.info", ... }
 
-### Update domain contact records [PUT]
+## Domain lock [/domain/lock/{domain}/{status}]
+Set domain lock status
+
++ Parameters
+    + domain (required, string, `myshop.info`) ... String of the domain name.
+    + status (required, int, 1) ... Integer representing off and on (0/1).
+
+### Set current status of domain lock [POST]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request (application/json)
-
-        { "domain": "myshop.info", ... }
-        
 + Response 200 (application/json)
 
-        { "success": 1 }
-
+        { "domain": "myshop.info", "lock": "on"... }
 
 
 
