@@ -227,8 +227,8 @@ TLD related resources of the **ASAP API**
 # Group Domains
 Domain related resources of the **ASAP API**
 
-## Search [/domain/search/{query}]
-Perform a domain name search, ("domain spinning")
+## Suggest [/domain/suggest/{query}]
+Perform a domain name suggestions search, ("domain spinning")
 
 + Parameters
     + query (required, string, `myshop`) ... String of the base name to spin domains for. 
@@ -291,23 +291,9 @@ Create a new domain name order
 + Response 200 (application/json)
 
         { "success": 1 }
-    
-## Domain creation [/domain/suggest/{query}]
-### Domain Creation [post]
-### Retrieve list of domain suggestions [GET]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {
-            "myshop.info", "myshophome.info", "myshopweb.organic", ...
-        }
 
 ## Domain managerment [/domain/{domain}]
-Retrieve and manage domain details using FQDN
+Retrieve and manage domain details
 
 + Parameters
     + domain (required, string, `myshop.info`) ... String of the domain name.
@@ -320,7 +306,7 @@ Retrieve and manage domain details using FQDN
 
 + Response 200 (application/json)
 
-        { "success": 1 }
+        { "domain": "myshop.info", ... }
 
 ### Update domain contact records [PUT]
 + Request
@@ -330,55 +316,15 @@ Retrieve and manage domain details using FQDN
 
 + Request (application/json)
 
-        { "fqdn": "myshop.info", ... }
+        { "domain": "myshop.info", ... }
         
 + Response 200 (application/json)
 
         { "success": 1 }
 
 
-# Group Domains
-User related resources of the **ASAP API**
 
-## Domain [/domains/{fqdn}]
-Creating and managing domain objects
 
-### Retrieve a domain [GET]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request (application/json)
-
-        { "fqd": "bob@example.com" }
-        
-+ Response 200 (application/json)
-
-        { "id": 1, ... }
-            
-### Create a new user [POST]
-+ Request (application/json)
-
-        { "email": "bob@example.com", "password": "secret1" }
-        
-+ Response 200 (application/json)
-
-        { "success": 1, "id": 23, ... }
-
-### Update user record [PUT]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com", ... }
-        
-+ Response 200 (application/json)
-
-        { "success": 1 }
-        
         
         
