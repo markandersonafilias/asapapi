@@ -4,14 +4,17 @@ HOST: http://www.google.com
 # ASAP Reseller API
 The ASAP Reseller API is a *registrar platform* offering for ASAP reseller website and services. 
 
-# Group User
-General user management and authentication handling
+# Group Authorization
+General authorization handling
 
-## User Token Authentication [/v1/user/token]
+## User Token Authentication [/v1/token]
 ### Request new JWT token [GET]
 + Response 200 (application/json)
 
-        { "success": 1, "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
+        { 
+        "success": 1,
+        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E"
+        }
 
 ### Update JWT token to avoid expiration [PUT]
 + Request
@@ -21,64 +24,9 @@ General user management and authentication handling
 
 + Response 200 (application/json)
 
-        { "success": 1 }
-
-## User Search [/v1/user/]
-### Retrieve a user [GET]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com" }
-        
-+ Response 200 (application/json)
-
-        { "id": 1, ... }
-
-## User Management [/v1/user/{id}]
-### Retrieve a user [GET]
-+ Request
-    + Parameters
-        + id (required, int) ... ID of the required user.
-            
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-        
-+ Response 200 (application/json)
-
-        { "id": 1, ... }
-            
-### Create a new user [POST]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com", "password": "secret1" }
-        
-+ Response 200 (application/json)
-
-        { "success": 1, "id": 23, ... }
-
-### Update user record [PUT]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com", ... }
-        
-+ Response 200 (application/json)
-
-        { "success": 1 }
+        { 
+        "success": 1
+        }
 
 ## User Login [/v1/login]
 ### Returning user login [POST]
@@ -139,12 +87,12 @@ Product related resources of the **ASAP API**
           "id": 2, "title": "Bundle #2", ...
         }]
 
+
 # Group Customers
 Customer related resources of the **ASAP API**
 
-## Customers [/customers{?id}{?email}]
+## Customers [/v1/customers{?id}{?email}]
 Creating and managing customer objects
-
 
 ### Retrieve a customer [GET]
 + Parameters
@@ -154,6 +102,7 @@ Creating and managing customer objects
 
 + Request
     + Headers
+    
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
     
@@ -192,7 +141,7 @@ Creating and managing customer objects
 # Group TLDs
 TLD related resources of the **ASAP API**
 
-## TLD List [/tlds/list]
+## TLD List [/v1/tlds]
 ### List all available TLDs [GET]
 + Request
     + Headers
@@ -202,13 +151,13 @@ TLD related resources of the **ASAP API**
 + Response 200 (application/json)
 
         [{
-          "id": 1, "tld": "organic", ...
+          "id": 1, "category": "organic", ...
         }, {
-          "id": 2, "tld": "info", ...
+          "id": 2, "category": "info", ...
         }]
-
-## TLD Categories [/tlds/categories]
-### List all TLD categories [GET]
+     
+## TLD Categories [/v1/tld_categories]
+### List all available TLD categories [GET]
 + Request
     + Headers
     
@@ -217,21 +166,64 @@ TLD related resources of the **ASAP API**
 + Response 200 (application/json)
 
         [{
-          "id": 1, "category": "business", ...
+          "id": 1, "tld": "Business", ...
         }, {
-          "id": 2, "category": "industry", ...
-        }, {
-          "id": 3, "category": "personal", ...
+          "id": 2, "tld": "Education", ...
         }]
+
+
+# Group Users
+User related resources of the **ASAP API**
+
+## User [/v1/users]
+Creating and managing user objects
+
+### Retrieve a user [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "email": "bob@example.com" }
+        
++ Response 200 (application/json)
+
+        { "id": 1, ... }
+            
+### Create a new user [POST]
++ Request (application/json)
+
+        { "email": "bob@example.com", "password": "secret1" }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23, ... }
+
+### Update user record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "email": "bob@example.com", ... }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+
 
 # Group Domains
 Domain related resources of the **ASAP API**
 
-## Suggest [/domain/suggest/{query}]
-Perform a domain name suggestions search, ("domain spinning")
+## Search [/v1/domain/search/{query}]
+Perform a domain name search, ("domain spinning")
 
 + Parameters
-    + query (required, string, `myshop`) ... String of the base name to spin domains for. 
+    + query (required, string, `myshop.info`) ... String `query` of the base name to spin domains for. 
 
 ### Retrieve list of suggestions [GET]
 + Request
@@ -241,106 +233,101 @@ Perform a domain name suggestions search, ("domain spinning")
 
 + Response 200 (application/json)
 
-        {
-            "myshop.info", "myshophome.info", "myshopweb.organic", ...
-        }
+        { ... }
 
-## List My Domains [/domain/list]
-### Retrieve list of my domains [get]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-        
-+ Response 200 (application/json)
+## Domain creation [/v1/domain/create/{fqdn}]
 
-        {
-            "myshop.info", "myshophome.info", "myshopweb.organic", ...
-        }
-        
-## Domain creation [/domain/create]
-### Domain Creation [post]
-Create a new domain name order
+## Domain info [/v1/domain/{fqdn}]
+Retrieve and manage domain details using FQDN
+
++ Parameters
+    + fqdn (required, string, `myshop.info`) ... String `fqdn` of the fully qualified domain name.
+
+### Retrieve domain info, contacts, DNS records, nameservers [GET]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-    + Body
-    
-        {
-            "domain": "myshop.info",
-            "years": 2,
-            "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
-            "contacts": [
-                {
-                    "type": "registrant",
-                    "first_name": "Jonathan",
-                    "last_name": "Doe",
-                    "organization": "Acme Inc",
-                    "email": "",
-                    "address1": "",
-                    "address2": "",
-                    "city": "",
-                    "state": "",
-                    "postal_code": "",
-                    "country": "",
-                    "phone1_type": "",
-                    "phone1_country_code": "",
-                    "phone1_number": "",
-                    "phone1_extension": "",
-                    "phone2_type": "",
-                    "phone2_country_code": "",
-                    "phone2_number": "",
-                    "phone2_extension": "",
-                    "fax1_type": "",
-                    "fax1_country_code": "",
-                    "fax1_number": ""
-                }
-            ]
-        }
-    
-        
 + Response 200 (application/json)
 
         { "success": 1 }
 
-## Domain info [/domain/{domain}]
-Retrieve domain details
-
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
-
-### Retrieve full domain info, contacts, DNS records, nameservers, domain lock [GET]
+### Update domain contact records [PUT]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
++ Request (application/json)
+
+        { "fqdn": "myshop.info", ... }
+        
 + Response 200 (application/json)
 
-        { "domain": "myshop.info", ... }
+        { "success": 1 }
+        
+## Retrieve Whois information [/v1/domain/{fqdn}/whois]
+Retrieve who information for a domain using FQDN
 
-## Domain lock [/domain/lock/{domain}/{status}]
-Set domain lock status
 
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
-    + status (required, int, 1) ... Integer representing off and on (0/1).
 
-### Set current status of domain lock [POST]
+
+
+# Group Domains
+User related resources of the **ASAP API**
+
+## Domain [/v1/domains/{fqdn}]
+Creating and managing domain objects
+
+### Retrieve a domain [GET]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
++ Request (application/json)
+
+        { "fqd": "bob@example.com" }
+        
 + Response 200 (application/json)
 
-        { "domain": "myshop.info", "lock": "on"... }
+        { "id": 1, ... }
+            
+### Create a new user [POST]
++ Request (application/json)
+
+        { "email": "bob@example.com", "password": "secret1" }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23, ... }
+
+### Update user record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "email": "bob@example.com", ... }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+        
+
+# Group Orders
+Order related resources of the reseller API
+
+
+# Group Bundles
+Bundle related resources available via the reseller API
 
 
 
-hello world!
 
+        
         
         
