@@ -38,7 +38,7 @@ General user management and authentication handling
 
         { "id": 1, ... }
 
-## User Retrieval [/v1/user/{id}]
+## User Management [/v1/user/{id}]
 ### Retrieve a user [GET]
 + Request
     + Parameters
@@ -192,7 +192,7 @@ Creating and managing customer objects
 # Group TLDs
 TLD related resources of the **ASAP API**
 
-## TLD List [/tlds]
+## TLD List [/tlds/list]
 ### List all available TLDs [GET]
 + Request
     + Headers
@@ -207,9 +207,22 @@ TLD related resources of the **ASAP API**
           "id": 2, "tld": "info", ...
         }]
 
-# Group Users
-User related resources of the **ASAP API**
+## TLD Categories [/tlds/categories]
+### List all TLD categories [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
++ Response 200 (application/json)
+
+        [{
+          "id": 1, "category": "business", ...
+        }, {
+          "id": 2, "category": "industry", ...
+        }, {
+          "id": 3, "category": "personal", ...
+        }]
 
 # Group Domains
 Domain related resources of the **ASAP API**
@@ -218,7 +231,7 @@ Domain related resources of the **ASAP API**
 Perform a domain name search, ("domain spinning")
 
 + Parameters
-    + query (required, string, `myshop.info`) ... String `query` of the base name to spin domains for. 
+    + query (required, string, `myshop`) ... String of the base name to spin domains for. 
 
 ### Retrieve list of suggestions [GET]
 + Request
@@ -228,15 +241,76 @@ Perform a domain name search, ("domain spinning")
 
 + Response 200 (application/json)
 
-        { ... }
+        {
+            "myshop.info", "myshophome.info", "myshopweb.organic", ...
+        }
 
-## Domain creation [/domain/create/{fqdn}]
+## Domain creation [/domain/create]
+### Domain Creation [post]
+Create a new domain name order
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-## Domain info [/domain/{fqdn}]
+    + Body
+    
+        {
+            "domain": "myshop.info",
+            "years": 2,
+            "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
+            "contacts": [
+                {
+                    "type": "registrant",
+                    "first_name": "Jonathan",
+                    "last_name": "Doe",
+                    "organization": "Acme Inc",
+                    "email": "",
+                    "address1": "",
+                    "address2": "",
+                    "city": "",
+                    "state": "",
+                    "postal_code": "",
+                    "country": "",
+                    "phone1_type": "",
+                    "phone1_country_code": "",
+                    "phone1_number": "",
+                    "phone1_extension": "",
+                    "phone2_type": "",
+                    "phone2_country_code": "",
+                    "phone2_number": "",
+                    "phone2_extension": "",
+                    "fax1_type": "",
+                    "fax1_country_code": "",
+                    "fax1_number": ""
+                }
+            ]
+        }
+    
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+    
+## Domain creation [/domain/suggest/{query}]
+### Domain Creation [post]
+### Retrieve list of domain suggestions [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        {
+            "myshop.info", "myshophome.info", "myshopweb.organic", ...
+        }
+
+## Domain managerment [/domain/{domain}]
 Retrieve and manage domain details using FQDN
 
 + Parameters
-    + fqdn (required, string, `myshop.info`) ... String `fqdn` of the fully qualified domain name.
+    + domain (required, string, `myshop.info`) ... String of the domain name.
 
 ### Retrieve domain info, contacts, DNS records, nameservers [GET]
 + Request
