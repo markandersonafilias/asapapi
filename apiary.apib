@@ -4,17 +4,14 @@ HOST: http://www.google.com
 # ASAP Reseller API
 The ASAP Reseller API is a *registrar platform* offering for ASAP reseller website and services. 
 
-# Group Authorization
-General authorization handling
+# Group User
+General user management and authentication handling
 
-## User Token Authentication [/v1/token]
+## User Token Authentication [/v1/user/token]
 ### Request new JWT token [GET]
 + Response 200 (application/json)
 
-        { 
-        "success": 1,
-        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E"
-        }
+        { "success": 1, "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
 
 ### Update JWT token to avoid expiration [PUT]
 + Request
@@ -24,9 +21,64 @@ General authorization handling
 
 + Response 200 (application/json)
 
-        { 
-        "success": 1
-        }
+        { "success": 1 }
+
+## User Search [/v1/user/]
+### Retrieve a user [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "email": "bob@example.com" }
+        
++ Response 200 (application/json)
+
+        { "id": 1, ... }
+
+## User Retrieval [/v1/user/{id}]
+### Retrieve a user [GET]
++ Request
+    + Parameters
+        + id (required, int) ... ID of the required user.
+            
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        
++ Response 200 (application/json)
+
+        { "id": 1, ... }
+            
+### Create a new user [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "email": "bob@example.com", "password": "secret1" }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23, ... }
+
+### Update user record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "email": "bob@example.com", ... }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
 
 ## User Login [/v1/login]
 ### Returning user login [POST]
@@ -93,6 +145,7 @@ Customer related resources of the **ASAP API**
 ## Customers [/customers{?id}{?email}]
 Creating and managing customer objects
 
+
 ### Retrieve a customer [GET]
 + Parameters
     
@@ -156,46 +209,6 @@ TLD related resources of the **ASAP API**
 
 # Group Users
 User related resources of the **ASAP API**
-
-## User [/users]
-Creating and managing user objects
-
-### Retrieve a user [GET]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com" }
-        
-+ Response 200 (application/json)
-
-        { "id": 1, ... }
-            
-### Create a new user [POST]
-+ Request (application/json)
-
-        { "email": "bob@example.com", "password": "secret1" }
-        
-+ Response 200 (application/json)
-
-        { "success": 1, "id": 23, ... }
-
-### Update user record [PUT]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com", ... }
-        
-+ Response 200 (application/json)
-
-        { "success": 1 }
 
 
 # Group Domains
