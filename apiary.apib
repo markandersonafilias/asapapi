@@ -268,11 +268,102 @@ Retrieve and manage domain details using FQDN
         { "success": 1 }
         
 ## Retrieve Whois information [/v1/domain/{fqdn}/whois]
-Retrieve who information for a domain using FQDN
+Retrieve whois information by fully qualified domain name
+### Retrieve whois information [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
++ Response 200 (application/json)
+        [{
+            "Registry Domain ID","3245400_DOMAIN_COM-VRSN",
+            "Registrar WHOIS Server","whois.enom.com",
+            "Registrar URL","www.enom.com",
+            "Updated Date","2014-08-08 04:07:32Z",
+            "Creation Date","1997-05-07 04:00:00Z",
+            "Registrar Registration Expiration Date","2019-05-08 04:00:00Z",
+            "Registrar","ENOM, INC.",
+            "Registrar IANA ID","48",
+            "Registrar Abuse Contact Email","abuse@enom.com",
+            "Registrar Abuse Contact Phone","+1.4252744500",
+            "Domain Status","clientTransferProhibited",
+            "Registrant Name","WHOIS AGENT",
+            "Registrant Organization","WHOIS PRIVACY PROTECTION SERVICE, INC.",
+            "Registrant Street","PO BOX 639",
+            "Registrant Street","C/O INTERNET.COM",
+            "Registrant City","KIRKLAND",
+            "Registrant State/Province","WA",
+            "Registrant Postal Code","98083",
+            "Registrant Country","US",
+            "Registrant Phone","+1.4252740657",
+            "Registrant Fax","+1.4259744730",
+            "Registrant Email","MWJWPKKY@WHOISPRIVACYPROTECT.COM",
+            "Admin Name","WHOIS AGENT",
+            "Admin Organization","WHOIS PRIVACY PROTECTION SERVICE, INC.",
+            "Admin Street","PO BOX 639",
+            "Admin Street","C/O INTERNET.COM",
+            "Admin City","KIRKLAND",
+            "Admin State/Province","WA",
+            "Admin Postal Code","98083",
+            "Admin Country","US",
+            "Admin Phone","+1.4252740657",
+            "Admin Fax","+1.4259744730",
+            "Admin Email","MWJWPKKY@WHOISPRIVACYPROTECT.COM",
+            "Tech Name","WHOIS AGENT",
+            "Tech Organization","WHOIS PRIVACY PROTECTION SERVICE, INC.",
+            "Tech Street","PO BOX 639",
+            "Tech Street","C/O INTERNET.COM",
+            "Tech City","KIRKLAND",
+            "Tech State/Province","WA",
+            "Tech Postal Code","98083",
+            "Tech Country","US",
+            "Tech Phone","+1.4252740657",
+            "Tech Fax","+1.4259744730",
+            "Tech Email","MWJWPKKY@WHOISPRIVACYPROTECT.COM",
+            "Name Server","NS5.SWIFTPOST.NET",
+            "Name Server","NS6.SWIFTPOST.NET",
+            "DNSSEC","unSigned",
+            "URL of the ICANN WHOIS Data Problem Reporting System","http://wdprs.internic.net/",
+            "Last update of WHOIS database","2014-08-08 04:07:32Z"
+        }]
 
+## Retrieve Whois information [/v1/domain/{fqdn}/urlforwards]
+Retrieve URL forwards for a specified domain
+### Retrieve URL forwards [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
++ Response 200 (application/json)
+        [{
+            "source","www.internet.com",
+            "destination","example.com"
+        }]
 
+### Create a URL forward [PUT]
++ Request (application/json)
+
+        { "source": "www.internet.com", "destination": "example.com" }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 1, ... }
+
+### Update URL forwards [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "id": 1, "source": "www.internet.com", "destination","example2.com" }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
 
 # Group Domains
 User related resources of the **ASAP API**
@@ -318,16 +409,104 @@ Creating and managing domain objects
         { "success": 1 }
         
 
+
+# Group Bundles [/v1/bundles/]
+## Bundle [/v1/bundles/{id}]
+Bundle related resources available via the reseller API
+### Retrieve a bundle [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        [{
+          "id": 1, "title": "Bundle #1", ...
+        }, {
+          "id": 2, "title": "Bundle #2", ...
+        }]
+        
++ Response 200 (application/json)
+
+        { "id": 1, ... }
+        
+
+### Update a bundle [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        { "title": "Bundle #2" }
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+        
+## Bundle [/v1/bundles]
+### Create a new bundle [POST]
++ Request (application/json)
+
+        { "title": "Bundle #1 " }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23 }
+        
+
+# Group Wishlist
+Managing items in the users wishlist
+## Wishlist [/v1/wishlist}]
+### Retrieve the user's wishlist [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        [{
+          "id": 1, "title": "Product #1", "total", 25.49
+        }, {
+          "id": 2, "title": "Product #2", "total", 19.99
+        }]
+        
++ Response 200 (application/json)
+
+        { "id": 1, ... }
+        
+
+### Update a wishlist [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Request (application/json)
+
+        [{
+          "id": 1, "title": "Product #1", "total", 25.49
+        }, {
+          "id": 2, "title": "Product #2", "total", 19.99
+        }]
+        
++ Response 200 (application/json)
+
+        { "success": 1 }
+        
+### Create a new wishlist [POST]
++ Request (application/json)
+
+        { "title": "Bundle #1 " }
+        
++ Response 200 (application/json)
+
+        { "success": 1, "id": 23 }
+
+        
 # Group Orders
 Order related resources of the reseller API
-
-
-# Group Bundles
-Bundle related resources available via the reseller API
-
-
-
-
-        
-        
-        
+### Retrieve the user's current order [GET]
