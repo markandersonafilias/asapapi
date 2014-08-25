@@ -1,20 +1,21 @@
 FORMAT: 1A
-HOST: http://www.google.com
+HOST: https://api.internet.com/
 
 # ASAP Reseller API
 The ASAP Reseller API is a *registrar platform* offering for ASAP reseller website and services. 
 
-# Group Authorization
-General authorization handling
+# Group User
+General user management and authentication handling
 
-## User Token Authentication [/v1/token]
+## User Token Authentication [/v1/user/token]
 ### Request new JWT token [GET]
 + Response 200 (application/json)
 
-        { 
-        "success": 1,
-        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E"
-        }
+        { "success": 1, "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E" }
+        
++ Response 400 (text/plain)
+
+        IP banned.
 
 ### Update JWT token to avoid expiration [PUT]
 + Request
@@ -22,11 +23,91 @@ General authorization handling
 
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
++ Response 201 (application/json)
+
+        { "success": 1 }
+        
++ Response 400 (text/plain)
+
+        Token unknown or already expired. 
+
+## User Search [/v1/user/{query}{?limit}{?offset}{?sortby}{?order}]
+
++ Parameters
+    + query (required, string, `jon`) ... Query string for user search.
+    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
+    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
+    + sortby (optional, string, `name`) ... Sort result set by specific column.
+    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
+    
+### Retrieve a user [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        
 + Response 200 (application/json)
 
-        { 
-        "success": 1
-        }
+        [{
+          "id": 1, "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
+        }, {
+          "id": 2, "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
+        }]
+        
+## User Creation [/v1/user]
+### Create a new user [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            { "email": "bob@example.com", "password": "secret1" }
+        
++ Response 201 (application/json)
+
+        { "success": 1, "id": 23, ... }
+        
++ Response 400 (text/plain)
+
+        Body format invalid.
+        
+## User Management [/v1/user/{id}]
++ Parameters
+    + id (required, integer, `24`) ... User record id.
+
+### Retrieve a user [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        
++ Response 200 (application/json)
+
+        { "id": 1, "first_name": "Adam", "last_name", "Jones", "email": "ajones@yahoo.com", ... }
+
++ Response 400 (text/plain)
+
+        User not found.
+
+### Update user record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "user_id": 50, "first_name", "Sam", "last_name": "Spade", "email": "bob@example.com", ... }
+        
++ Response 201 (application/json)
+
+        { "success": 1 }
+        
++ Response 400 (text/plain)
+
+        Body format invalid or user not found.
 
 ## User Login [/v1/login]
 ### Returning user login [POST]
@@ -35,24 +116,26 @@ General authorization handling
 
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
             
-+ Request (application/json)
-
-        { "email": "bob@example.com", "password": "secret1" }
+    + Body
+    
+            { "email": "bob@example.com", "password": "secret1" }
         
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         { "success": 1, "id": 23, ... }
+        
++ Response 400 (text/plain)
+
+        Body format invalid or login failed.
 
 ## User Logout [/v1/logout]
-### Returning user logout [GET]
+### Returning user logout [DELETE]
 + Request
     + Headers
 
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
             
-+ Response 200 (application/json)
-
-        { "success": 1 }
++ Response 204 (text/plain)
 
 # Group Products
 Product related resources of the **ASAP API**
@@ -72,7 +155,7 @@ Product related resources of the **ASAP API**
           "id": 2, "name": "goMobi", ...
         }]
 
-## Offers List [/v1/offers]
+## Offers List [/v1/products/offers]
 ### List product offers [GET]
 + Request
     + Headers
@@ -87,61 +170,7 @@ Product related resources of the **ASAP API**
           "id": 2, "title": "Bundle #2", ...
         }]
 
-
-# Group Customers
-Customer related resources of the **ASAP API**
-
-## Customers [/v1/customers{?id}{?email}]
-Creating and managing customer objects
-
-### Retrieve a customer [GET]
-+ Parameters
-    
-    + id (optional, int) ... ID of the required customer.
-    + email (optional, string) ... Email address of the required customer.
-
-+ Request
-    + Headers
-    
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-    
-+ Response 200 (application/json)
-
-        { "id": 1, ... }
-
-### Create a new customer [POST]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com", "password": "secret1" }
-        
-+ Response 200 (application/json)
-
-        { "success": 1, "id": 23, ... }
-
-### Update customer record [PUT]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com", ... }
-        
-+ Response 200 (application/json)
-
-        { "success": 1 }
-
-# Group TLDs
-TLD related resources of the **ASAP API**
-
-## TLD List [/v1/tlds]
+## TLD List [/v1/products/tlds]
 ### List all available TLDs [GET]
 + Request
     + Headers
@@ -151,13 +180,13 @@ TLD related resources of the **ASAP API**
 + Response 200 (application/json)
 
         [{
-          "id": 1, "category": "organic", ...
+          "id": 1, "tld": "organic", ...
         }, {
-          "id": 2, "category": "info", ...
+          "id": 2, "tld": "info", ...
         }]
-     
-## TLD Categories [/v1/tld_categories]
-### List all available TLD categories [GET]
+
+## TLD Categories [/v1/products/tlds/categories]
+### List all TLD categories [GET]
 + Request
     + Headers
     
@@ -166,66 +195,103 @@ TLD related resources of the **ASAP API**
 + Response 200 (application/json)
 
         [{
-          "id": 1, "tld": "Business", ...
+          "id": 1, "category": "business", ...
         }, {
-          "id": 2, "tld": "Education", ...
+          "id": 2, "category": "industry", ...
+        }, {
+          "id": 3, "category": "personal", ...
         }]
 
+# Group Customers
+Customer related resources of the **ASAP API**
 
-# Group Users
-User related resources of the **ASAP API**
+## Customer Search [/v1/customer/{query}{?limit}{?offset}{?sortby}{?order}]
+### Retrieve a customer [GET]
++ Parameters
+    + query (required, string, `jon`) ... Query string for user search.
+    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
+    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
+    + sortby (optional, string, `name`) ... Sort result set by specific column.
+    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
 
-## User [/v1/users]
-Creating and managing user objects
-
-### Retrieve a user [GET]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request (application/json)
-
-        { "email": "bob@example.com" }
-        
 + Response 200 (application/json)
 
-        { "id": 1, ... }
-            
-### Create a new user [POST]
-+ Request (application/json)
+        [{
+          "id": 1, "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
+        }, {
+          "id": 2, "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
+        }]
 
-        { "email": "bob@example.com", "password": "secret1" }
+## Customer Creation [/v1/customer]
+### Create a new customer [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "email": "bob@example.com", "password": "secret1" }
         
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         { "success": 1, "id": 23, ... }
+        
++ Response 400 (text/plain)
 
-### Update user record [PUT]
+        Body format invalid.
+        
+## Customer Management [/v1/customer/{id}]
++ Parameters
+    + id (required, integer, `102`) ... Customer record id.
+    
+### Retrieve a customer [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+    
++ Response 200 (application/json)
+
+        { "id": 11, "first_name": "Adam", "last_name", "Jones", "email": "ajones@yahoo.com", ... }
+
++ Response 400 (text/plain)
+
+        Customer not found.
+
+### Update customer record [PUT]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request (application/json)
-
-        { "email": "bob@example.com", ... }
+    + Body
+    
+            { "id": 13, "email": "bob@example.com", ... }
         
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         { "success": 1 }
 
++ Response 400 (text/plain)
+
+        Body format invalid or unknown user.
 
 # Group Domains
 Domain related resources of the **ASAP API**
 
-## Search [/v1/domain/search/{query}]
-Perform a domain name search, ("domain spinning")
+## Suggest [/domain/suggest/{query}]
+Perform a domain name suggestions search, ("domain spinning")
 
 + Parameters
-    + query (required, string, `myshop.info`) ... String `query` of the base name to spin domains for. 
+    + query (required, string, `myshop`) ... String of the base name to spin domains for. 
 
-### Retrieve list of suggestions [GET]
+### Retrieve list of domain suggestions [GET]
 + Request
     + Headers
     
@@ -233,250 +299,457 @@ Perform a domain name search, ("domain spinning")
 
 + Response 200 (application/json)
 
-        { ... }
+        {
+            "myshop.info", "myshophome.info", "myshopweb.organic", ...
+        }
 
-## Domain creation [/v1/domain/create/{fqdn}]
-
-## Domain info [/v1/domain/{fqdn}]
-Retrieve and manage domain details using FQDN
+## List My Domains [/domain/list{?limit}{?offset}{?sortby}{?order}]
 
 + Parameters
-    + fqdn (required, string, `myshop.info`) ... String `fqdn` of the fully qualified domain name.
+    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
+    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
+    + sortby (optional, string, `name`) ... Sort result set by specific column.
+    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
 
-### Retrieve domain info, contacts, DNS records, nameservers [GET]
+### Retrieve list of my domains [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        
++ Response 200 (application/json)
+
+        {
+            "myshop.info", "myshophome.info", "myshopweb.organic", ...
+        }
+        
+## Domain creation [/domain/create]
+### Domain Creation [post]
+Create a new domain name order
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Response 200 (application/json)
+    + Body
+    
+        {
+            "domain": "myshop.info",
+            "years": 2,
+            "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
+            "contacts": [
+                {
+                    "type": "registrant",
+                    "first_name": "Jonathan",
+                    "last_name": "Doe",
+                    "organization": "Acme Inc",
+                    "email": "",
+                    "address1": "",
+                    "address2": "",
+                    "city": "",
+                    "state": "",
+                    "postal_code": "",
+                    "country": "",
+                    "phone1_type": "",
+                    "phone1_country_code": "",
+                    "phone1_number": "",
+                    "phone1_extension": "",
+                    "phone2_type": "",
+                    "phone2_country_code": "",
+                    "phone2_number": "",
+                    "phone2_extension": "",
+                    "fax1_type": "",
+                    "fax1_country_code": "",
+                    "fax1_number": ""
+                }
+            ]
+        }
+
++ Response 201 (application/json)
 
         { "success": 1 }
 
-### Update domain contact records [PUT]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
++ Response 400 (text/plain)
 
-+ Request (application/json)
+        Body format invalid.
 
-        { "fqdn": "myshop.info", ... }
-        
-+ Response 200 (application/json)
+## Domain info [/domain/{domain}]
+Retrieve domain details
 
-        { "success": 1 }
-        
-## Retrieve Whois information [/v1/domain/{fqdn}/whois]
-Retrieve whois information by fully qualified domain name
-### Retrieve whois information [GET]
++ Parameters
+    + domain (required, string, `myshop.info`) ... String of the domain name.
+
+### Retrieve full domain info, contacts, DNS records, nameservers, domain lock [GET]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
 + Response 200 (application/json)
-        [{
-            "Registry Domain ID","3245400_DOMAIN_COM-VRSN",
-            "Registrar WHOIS Server","whois.enom.com",
-            "Registrar URL","www.enom.com",
-            "Updated Date","2014-08-08 04:07:32Z",
-            "Creation Date","1997-05-07 04:00:00Z",
-            "Registrar Registration Expiration Date","2019-05-08 04:00:00Z",
-            "Registrar","ENOM, INC.",
-            "Registrar IANA ID","48",
-            "Registrar Abuse Contact Email","abuse@enom.com",
-            "Registrar Abuse Contact Phone","+1.4252744500",
-            "Domain Status","clientTransferProhibited",
-            "Registrant Name","WHOIS AGENT",
-            "Registrant Organization","WHOIS PRIVACY PROTECTION SERVICE, INC.",
-            "Registrant Street","PO BOX 639",
-            "Registrant Street","C/O INTERNET.COM",
-            "Registrant City","KIRKLAND",
-            "Registrant State/Province","WA",
-            "Registrant Postal Code","98083",
-            "Registrant Country","US",
-            "Registrant Phone","+1.4252740657",
-            "Registrant Fax","+1.4259744730",
-            "Registrant Email","MWJWPKKY@WHOISPRIVACYPROTECT.COM",
-            "Admin Name","WHOIS AGENT",
-            "Admin Organization","WHOIS PRIVACY PROTECTION SERVICE, INC.",
-            "Admin Street","PO BOX 639",
-            "Admin Street","C/O INTERNET.COM",
-            "Admin City","KIRKLAND",
-            "Admin State/Province","WA",
-            "Admin Postal Code","98083",
-            "Admin Country","US",
-            "Admin Phone","+1.4252740657",
-            "Admin Fax","+1.4259744730",
-            "Admin Email","MWJWPKKY@WHOISPRIVACYPROTECT.COM",
-            "Tech Name","WHOIS AGENT",
-            "Tech Organization","WHOIS PRIVACY PROTECTION SERVICE, INC.",
-            "Tech Street","PO BOX 639",
-            "Tech Street","C/O INTERNET.COM",
-            "Tech City","KIRKLAND",
-            "Tech State/Province","WA",
-            "Tech Postal Code","98083",
-            "Tech Country","US",
-            "Tech Phone","+1.4252740657",
-            "Tech Fax","+1.4259744730",
-            "Tech Email","MWJWPKKY@WHOISPRIVACYPROTECT.COM",
-            "Name Server","NS5.SWIFTPOST.NET",
-            "Name Server","NS6.SWIFTPOST.NET",
-            "DNSSEC","unSigned",
-            "URL of the ICANN WHOIS Data Problem Reporting System","http://wdprs.internic.net/",
-            "Last update of WHOIS database","2014-08-08 04:07:32Z"
-        }]
 
-## Retrieve Whois information [/v1/domain/{fqdn}/urlforwards]
-Retrieve URL forwards for a specified domain
-### Retrieve URL forwards [GET]
+        { "domain": "myshop.info", ... }
+
++ Response 400 (text/plain)
+
+        Unknown domain.
+
+## Domain lock [/domain/{domain}/lock]
+Set domain lock status
+
++ Parameters
+    + domain (required, string, `myshop.info`) ... String of the domain name.
+
+### Set current status of domain lock [PUT]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Response 200 (application/json)
-        [{
-            "source","www.internet.com",
-            "destination","example.com"
-        }]
++ Response 201 (application/json)
 
-### Create a URL forward [PUT]
-+ Request (application/json)
+        { "lock": "on" }
 
-        { "source": "www.internet.com", "destination": "example.com" }
-        
-+ Response 200 (application/json)
+## Nameservers [/domain/{domain}/nameservers]
+Update domain nameservers
 
-        { "success": 1, "id": 1, ... }
++ Parameters
+    + domain (required, string, `myshop.info`) ... String of the domain name.
 
-### Update URL forwards [PUT]
+### Update domain nameserver records [PUT]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request (application/json)
+    + Body
 
-        { "id": 1, "source": "www.internet.com", "destination","example2.com" }
-        
-+ Response 200 (application/json)
-
-        { "success": 1 }
-
-# Group Domains
-User related resources of the **ASAP API**
-
-## Domain [/v1/domains/{fqdn}]
-Creating and managing domain objects
-
-### Retrieve a domain [GET]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "fqd": "bob@example.com" }
-        
-+ Response 200 (application/json)
-
-        { "id": 1, ... }
+            {
+                "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...]
+            }
             
-### Create a new user [POST]
-+ Request (application/json)
-
-        { "email": "bob@example.com", "password": "secret1" }
-        
-+ Response 200 (application/json)
-
-        { "success": 1, "id": 23, ... }
-
-### Update user record [PUT]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "email": "bob@example.com", ... }
-        
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         { "success": 1 }
         
++ Response 400 (text/plain)
 
+        Unknown domain.
 
-# Group Bundles [/v1/bundles/]
-## Bundle [/v1/bundles/{id}]
-Bundle related resources available via the reseller API
-### Retrieve a bundle [GET]
+## Domain Contact Creation [/v1/domain/{domain}/contacts]
++ Parameters
+    + domain (required, string, `myshop.info`) ... Domain name of new contact.
+
+### Add domain contact records [POST]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request (application/json)
+    + Body
 
-        [{
-          "id": 1, "title": "Bundle #1", ...
-        }, {
-          "id": 2, "title": "Bundle #2", ...
-        }]
-        
-+ Response 200 (application/json)
+            {
+                "contact": [
+                    {
+                        "type": "registrant",
+                        "first_name": "Jonathan",
+                        "last_name": "Doe",
+                        "organization": "Acme Inc",
+                        "email": "",
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "postal_code": "",
+                        "country": "",
+                        "phone1_type": "",
+                        "phone1_country_code": "",
+                        "phone1_number": "",
+                        "phone1_extension": "",
+                        "phone2_type": "",
+                        "phone2_country_code": "",
+                        "phone2_number": "",
+                        "phone2_extension": "",
+                        "fax1_type": "",
+                        "fax1_country_code": "",
+                        "fax1_number": ""
+                    }
+                ]
+            }
 
-        { "id": 1, ... }
-        
-
-### Update a bundle [PUT]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Request (application/json)
-
-        { "title": "Bundle #2" }
-        
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         { "success": 1 }
         
-## Bundle [/v1/bundles]
-### Create a new bundle [POST]
-+ Request (application/json)
++ Response 400 
 
-        { "title": "Bundle #1 " }
+        The body format was invalid.
+
+## Domain Contacts Management [/domain/{domain}/contacts/{id}]
+Update domain contacts record
+
++ Parameters
+    + domain (required, string, `myshop.info`) ... String of the domain name.
+    + id (required, integer, `42`) ... Domain contact record id.
+    
+### Delete domain contact [DELETE]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 204 
+
+### Update domain contact [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            {
+                "contact_id": 35,
+                "contact": [
+                    {
+                        "type": "registrant",
+                        "first_name": "Jonathan",
+                        "last_name": "Doe",
+                        "organization": "Acme Inc",
+                        "email": "",
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "postal_code": "",
+                        "country": "",
+                        "phone1_type": "",
+                        "phone1_country_code": "",
+                        "phone1_number": "",
+                        "phone1_extension": "",
+                        "phone2_type": "",
+                        "phone2_country_code": "",
+                        "phone2_number": "",
+                        "phone2_extension": "",
+                        "fax1_type": "",
+                        "fax1_country_code": "",
+                        "fax1_number": ""
+                    }
+                ]
+            }
+
++ Response 201 (application/json)
+
+        { "success": 1 }
         
++ Response 400 (text/plain)
+
+        The body format was invalid.
+
+# Group URL Forwarding
+URL forwarding related resources of the **ASAP API**
+
+## List domain fowarding rules [/domain/{domain}/forwarding]
++ Parameters
+    + domain (required, string, `myshop.info`) ... String of the domain name to list URL forwarding rules for.
+    
+### Retrieve list of URL forwarding rules [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
 + Response 200 (application/json)
 
-        { "success": 1, "id": 23 }
+        {
+            "rules": [
+                {
+                    "rule_id": 56,
+                    "pointing": "http://www.myothershop.info",
+                    "type": "MASKED",
+                    "page_title": "Forwarding Page"
+                }
+            ]
+        }
+
++ Response 400 (text/plain)
+
+        Unknown domain.
+
+## Forwarding rule creation [/v1/domain/{domain}/forwarding]
++ Parameters
+    + domain (required, string, `myshop.info`) ... Domain name to create forwarding rule for.
+
+### Create forwarding rule record [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "pointing": "http://www.myothershop.info",
+                "type": "MASKED",
+                "page_title": "Forwarding Page"
+            }
+
++ Response 201 (application/json)
+
+        { "success": 1 }
         
++ Response 400 (text/plain)
+
+        The body format was invalid.
+
+## Manage forwarding rule records [/domain/{domain}/forwarding/{id}]
++ Parameters
+    + domain (required, string, `myshop`) ... String of the base name to manage forwarding for. 
+    + id (required, integer, `90`) ... Forwarding rule record id. 
+
+### Delete forwarding rule record [DELETE]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 204
+    
+### Update forwarding rule record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "rule_id": 56,
+                "pointing": "http://www.myothershop.info",
+                "type": "MASKED",
+                "page_title": "Forwarding Page"
+            }
+
++ Response 201 (application/json)
+
+        { "success": 1 }
+        
++ Response 400 (text/plain)
+
+        The body format was invalid.
+
+# Group DNS
+DNS record related resources of the **ASAP API**
+
+## List [/domain/{domain}/dns]
++ Parameters
+    + domain (required, string, `myshop.info`) ... String of the domain name to list DNS records for.
+
+### Retrieve list of DNS records [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        {
+            "records": [
+                {
+                    "record_id": 32,
+                    "type": "MX",
+                    "content": "mx1.myshop.info",
+                    "ttl": 300,
+                    "priority": 10
+                },
+                {
+                    "record_id": 33,
+                    "type": "MX",
+                    "content": "mx2.myshop.info",
+                    "ttl": 300,
+                    "priority": 20
+                }
+            ]
+        }
+
++ Response 400 (text/plain)
+
+        Unknown domain.
+
+### Create new DNS record [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "type": "MX",
+                "content": "mx1.myshop.info",
+                "ttl": 300,
+                "priority": 10
+            }
+
++ Response 201 (application/json)
+
+        { "success": 1 }
+        
++ Response 400 (text/plain)
+
+        The body format was invalid.
+
+## Manage DNS record [/domain/{domain}/dns/{id}]
++ Parameters
+    + domain (required, string, `myshop.info`) ... Domain name to manage DNS records for.
+    + id (required, integer, `90`) ... Domain DNS record id. 
+
+### Delete DNS record [DELETE]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 204
+    
+### Update DNS record [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "type": "MX",
+                "content": "mx1.myshop.info",
+                "ttl": 300,
+                "priority": 10
+            }
+
++ Response 201 (application/json)
+
+        { "success": 1 }
+        
++ Response 400 (text/plain)
+
+        The body format was invalid.
 
 # Group Wishlist
 Managing items in the users wishlist
-## Wishlist [/v1/wishlist}]
+## Wishlist [/v1/wishlist]
 ### Retrieve the user's wishlist [GET]
 + Request
     + Headers
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request (application/json)
-
-        [{
-          "id": 1, "title": "Product #1", "total", 25.49
-        }, {
-          "id": 2, "title": "Product #2", "total", 19.99
-        }]
-        
 + Response 200 (application/json)
 
-        { "id": 1, ... }
+            [{
+              "id": 1, "title": "Product #1", "total", 25.49
+            }, {
+              "id": 2, "title": "Product #2", "total", 19.99
+            }]
         
 
 ### Update a wishlist [PUT]
@@ -485,28 +758,62 @@ Managing items in the users wishlist
     
             Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request (application/json)
+    + Body
 
-        [{
-          "id": 1, "title": "Product #1", "total", 25.49
-        }, {
-          "id": 2, "title": "Product #2", "total", 19.99
-        }]
+            [{
+              "id": 1, "title": "Product #1", "total", 25.49
+            }, {
+              "id": 2, "title": "Product #2", "total", 19.99
+            }]
         
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         { "success": 1 }
         
 ### Create a new wishlist [POST]
-+ Request (application/json)
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-        { "title": "Bundle #1 " }
+    + Body
+
+            { "title": "Bundle #1 " }
+        
++ Response 201 (application/json)
+
+        { "success": 1, "id": 23 }
+        
+# Group Bundles [/v1/bundles/]
+## Bundle [/v1/bundles/{id}]
+Bundle related resources available via the reseller API
+### Retrieve a bundle [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
         
 + Response 200 (application/json)
 
-        { "success": 1, "id": 23 }
-
+            [{
+              "id": 1, "title": "Bundle #1", ...
+            }, {
+              "id": 2, "title": "Bundle #2", ...
+            }]
         
-# Group Orders
-Order related resources of the reseller API
-### Retrieve the user's current order [GET]
+
+### Update a bundle [PUT]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "title": "Bundle #2", ... }
+        
++ Response 201 (application/json)
+
+        { "success": 1 }
+        
+        
