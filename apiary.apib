@@ -1351,4 +1351,115 @@ Create a new domain name order
           "id": 2, "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
         }]
         
+# Group Whois
+Whois lookup service of the **ASAP API**
+
+## List [/v1/whois/{domain}]
++ Parameters
+    + domain (required, string, `myshop.info`) ... String of the domain name to list whois info for.
+
+### Retrieve list of whois info [GET]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (text/plain)
+
+        Domain Name:AFILIAS.INFO
+        Domain ID: D217-LRMS
+        Creation Date: 2001-07-25T14:11:20Z
+        Updated Date: 2014-06-30T14:22:47Z
+        Registry Expiry Date: 2021-07-25T14:11:20Z
+        Sponsoring Registrar:Afilias Ltd. (R145-LRMS)
+        Sponsoring Registrar IANA ID: 700023
+        WHOIS Server: 
+        Referral URL: 
+        Domain Status: ok
+        Registrant ID:C270-LRMS
+        Registrant Name:Afilias Limited
+        Registrant Organization:Afilias Ltd.
+        Registrant Street: 2 La Touche House
+        Registrant Street: IFSC
+        Registrant City:Dublin
+        Registrant State/Province:
+        Registrant Postal Code:1
+        Registrant Country:IE
+        Registrant Phone:+353.18541100
+        Registrant Phone Ext: 
+        Registrant Fax: +1.2157065701
+        Registrant Fax Ext: 
+        Registrant Email:support@afilias.info
+        Admin ID:C270-LRMS
+        Admin Name:Afilias Limited
+        Admin Organization:Afilias Ltd.
+        Admin Street: 2 La Touche House
+        Admin Street: IFSC
+        Admin City:Dublin
+        Admin State/Province:
+        Admin Postal Code:1
+        Admin Country:IE
+        Admin Phone:+353.18541100
+        Admin Phone Ext: 
+        Admin Fax: +1.2157065701
+        Admin Fax Ext: 
+        Admin Email:support@afilias.info
+        Billing ID:C270-LRMS
+        Billing Name:Afilias Limited
+        Billing Organization:Afilias Ltd.
+        Billing Street: 2 La Touche House
+        Billing Street: IFSC
+        Billing City:Dublin
+        Billing State/Province:
+        Billing Postal Code:1
+        Billing Country:IE
+        Billing Phone:+353.18541100
+        Billing Phone Ext: 
+        Billing Fax: +1.2157065701
+        Billing Fax Ext: 
+        Billing Email:support@afilias.info
+        Tech ID:C270-LRMS
+        Tech Name:Afilias Limited
+        Tech Organization:Afilias Ltd.
+        Tech Street: 2 La Touche House
+        Tech Street: IFSC
+        Tech City:Dublin
+        Tech State/Province:
+        Tech Postal Code:1
+        Tech Country:IE
+        Tech Phone:+353.18541100
+        Tech Phone Ext: 
+        Tech Fax: +1.2157065701
+        Tech Fax Ext: 
+        Tech Email:support@afilias.info
+        Name Server:A0.DIG.AFILIAS-NST.INFO
+        Name Server:B0.DIG.AFILIAS-NST.INFO
+        Name Server:C0.DIG.AFILIAS-NST.INFO
+        Name Server:D0.DIG.AFILIAS-NST.INFO
+        Name Server: 
+        Name Server: 
+        Name Server: 
+        Name Server: 
+        Name Server: 
+        Name Server: 
+        Name Server: 
+        Name Server: 
+        Name Server: 
+        DNSSEC:signedDelegation
+        DS Created 1:2013-12-09T21:29:30Z
+        DS Key Tag 1:32709
+        Algorithm 1:5
+        Digest Type 1:2
+        Digest 1:4B5D67729CE8180BBF93D0ACD78053262F68BCD402D0C947E54E74A553E5994A
+        DS Maximum Signature Life 1:1814400 seconds
+        DS Created 2:2013-12-09T21:29:30Z
+        DS Key Tag 2:32709
+        Algorithm 2:5
+        Digest Type 2:1
+        Digest 2:BF4903176E0BE0664B511BFEAA4651A5CACCC733
+        DS Maximum Signature Life 2:1814400 seconds
+
++ Response 400 (text/plain)
+
+        Unknown domain.
         
