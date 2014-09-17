@@ -79,48 +79,7 @@ General token authentication and handling.
 + Response 400 (text/plain)
 
         Body format invalid.
-
-# Group Passwords
-Password handling and reset.
-
-## Change Request [/v1/password/forgot]
-### Forgotten password email request [POST]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-    
-            { "user_id": "u_345f4h2b" }
         
-+ Response 201 (application/json)
-
-        { "success": 1 }
-        
-+ Response 400 (text/plain)
-
-        Body format invalid.
-
-## Change Request [/v1/password/forgot/{verification_id}]
-### Change email request [POST]
-+ Request
-    + Headers
-    
-            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-    
-            { "user_id": "u_345f4h2b", "verification_token": "agerffsfv4g3qgqh" }
-        
-+ Response 201 (application/json)
-
-        { "success": 1 }
-        
-+ Response 400 (text/plain)
-
-        Body format invalid.
-
 ## List Users [/v1/users]
 ### List direct reseller admin users and customer users [GET]
 + Request
@@ -175,6 +134,47 @@ Password handling and reset.
 + Response 400 (text/plain)
 
         Body format invalid or user not found.
+
+# Group Passwords
+Password handling and reset.
+
+## Change Request [/v1/password/forgot]
+### Forgotten password email request [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            { "user_id": "u_345f4h2b" }
+        
++ Response 201 (application/json)
+
+        { "success": 1 }
+        
++ Response 400 (text/plain)
+
+        Body format invalid.
+
+## Change Request [/v1/password/forgot/{verification_id}]
+### Change email request [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            { "user_id": "u_345f4h2b", "verification_token": "agerffsfv4g3qgqh" }
+        
++ Response 201 (application/json)
+
+        { "success": 1 }
+        
++ Response 400 (text/plain)
+
+        Body format invalid.
 
 # Group Verification
 New user verification of the **ASAP API**
