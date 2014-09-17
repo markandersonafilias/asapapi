@@ -42,14 +42,10 @@ General token authentication and handling.
 + Response 204
 
 # Group Users
-## User Search [/v1/users/{query}{?limit}{?offset}{?sortby}{?order}]
+## User Retrieval [/v1/users/{user_id}]
 
 + Parameters
-    + query (required, string, `jon`) ... Query string for user search.
-    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
-    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
-    + sortby (optional, string, `name`) ... Sort result set by specific column.
-    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
+    + user_id (required, string, `u_345f4h2b`) ... User ID to retrieve.
     
 ### Retrieve a user [GET]
 + Request
@@ -60,9 +56,9 @@ General token authentication and handling.
 + Response 200 (application/json)
 
         [{
-          "id": 1, "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
+          "id": "u_345f4h2b", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
         }, {
-          "id": 2, "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
+          "id": "u_345f4h2b", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
         }]
         
 ## User Creation [/v1/user]
@@ -74,7 +70,7 @@ General token authentication and handling.
 
     + Body
     
-            { "reseller_id": "r_35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1", "first_name": "Bob", "last_name": "Smith" }
+            { "reseller_id": "r_35gegsdfsr", "email": "bob@example.com", "password": "secret1", "first_name": "Bob", "last_name": "Smith" }
         
 + Response 201 (application/json)
 
@@ -84,14 +80,11 @@ General token authentication and handling.
 
         Body format invalid.
 
-## Change / Reset [/v1/user/{user_id}{?query}{?old_password}{?new_password}]
-### Change / Reset user password [POST]
-+ Parameters
-    + user_id (required, integer, `1000`) ... reference id of the user.
-    + query (required, String, `change` or `reset`) ... Query string for user search.
-    + old_password (optional, String, `bGciOiJSUzI1NiIsIm`) ... Encrypted old password.
-    + new_password (optional, String, `abFfYMGkbI7DEuFl1Q`) ... Encrypted new password.
+# Group Passwords
+Password handling and reset.
 
+## Change Request [/v1/password/forgot]
+### Forgotten password email request [POST]
 + Request
     + Headers
     
@@ -99,11 +92,30 @@ General token authentication and handling.
 
     + Body
     
-            { "user_id": "r_35gegsdfsdfbgbr", "query": "reset", ... }
+            { "user_id": "u_345f4h2b" }
         
 + Response 201 (application/json)
 
-        { "success": 1, "id": 23, ... }
+        { "success": 1 }
+        
++ Response 400 (text/plain)
+
+        Body format invalid.
+
+## Change Request [/v1/password/forgot/{verification_id}]
+### Change email request [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            { "user_id": "u_345f4h2b", "verification_token": "agerffsfv4g3qgqh" }
+        
++ Response 201 (application/json)
+
+        { "success": 1 }
         
 + Response 400 (text/plain)
 
