@@ -684,7 +684,10 @@ Perform a domain name suggestions search, ("domain spinning") : Related
         
 ## Domain creation [/v1/domain/{domain}{?query}]
 ### Domain Creation & Update [POST]
-Create a new domain name order - Asynchronous call
+Create a new domain name order - Asynchronous
++ Parameters
+    + query (optional, string, `create`) ... register domain.
+    
 + Request
     + Headers
     
@@ -769,6 +772,27 @@ Retrieve current details
         { "data": { "reference":TRXPROC-1234, "message":"Problem in processing", 
         "errors":[{"code":121, "message":"Card expired"}]
         }
+
++ Response 400 (text/plain)
+
+        Unknown domain.
+
+## Send email [/v1/user/{email_id}{?action}]
+Request to send email - Asynchronous
+
++ Parameters
+    + email_id (required, string, `thomsan@afilias.com`) ... mail id of the user.
+    + action (optional, string, `resend/activation`) ... Will re-send/activation mail to the user.
+
+### Querying the current status of the process [POST]
++ Request
+    + Headers
+    
+            Token: eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        { "data": { "email_id":thomsan@afilias.com, "message":"Success"} }
 
 + Response 400 (text/plain)
 
