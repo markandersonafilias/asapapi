@@ -752,13 +752,13 @@ Retrieve domain details
 
         Unknown domain.
 
-## Domain info [/v1/query_status/{reference}]
-Retrieve domain details
+## Query status [/v1/query_status/{reference_id}]
+Retrieve current details
 
 + Parameters
-    + reference (required, string, `myshop.info`) ... String of the domain name.
+    + reference_id (required, string, `TRXPROC-1234`) ... Reference id to get the status of the process.
 
-### Retrieve full domain info, contacts, DNS records, nameservers, domain lock [GET]
+### Querying the current status of the process [GET]
 + Request
     + Headers
     
@@ -766,8 +766,9 @@ Retrieve domain details
 
 + Response 200 (application/json)
 
-        { "data":{"reference":121, "message":"In progress"
-        "} }
+        { "data": { "reference":TRXPROC-1234, "message":"Problem in processing", 
+        "errors":[{"code":121, "message":"Card expired"}]
+        }
 
 + Response 400 (text/plain)
 
