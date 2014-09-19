@@ -16,19 +16,19 @@ General token authentication and handling.
 + Response 201 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", 
                         "id": "u_asfvlsajdfoasjf" 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Login failed"
-                }]
+                }
         }
         
 ## Token Refresh [/v1/auth/token/refresh]
@@ -41,18 +41,18 @@ General token authentication and handling.
 + Response 201 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "token": "abJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd44" 
-                }]
+                }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Token unknown or already expired"
-                }]
+                }
         }
 
 ## Token Invalidation [/v1/auth/token/revoke]
@@ -100,18 +100,18 @@ General token authentication and handling.
 + Response 201 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "id": "u_345f4h2b" 
-                }]
+                }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Operation failed"
-                }]
+                }
         }
         
 ### List direct reseller admin users and customer users [GET]
@@ -143,18 +143,18 @@ General token authentication and handling.
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "id": "u_145f4h2b", "first_name": "Adam", "last_name", "Jones", "email": "ajones@yahoo.com", ... 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ### Update user record [PUT]
@@ -170,16 +170,16 @@ General token authentication and handling.
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 # Group Passwords
@@ -199,16 +199,16 @@ Password handling and reset.
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ## Change Request [/v1/password/forgot/{verification_id}]
@@ -225,16 +225,16 @@ Password handling and reset.
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 # Group Verification
@@ -246,16 +246,16 @@ New user verification of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Verification code not found"
-                }]
+                }
         }
 
 # Group Resellers
@@ -288,18 +288,18 @@ Reseller related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "id": "r_zxfvebererfdfbdfv" 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Reseller not found"
-                }]
+                }
         }
 
 ### Update reseller record [PUT]
@@ -315,16 +315,16 @@ Reseller related resources of the **ASAP API**
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Reseller not found"
-                }]
+                }
         }
 
 # Group Products
@@ -374,18 +374,18 @@ Product related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "id": "r_zxfvebererfdfbdfv" 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Product not found"
-                }]
+                }
         }
 
 ### Update product upsell record [PUT]
@@ -401,16 +401,16 @@ Product related resources of the **ASAP API**
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Product not found"
-                }]
+                }
         }
 
 # Group TLDs
@@ -476,10 +476,10 @@ Customer cart related resources of the **ASAP API**
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ### Add to user's cart [POST]
@@ -495,16 +495,16 @@ Customer cart related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ## Manage Cart Items [/v1/users/{user_id}/cart/items/{item_id}]
@@ -537,16 +537,16 @@ Customer cart related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ## Reserving Domains [/v1/users/{user_id}/cart/items/{item_id}/reserve]
@@ -563,16 +563,16 @@ Customer cart related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ## Cart Checkout [/v1/users/{user_id}/cart/checkout]
@@ -588,18 +588,18 @@ Customer cart related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "order_id": "o_fvdfb3gervsf2es" 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ## Cart Complete [/v1/users/{user_id}/cart/complete]
@@ -615,18 +615,18 @@ Customer cart related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "payment_id": "bluesnap_12345" 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 # Group Wishlist
@@ -655,10 +655,10 @@ Wishlist related resources of the **ASAP API**
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ### Add to wishlist [POST]
@@ -674,16 +674,16 @@ Wishlist related resources of the **ASAP API**
 + Response 200 (application/json)
 
           {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ### Delete entire wishlist [DELETE]
@@ -711,16 +711,16 @@ Wishlist related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ### Delete wishlist item [DELETE]
@@ -757,10 +757,10 @@ Orders related resources of the **ASAP API**
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ## List specific order [/v1/users/{user_id}/orders/{order_id}]
@@ -777,18 +777,18 @@ Orders related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", ... 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 # Group Domains
@@ -807,18 +807,18 @@ Domain related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "available": 1 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "User not found"
-                }]
+                }
         }
 
 ## Suggest [/v1/domain-search/{query}]
@@ -836,9 +836,9 @@ Perform a domain name suggestions search: Recommended, Most popular
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }]
+                }
         }
 
 ## Suggest [/v1/domain-search/{query}/bulk]
@@ -856,9 +856,9 @@ Perform a bulk domain name suggestions search
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }]
+                }
         }
 
 ## Suggest [/v1/domain/{query}/tld-spin]
@@ -876,9 +876,9 @@ Perform a domain name suggestions search: Recommended, Most popular
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }]
+                }
         }
 
 ## Suggest [/v1/domain/{query}/domain-spin] 
@@ -896,9 +896,9 @@ Perform a domain name suggestions search, ("domain spinning") : Related
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }]
+                }
         }
 
 ## List My Domains [/v1/domain/list{?limit}{?offset}{?sortby}{?order}]
@@ -918,9 +918,9 @@ Perform a domain name suggestions search, ("domain spinning") : Related
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }]
+                }
         }
         
 ## Domain creation [/v1/domain/{domain}{?query}]
@@ -971,9 +971,9 @@ Create a new domain name order - Asynchronous
 + Response 202 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "status":"Accepted", "location": "/v1/query_status/{reference}" 
-                }]
+                }
         }
 
 ## Domain info [/v1/domain/{domain}]
@@ -991,18 +991,18 @@ Retrieve domain details
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "domain": "myshop.info", ... 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 
@@ -1021,23 +1021,23 @@ Retrieve current details
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "reference": "TRXPROC-1234", 
                         "message": "Problem in processing", 
-                        "errors": [{
+                        "errors": {
                             "code":121, 
                             "message": "Card expired"
-                        }]
-                }]
+                        }
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
-                        "message": "Domain not found"
-                }]
+                        "message": "Process not found"
+                }
         }
 
 ## Send email [/v1/user/{email_id}{?action}]
@@ -1056,18 +1056,18 @@ Request to send activation email - Asynchronous
 + Response 200 (application/json)
 
         {  
-                "data": [{
-                        "email_id":thomsan@afilias.com, "message":"Success"
-                }]
+                "data": {
+                        "email": thomsan@afilias.com, "message": "Success"
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
-                        "message": "Domain not found"
-                }]
+                        "message": "User not found"
+                }
         }
 
 ## Search [/v1/domain-search/{domain_name}]
@@ -1085,18 +1085,18 @@ Domain search
 + Response 200 (application/json)
 
         {  
-                "data": [{ 
+                "data": { 
                         "domain": "myshop.info", ... 
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Domain lock [/v1/domain/{domain}/lock]
@@ -1118,16 +1118,16 @@ Set domain lock status
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Domain Auto renew [/v1/domain/{domain}/auto-renew]
@@ -1149,16 +1149,16 @@ Set domain lock status
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ### Set current status of auto renew [PUT]
@@ -1174,16 +1174,16 @@ Set domain lock status
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Domain Auto renew [/v1/domain/{domain}/who-is-privacy]
@@ -1205,16 +1205,16 @@ Set domain lock status
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ### Set current status of whoisprivacy [PUT]
@@ -1230,16 +1230,16 @@ Set domain lock status
 + Response 200 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Nameservers [/v1/domain/{domain}/nameservers]
@@ -1263,16 +1263,16 @@ Update domain nameservers
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Domain Contact Creation [/v1/domain/{domain}/contacts]
@@ -1319,16 +1319,16 @@ Update domain nameservers
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Domain Contacts Management [/v1/domain/{domain}/contacts/{id}]
@@ -1387,16 +1387,16 @@ Update domain contacts record
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 # Group URL Forwarding
@@ -1415,7 +1415,7 @@ URL forwarding related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "rules": [
                                 {
                                         "id": "ru_34effrth45y4",
@@ -1424,16 +1424,16 @@ URL forwarding related resources of the **ASAP API**
                                         "page_title": "Forwarding Page"
                                 }
                         ]
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ### Create forwarding rule record [POST]
@@ -1453,16 +1453,16 @@ URL forwarding related resources of the **ASAP API**
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Manage email fowarding [/v1/domain/{domain}/email]
@@ -1514,10 +1514,10 @@ URL forwarding related resources of the **ASAP API**
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Manage forwarding rule record [/v1/domain/{domain}/forwarding/{id}]
@@ -1536,10 +1536,10 @@ URL forwarding related resources of the **ASAP API**
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ### Update forwarding rule record [PUT]
@@ -1560,16 +1560,16 @@ URL forwarding related resources of the **ASAP API**
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 # Group DNS
@@ -1588,7 +1588,7 @@ DNS record related resources of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "records": [
                                 {
                                         "id": "d_fg3qg4535y",
@@ -1605,16 +1605,16 @@ DNS record related resources of the **ASAP API**
                                         "priority": 20
                                 }
                         ]
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ### Create new DNS record [POST]
@@ -1635,16 +1635,16 @@ DNS record related resources of the **ASAP API**
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## Manage DNS record [/v1/domain/{domain}/dns/{id}]
@@ -1661,16 +1661,16 @@ DNS record related resources of the **ASAP API**
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
     
 ### Update DNS record [PUT]
@@ -1691,16 +1691,16 @@ DNS record related resources of the **ASAP API**
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
         
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
 
 ## For future - Domain  [/v1/domains/{query}{?params}{?limit}{?offset}{?sortby}{?order}]
@@ -1771,7 +1771,7 @@ Create a new domain name order
 + Response 201 (application/json)
 
         {  
-                "data": [{ }]
+                "data": { }
         }
 
 ## For future - Reseller  [/v1/resellers/{query}{?limit}{?offset}{?sortby}{?order}]
@@ -1865,7 +1865,7 @@ Whois lookup service of the **ASAP API**
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                         "record": 
                                 "Domain Name:AFILIAS.INFO
                                 Domain ID: D217-LRMS
@@ -1950,15 +1950,15 @@ Whois lookup service of the **ASAP API**
                                 Digest Type 2:1
                                 Digest 2:BF4903176E0BE0664B511BFEAA4651A5CACCC733
                                 DS Maximum Signature Life 2:1814400 seconds"
-                }]
+                }
         }
 
 + Response 400 (application/json) 
 
         {  
-                "errors": [{  
+                "errors": {  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
+                }
         }
         
