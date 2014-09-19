@@ -8,7 +8,9 @@ The ASAP Reseller API is a *registrar platform* offering for the Afilias ASAP re
 General token authentication and handling.
 
 ## Token Generation [/v1/auth/token]
+
 ### Request new JWT token [POST]
+
 + Request
     
         { "reseller_key": "dfservev35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
@@ -32,7 +34,9 @@ General token authentication and handling.
         }
         
 ## Token Refresh [/v1/auth/token/refresh]
+
 ### Update JWT token to avoid expiration [PUT]
+
 + Request
     + Headers
 
@@ -58,6 +62,7 @@ General token authentication and handling.
 ## Token Invalidation [/v1/auth/token/revoke]
 
 ### Force JWT token expiration [DELETE]
+
 + Request
     + Headers
 
@@ -66,8 +71,11 @@ General token authentication and handling.
 + Response 204
 
 # Group Users
+
 ## Users [/v1/users]
+
 ### Create a new user [POST]
+
 + Request
     + Headers
     
@@ -95,6 +103,7 @@ General token authentication and handling.
         }
 
 ### List all users [GET]
+
 + Request
     + Headers
     
@@ -109,36 +118,13 @@ General token authentication and handling.
                           "id": "u_94gh4627", "first_name": "Bob", ...
                 }]
         }
-
-## Resend email verification link [/v1/user/{email}]
-Request to send activation email with verification link
-
-+ Parameters
-    + email (required, string, `thomsan@afilias.com`) ... Email address of the user.
-
-### Querying the current status of the process [POST]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200
-
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "User not found"
-                }]
-        }
         
 ## User Management [/v1/users/{id}]
 + Parameters
     + id (required, string, `u_db3g3grg2r2g`) ... User record id.
 
 ### Retrieve specific user [GET]
+
 + Request
     + Headers
     
@@ -162,6 +148,7 @@ Request to send activation email with verification link
         }
 
 ### Update user record [PUT]
+
 + Request
     + Headers
     
@@ -186,7 +173,9 @@ Request to send activation email with verification link
 Password handling and reset.
 
 ## Forgotten Password Email Request [/v1/password/forgot]
+
 ### Request forgotten email password email [POST]
+
 + Request
     + Headers
     
@@ -207,8 +196,8 @@ Password handling and reset.
                 }]
         }
 
-## Forgotten Password Change Request [/v1/password/forgot/{verification_id}]
-### Forgotten password verified change request [POST]
+### Forgotten password verified change request [PUT]
+
 + Request
     + Headers
     
@@ -216,7 +205,7 @@ Password handling and reset.
 
     + Body
     
-            { "verification_token": "agerffsfv4g3qgqh", "password": "secret2" }
+            { "verification_code": "t5fgftehved24tege", "password": "secret2" }
         
 + Response 200
         
@@ -225,7 +214,7 @@ Password handling and reset.
         {  
                 "errors": [{  
                         "code": 1234,
-                        "message": "User not found"
+                        "message": "Verification code not found"
                 }]
         }
 
@@ -233,7 +222,9 @@ Password handling and reset.
 New user verification of the **ASAP API**
 
 ## Verify New User [/v1/verification/{verification_key}]
+
 ### Complete new user creation by verifying email address [GET]
+
 + Request
     + Headers
     
@@ -253,12 +244,61 @@ New user verification of the **ASAP API**
                         "message": "Verification code not found"
                 }]
         }
+        
+## Resend Verification Link [/v1/verification]
+
+### Request to resend activation email with verification link [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            { "email": "bob@example.com" }
+
++ Response 200
 
 # Group Resellers
 Reseller related resources of the **ASAP API**
 
+## Create Reseller [/v1/resellers]
+
+### Create a new reseller [POST]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            { "name": "Web.com", ... }
+
++ Response 200
+
+### Retrieve reseller records [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        {  
+                "data": [{
+                        "id": "r_zxfveberbdfv", "name": "Web.com", ...
+                }, { 
+                        "id": "r_bcxbthrdfggs", "name":, "1&1", ...
+                }]
+        }
+
 ## Specific reseller [/v1/resellers/{reseller_id}]
+
 ### Retrieve reseller record [GET]
+
 + Request
     + Headers
 
@@ -282,6 +322,7 @@ Reseller related resources of the **ASAP API**
         }
 
 ### Update reseller record [PUT]
+
 + Request
     + Headers
     
@@ -303,7 +344,9 @@ Reseller related resources of the **ASAP API**
         }
 
 ## List sub-resellers [/v1/resellers/{reseller_id}/sub-resellers]
+
 ### List all direct sub-resellers [GET]
+
 + Request
     + Headers
 
@@ -319,8 +362,12 @@ Reseller related resources of the **ASAP API**
                 }]
         }
 
+# Group Reseller Products
+
 ## List resellers products [/v1/resellers/{reseller_id}/products]
+
 ### List all reseller products [GET]
+
 + Request
     + Headers
 
@@ -337,7 +384,9 @@ Reseller related resources of the **ASAP API**
         }
 
 ## Manage resellers products [/v1/resellers/{reseller_id}/products/{product_id}]
+
 ### Update reseller product [PUT]
+
 + Request
     + Headers
 
@@ -358,7 +407,10 @@ Reseller related resources of the **ASAP API**
                 }]
         }
 
+# Group Reseller Bundles
+
 ## List resellers bundles [/v1/resellers/{reseller_id}/bundles]
+
 ### List all reseller bundles [GET]
 + Request
     + Headers
@@ -398,10 +450,13 @@ Reseller related resources of the **ASAP API**
         }
 
 # Group Products
+
 Product related resources of the **ASAP API**
 
 ## Product List [/v1/products]
+
 ### List all products [GET]
+
 + Request
     + Headers
 
@@ -418,7 +473,9 @@ Product related resources of the **ASAP API**
         }
 
 ## Retrieve Specific Product [/v1/products/{product_id}]
+
 ### Get a specific product [GET]
+
 + Request
     + Headers
 
@@ -442,6 +499,7 @@ Product related resources of the **ASAP API**
         }
 
 ### Update a specific product [PUT]
+
 + Request
     + Headers
 
@@ -462,8 +520,12 @@ Product related resources of the **ASAP API**
                 }]
         }
 
+# Group Bundles
+
 ## Bundles List [/v1/products/bundles]
-### List  offers [GET]
+
+### List all bundles [GET]
+
 + Request
     + Headers
 
@@ -480,6 +542,7 @@ Product related resources of the **ASAP API**
         }
 
 ### Create new bundle [POST]
+
 + Request
     + Headers
 
@@ -492,7 +555,9 @@ Product related resources of the **ASAP API**
 + Response 200 (application/json)
 
 ## Update Bundle [/v1/products/bundles/{bundle_id}]
+
 ### Update an existing bundle [PUT]
+
 + Request
     + Headers
 
@@ -513,31 +578,14 @@ Product related resources of the **ASAP API**
                 }]
         }
 
-## Retrieve specific upsells [/v1/products/{pid}/upsells]
-### Retrieve upsells record [GET]
-+ Request
-    + Headers
+# Group Cart
 
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+Customer cart related resources of the **ASAP API**
 
-+ Response 200 (application/json)
+## Manage Cart [/v1/users/{user_id}/cart/items]
 
-        {  
-                "data": {
-                        "id": "r_zxfvebererfdfbdfv" 
-                }
-        }
+### Add to user's cart [POST]
 
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Product not found"
-                }]
-        }
-
-### Update product upsell record [PUT]
 + Request
     + Headers
     
@@ -545,27 +593,21 @@ Product related resources of the **ASAP API**
 
     + Body
 
-            { "name": "2&2", ... }
-        
+            { "name": "goMobi", "value": "", ... }
+
 + Response 200
-        
+
 + Response 404 (application/json) 
 
         {  
                 "errors": [{  
                         "code": 1234,
-                        "message": "Product not found"
+                        "message": "User not found"
                 }]
         }
-
-# Group Cart
-Customer cart related resources of the **ASAP API**
-
-## Manage Cart [/v1/users/{user_id}/cart/items]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
     
 ### Retrieve a user's cart [GET]
+
 + Request
     + Headers
     
@@ -590,45 +632,10 @@ Customer cart related resources of the **ASAP API**
                 }]
         }
 
-### Add to user's cart [POST]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            { "name": "goMobi", "value": "", ... }
-
-+ Response 200
-
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "User not found"
-                }]
-        }
-
 ## Manage Cart Items [/v1/users/{user_id}/cart/items/{item_id}]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
-    + item_id (required, string, `i_asdf34fwrfgb`) ... Cart item id.
-
-### Remove item from user's cart [DELETE]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            { "id": "i_45g3rsdfsdfsq" }
-
-+ Response 204
 
 ### Update item in user's cart [PUT]
+
 + Request
     + Headers
     
@@ -649,12 +656,23 @@ Customer cart related resources of the **ASAP API**
                 }]
         }
 
+### Remove item from user's cart [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "id": "i_45g3rsdfsdfsq" }
+
++ Response 204
+
 ## Reserving Domains [/v1/users/{user_id}/cart/items/{item_id}/reserve]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
-    + item_id (required, string, `i_asdf34fwrfgb`) ... Cart item id.
 
 ### Reserve a domain name [POST]
+
 + Request
     + Headers
     
@@ -676,10 +694,9 @@ Customer cart related resources of the **ASAP API**
         }
 
 ## Cart Checkout [/v1/users/{user_id}/cart/checkout]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
 
 ### Submit order and get order id [POST]
+
 + Request
     + Headers
     
@@ -703,10 +720,9 @@ Customer cart related resources of the **ASAP API**
         }
 
 ## Cart Complete [/v1/users/{user_id}/cart/complete]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
 
 ### Send payment reference and finalize purchase [POST]
+
 + Request
     + Headers
     
@@ -734,13 +750,34 @@ Customer cart related resources of the **ASAP API**
         }
 
 # Group Wishlist
+
 Wishlist related resources of the **ASAP API**
 
 ## Wistlist Management [/users/{user_id}/wishlist]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
+
+### Add to wishlist [POST]
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "id": "p_45g3rsdfsdfsq", "name": "goMobi", "value": "", ... }
+            
++ Response 200
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ### Retrieve wishlist [GET]
+
 + Request
     + Headers
     
@@ -765,40 +802,10 @@ Wishlist related resources of the **ASAP API**
                 }]
         }
 
-### Add to wishlist [POST]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            { "id": "p_45g3rsdfsdfsq", "name": "goMobi", "value": "", ... }
-            
-+ Response 200
-
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "User not found"
-                }]
-        }
-
-### Delete entire wishlist [DELETE]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-            
-+ Response 204
-
 ## Manage wishlist items [/v1/users/{user_id}/wishlist/{wish_id}]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
 
 ### Update wishlist item [PUT]
+
 + Request
     + Headers
     
@@ -820,6 +827,7 @@ Wishlist related resources of the **ASAP API**
         }
 
 ### Delete wishlist item [DELETE]
+
 + Request
     + Headers
     
@@ -828,13 +836,13 @@ Wishlist related resources of the **ASAP API**
 + Response 204
 
 # Group Orders
+
 Orders related resources of the **ASAP API**
 
 ## List user's orders [/v1/users/{user_id}/orders]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
 
-### Retrieve list of user orders [GET]
+### Retrieve all user orders [GET]
+
 + Request
     + Headers
     
@@ -859,12 +867,10 @@ Orders related resources of the **ASAP API**
                 }]
         }
 
-## List specific order [/v1/users/{user_id}/orders/{order_id}]
-+ Parameters
-    + user_id (required, string, `u_5g3gefwefwef`) ... User id.
-    + order_id (required, string, `o_ssdf34wfgfgd`) ... ORder id.
+## Retrieve specific order [/v1/users/{user_id}/orders/{order_id}]
 
-### Retrieve a user order [GET]
+### Retrieve a specific user order [GET]
+
 + Request
     + Headers
     
@@ -988,9 +994,6 @@ Domain related resources of the **ASAP API**
 
 ## Domain info [/v1/user/{user_id}/domains/{domain}]
 Retrieve domain details
-
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
 
 ### Retrieve full domain info, contacts, DNS records, nameservers, domain lock, etc [GET]
 
