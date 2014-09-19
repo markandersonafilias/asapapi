@@ -2,7 +2,7 @@ FORMAT: 1A
 HOST: https://api.internet.com/
 
 # ASAP Reseller API
-The ASAP Reseller API is a *registrar platform* offering for the Afilias ASAP reseller service.
+The ASAP Reseller API is a *platform* offering from Afilias. This document is a living document, a work in progress. Temporary comments are in () brackets. 
 
 # Group Token
 General token authentication and handling.
@@ -75,6 +75,7 @@ General token authentication and handling.
 ## Users [/v1/users]
 
 ### Create a new user [POST]
+(Creating a new user should map the guest user token in use to the new user and keep their token valid.)
 
 + Request
     + Headers
@@ -1386,9 +1387,6 @@ Whois lookup service of the **ASAP API**
 
 ## List [/v1/whois/{domain}]
 
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name to list whois info for.
-
 ### Retrieve list of whois info [GET]
 
 + Request
@@ -1414,12 +1412,9 @@ Whois lookup service of the **ASAP API**
         }
         
 # Group ASync Processes
+(There is debate over whether we need this endpoint.)
 
 ## ASync Status [/v1/status/{reference_id}]
-Retrieve current details
-
-+ Parameters
-    + reference_id (required, string, `TRXPROC-1234`) ... Reference id of the async process.
 
 ### Querying the current status of the process [GET]
 
