@@ -894,12 +894,10 @@ Orders related resources of the **ASAP API**
         }
 
 # Group Domains
+
 Domain related resources of the **ASAP API**
 
 ## Check Availability [/v1/domains/{domain}/available]
-
-+ Parameters
-    + domain (required, string, `myshop.info`) ... Name of domain to check availability for.
 
 ### Check availability of specific domain [GET]
 
@@ -916,10 +914,7 @@ Domain related resources of the **ASAP API**
                 }
         }
 
-## Suggest [/v1/domains/{query}/tld-spin]
-
-+ Parameters
-    + query (required, string, `myshop`) ... String of the base name to spin domains for. 
+## Suggest - TLD Spin [/v1/domains/{query}/tld-spin]
 
 ### Retrieve list of domain suggestions [GET]
 
@@ -946,10 +941,7 @@ Domain related resources of the **ASAP API**
             }]
         }
 
-## Suggest [/v1/domains/{query}/domain-spin] 
-
-+ Parameters
-    + query (required, string, `myshop`) ... String of the base name to spin domains for. 
+## Suggest - Domain & TLD Spin [/v1/domains/{query}/domain-spin] 
 
 ### Retrieve list of domain suggestions [GET]
 
@@ -979,6 +971,7 @@ Domain related resources of the **ASAP API**
 ## List User Domains [/v1/users/{user_id}/domains]
 
 ### Retrieve list of my domains [GET]
+
 + Request
     + Headers
     
@@ -993,7 +986,6 @@ Domain related resources of the **ASAP API**
         }
 
 ## Domain info [/v1/user/{user_id}/domains/{domain}]
-Retrieve domain details
 
 ### Retrieve full domain info, contacts, DNS records, nameservers, domain lock, etc [GET]
 
@@ -1043,7 +1035,7 @@ Retrieve domain details
                 }]
         }
 
-## Domain Auto Renew [/v1/domain/{domain}/auto-renew]
+## Domain Auto Renew [/v1/domains/{domain}/auto-renew]
 
 ### Set current status of auto renew [PUT]
 
@@ -1119,21 +1111,6 @@ Retrieve domain details
 
 ## Domain Contacts Management [/v1/domains/{domain}/contacts/{id}]
 
-Update domain contacts record
-
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
-    + id (required, string, `c_rtert4dsfwt`) ... Domain contact record id.
-    
-### Delete domain contact [DELETE]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 204 
-
 ### Update domain contact [PUT]
 
 + Request
@@ -1183,6 +1160,31 @@ Update domain contacts record
 URL forwarding related resources of the **ASAP API**
 
 ## Manage domain fowarding rules [/v1/domains/{domain}/forwarding]
+
+### Create forwarding rule record [POST]
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "pointing": "http://www.myothershop.info",
+                "type": "MASKED",
+                "page_title": "Forwarding Page"
+            }
+
++ Response 200
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
     
 ### Retrieve list of URL forwarding rules [GET]
 
@@ -1215,54 +1217,10 @@ URL forwarding related resources of the **ASAP API**
                 }]
         }
 
-### Create forwarding rule record [POST]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            {
-                "pointing": "http://www.myothershop.info",
-                "type": "MASKED",
-                "page_title": "Forwarding Page"
-            }
-
-+ Response 200
-        
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }]
-        }
-
 ## Manage forwarding rule record [/v1/domains/{domain}/forwarding/{id}]
-+ Parameters
-    + domain (required, string, `myshop`) ... String of the base name to manage forwarding for. 
-    + id (required, integer, `90`) ... Forwarding rule record id. 
-
-### Delete forwarding rule record [DELETE]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 204
-
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }]
-        }
 
 ### Update forwarding rule record [PUT]
+
 + Request
     + Headers
     
@@ -1288,14 +1246,57 @@ URL forwarding related resources of the **ASAP API**
                 }]
         }
 
+### Delete forwarding rule record [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 204
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+
 # Group DNS
 DNS record related resources of the **ASAP API**
 
 ## List [/v1/domains/{domain}/dns]
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name to list DNS records for.
+
+### Create new DNS record [POST]
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "type": "MX",
+                "content": "mx1.myshop.info",
+                "ttl": 300,
+                "priority": 10
+            }
+
++ Response 200
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ### Retrieve list of DNS records [GET]
+
 + Request
     + Headers
     
@@ -1333,51 +1334,7 @@ DNS record related resources of the **ASAP API**
                 }]
         }
 
-### Create new DNS record [POST]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            {
-                "type": "MX",
-                "content": "mx1.myshop.info",
-                "ttl": 300,
-                "priority": 10
-            }
-
-+ Response 200
-        
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }]
-        }
-
 ## Manage DNS record [/v1/domains/{domain}/dns/{id}]
-
-### Delete DNS record [DELETE]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200
-        
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }]
-        }
     
 ### Update DNS record [PUT]
 
@@ -1394,6 +1351,24 @@ DNS record related resources of the **ASAP API**
                 "ttl": 300,
                 "priority": 10
             }
+
++ Response 200
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+
+### Delete DNS record [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
 + Response 200
         
