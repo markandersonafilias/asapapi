@@ -15,21 +15,21 @@ General token authentication and handling.
         
 + Response 201 (application/json)
 
-    {  
-        "data": [{
-            "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", 
-            "id": "u_asfvlsajdfoasjf" 
-        }]
-    }
+        {  
+                "data": [{
+                        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", 
+                        "id": "u_asfvlsajdfoasjf" 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Login failed"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Login failed"
+                }]
+        }
         
 ## Token Refresh [/v1/auth/token/refresh]
 ### Update JWT token to avoid expiration [PUT]
@@ -40,20 +40,20 @@ General token authentication and handling.
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{
-            "token": "abJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd44" 
-        }]
-    }
+        {  
+                "data": [{
+                        "token": "abJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd44" 
+                }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Token unknown or already expired"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
 
 ## Token Invalidation [/v1/auth/token/revoke]
 ### Force JWT token expiration [DELETE]
@@ -78,13 +78,13 @@ General token authentication and handling.
         
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-                  "id": "u_345f4h2b", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-            }, {
-                  "id": "u_345f4h2b", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-            }]
-    }
+        {  
+                "data": [{
+                          "id": "u_345f4h2b", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
+                }, {
+                          "id": "u_345f4h2b", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
+                }]
+        }
         
 ## User Creation [/v1/users]
 ### Create a new user [POST]
@@ -99,20 +99,20 @@ General token authentication and handling.
         
 + Response 201 (application/json)
 
-    {  
-        "data": [{
-            "id": "u_345f4h2b" 
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "u_345f4h2b" 
+                }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Operation failed"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Operation failed"
+                }]
+        }
         
 ### List direct reseller admin users and customer users [GET]
 + Request
@@ -122,13 +122,13 @@ General token authentication and handling.
         
 + Response 201 (application/json)
 
-    {  
-        "data": [{
-                  "id": "u_145f4h2b", "first_name": "Alice", ...
-            }, {
-                  "id": "u_94gh4627", "first_name": "Bob", ...
-            }]
-    }
+        {  
+                "data": [{
+                          "id": "u_145f4h2b", "first_name": "Alice", ...
+                }, {
+                          "id": "u_94gh4627", "first_name": "Bob", ...
+                }]
+        }
         
 ## User Management [/v1/users/{id}]
 + Parameters
@@ -142,20 +142,20 @@ General token authentication and handling.
         
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "u_145f4h2b", "first_name": "Adam", "last_name", "Jones", "email": "ajones@yahoo.com", ... 
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "u_145f4h2b", "first_name": "Adam", "last_name", "Jones", "email": "ajones@yahoo.com", ... 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ### Update user record [PUT]
 + Request
@@ -169,18 +169,18 @@ General token authentication and handling.
         
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 # Group Passwords
 Password handling and reset.
@@ -198,18 +198,18 @@ Password handling and reset.
         
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ## Change Request [/v1/password/forgot/{verification_id}]
 ### Change email request [POST]
@@ -224,18 +224,18 @@ Password handling and reset.
         
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 # Group Verification
 New user verification of the **ASAP API**
@@ -245,18 +245,18 @@ New user verification of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Verification code not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Verification code not found"
+                }]
+        }
 
 # Group Resellers
 Reseller related resources of the **ASAP API**
@@ -270,13 +270,13 @@ Reseller related resources of the **ASAP API**
             
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "r_dfb3gwfsdfefw", "name": "Web.com", ...
-            }, {
-                  "id": "r_awrfedbe43tbe", "name": "1&1", ...
-            }]
-    }
+        {  
+                "data": [{
+                        "id": "r_dfb3gwfsdfefw", "name": "Web.com", ...
+                }, {
+                          "id": "r_awrfedbe43tbe", "name": "1&1", ...
+                }]
+        }
 
 ## Specific reseller [/v1/resellers/{reseller_id}]
 ### Retrieve reseller record [GET]
@@ -287,20 +287,20 @@ Reseller related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "r_zxfvebererfdfbdfv" 
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "r_zxfvebererfdfbdfv" 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Reseller not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Reseller not found"
+                }]
+        }
 
 ### Update reseller record [PUT]
 + Request
@@ -314,47 +314,18 @@ Reseller related resources of the **ASAP API**
         
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Reseller not found"
-        }]
-    }
-
-### Update reseller record [PUT]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-    {  
-        "data": [{
-            "name": "2&2", ... 
-        }]
-    }
-        
-+ Response 201 (application/json)
-
-    {  
-        "data": [{ }]
-    }
-        
-+ Response 400 (application/json) 
-
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Reseller not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Reseller not found"
+                }]
+        }
 
 # Group Products
 Product related resources of the **ASAP API**
@@ -368,13 +339,13 @@ Product related resources of the **ASAP API**
             
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-                  "id": "p_asfar34t4f2f", "name": "TLD", ...
-            }, {
-                  "id": "p_adtrgt55353q", "name": "goMobi", ...
-            }]
-    }
+        {  
+                "data": [{
+                          "id": "p_asfar34t4f2f", "name": "TLD", ...
+                }, {
+                          "id": "p_adtrgt55353q", "name": "goMobi", ...
+                }]
+        }
 
 ## Bundles List [/v1/products/bundles]
 ### List  offers [GET]
@@ -385,13 +356,13 @@ Product related resources of the **ASAP API**
             
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-                  "id": "b_asffreb4432", "title": "Bundle #1", ...
-            }, {
-                  "id": "b_a34t3gb2668", "title": "Bundle #2", ...
-            }]
-    }
+        {  
+                "data": [{
+                          "id": "b_asffreb4432", "title": "Bundle #1", ...
+                }, {
+                          "id": "b_a34t3gb2668", "title": "Bundle #2", ...
+                }]
+        }
 
 ## Retrieve specific upsells [/v1/products/{pid}/upsells]
 ### Retrieve upsells record [GET]
@@ -402,20 +373,20 @@ Product related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "r_zxfvebererfdfbdfv" 
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "r_zxfvebererfdfbdfv" 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Product not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Product not found"
+                }]
+        }
 
 ### Update product upsell record [PUT]
 + Request
@@ -429,18 +400,18 @@ Product related resources of the **ASAP API**
         
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Product not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Product not found"
+                }]
+        }
 
 # Group TLDs
 ## TLD List [/v1/domains/tlds]
@@ -452,13 +423,13 @@ Product related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": 1, "tld": "organic", ...
-        }, {
-            "id": 2, "tld": "info", ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": 1, "tld": "organic", ...
+                }, {
+                        "id": 2, "tld": "info", ...
+                }]
+        }
 
 ## TLD Categories [/v1/domains/tlds/categories]
 ### List all TLD categories [GET]
@@ -469,15 +440,15 @@ Product related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": 1, "category": "business", ...
-        }, {
-            "id": 2, "category": "industry", ...
-        }, {
-            "id": 3, "category": "personal", ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": 1, "category": "business", ...
+                }, {
+                        "id": 2, "category": "industry", ...
+                }, {
+                        "id": 3, "category": "personal", ...
+                }]
+        }
 
 # Group Cart
 Customer cart related resources of the **ASAP API**
@@ -494,22 +465,22 @@ Customer cart related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "i_45g3rsdfsdfsq", "name": "goMobi", "value": "", ...
-        }, {
-            "id": "i_asv5t3ggsdwfd", "name": ".Organic Domain", "value": "wholefoods" ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "i_45g3rsdfsdfsq", "name": "goMobi", "value": "", ...
+                }, {
+                        "id": "i_asv5t3ggsdwfd", "name": ".Organic Domain", "value": "wholefoods" ...
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ### Add to user's cart [POST]
 + Request
@@ -523,18 +494,18 @@ Customer cart related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ## Manage Cart Items [/v1/users/{user_id}/cart/items/{item_id}]
 + Parameters
@@ -565,18 +536,18 @@ Customer cart related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ## Reserving Domains [/v1/users/{user_id}/cart/items/{item_id}/reserve]
 + Parameters
@@ -591,18 +562,18 @@ Customer cart related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ## Cart Checkout [/v1/users/{user_id}/cart/checkout]
 + Parameters
@@ -616,20 +587,20 @@ Customer cart related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "order_id": "o_fvdfb3gervsf2es" 
-        }]
-    }
+        {  
+                "data": [{
+                        "order_id": "o_fvdfb3gervsf2es" 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ## Cart Complete [/v1/users/{user_id}/cart/complete]
 + Parameters
@@ -643,20 +614,20 @@ Customer cart related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "payment_id": "bluesnap_12345" 
-        }]
-    }
+        {  
+                "data": [{
+                        "payment_id": "bluesnap_12345" 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 # Group Wishlist
 Wishlist related resources of the **ASAP API**
@@ -673,22 +644,22 @@ Wishlist related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "i_45g3rsdfsdfsq", "name": "goMobi", "value": "", ...
-        }, {
-            "id": "i_asv5t3ggsdwfd", "name": ".Organic Domain", "value": "wholefoods" ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "i_45g3rsdfsdfsq", "name": "goMobi", "value": "", ...
+                }, {
+                        "id": "i_asv5t3ggsdwfd", "name": ".Organic Domain", "value": "wholefoods" ...
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ### Add to wishlist [POST]
 + Request
@@ -702,18 +673,18 @@ Wishlist related resources of the **ASAP API**
             
 + Response 200 (application/json)
 
-      {  
-        "data": [{ }]
-    }
+          {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ### Delete entire wishlist [DELETE]
 + Request
@@ -739,18 +710,18 @@ Wishlist related resources of the **ASAP API**
             
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ### Delete wishlist item [DELETE]
 + Request
@@ -775,22 +746,22 @@ Orders related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", ...
-        }, {
-            "id": "o_asv5t3ggsdwfd", "created": "2014-02-27 10:30:18", ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", ...
+                }, {
+                        "id": "o_asv5t3ggsdwfd", "created": "2014-02-27 10:30:18", ...
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ## List specific order [/v1/users/{user_id}/orders/{order_id}]
 + Parameters
@@ -805,20 +776,20 @@ Orders related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", ... 
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", ... 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 # Group Domains
 Domain related resources of the **ASAP API**
@@ -835,20 +806,20 @@ Domain related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "available": 1 
-        }]
-    }
+        {  
+                "data": [{
+                        "available": 1 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "User not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
 
 ## Suggest [/v1/domain-search/{query}]
 Perform a domain name suggestions search: Recommended, Most popular
@@ -864,11 +835,11 @@ Perform a domain name suggestions search: Recommended, Most popular
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-        }]
-    }
+        {  
+                "data": [{
+                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
+                }]
+        }
 
 ## Suggest [/v1/domain-search/{query}/bulk]
 Perform a bulk domain name suggestions search
@@ -884,11 +855,11 @@ Perform a bulk domain name suggestions search
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-        }]
-    }
+        {  
+                "data": [{
+                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
+                }]
+        }
 
 ## Suggest [/v1/domain/{query}/tld-spin]
 Perform a domain name suggestions search: Recommended, Most popular
@@ -904,11 +875,11 @@ Perform a domain name suggestions search: Recommended, Most popular
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-        }]
-    }
+        {  
+                "data": [{
+                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
+                }]
+        }
 
 ## Suggest [/v1/domain/{query}/domain-spin] 
 Perform a domain name suggestions search, ("domain spinning") : Related
@@ -924,11 +895,11 @@ Perform a domain name suggestions search, ("domain spinning") : Related
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-        }]
-    }
+        {  
+                "data": [{
+                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
+                }]
+        }
 
 ## List My Domains [/v1/domain/list{?limit}{?offset}{?sortby}{?order}]
 
@@ -946,11 +917,11 @@ Perform a domain name suggestions search, ("domain spinning") : Related
         
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-        }]
-    }
+        {  
+                "data": [{
+                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
+                }]
+        }
         
 ## Domain creation [/v1/domain/{domain}{?query}]
 ### Domain Creation & Update [POST]
@@ -999,11 +970,11 @@ Create a new domain name order - Asynchronous
 
 + Response 202 (application/json)
 
-    {  
-        "data": [{
-            "status":"Accepted", "location": "/v1/query_status/{reference}" 
-        }]
-    }
+        {  
+                "data": [{
+                        "status":"Accepted", "location": "/v1/query_status/{reference}" 
+                }]
+        }
 
 ## Domain info [/v1/domain/{domain}]
 Retrieve domain details
@@ -1019,20 +990,20 @@ Retrieve domain details
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "domain": "myshop.info", ... 
-        }]
-    }
+        {  
+                "data": [{
+                        "domain": "myshop.info", ... 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 
 ## Query status [/v1/query_status/{reference_id}]
@@ -1049,25 +1020,25 @@ Retrieve current details
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-                "reference": "TRXPROC-1234", 
-                "message": "Problem in processing", 
-                "errors": [{
-                    "code":121, 
-                    "message": "Card expired"
+        {  
+                "data": [{
+                        "reference": "TRXPROC-1234", 
+                        "message": "Problem in processing", 
+                        "errors": [{
+                            "code":121, 
+                            "message": "Card expired"
+                        }]
                 }]
-        }]
         }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Send email [/v1/user/{email_id}{?action}]
 Request to send activation email - Asynchronous
@@ -1084,20 +1055,20 @@ Request to send activation email - Asynchronous
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "email_id":thomsan@afilias.com, "message":"Success"
-        }]
-    }
+        {  
+                "data": [{
+                        "email_id":thomsan@afilias.com, "message":"Success"
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Search [/v1/domain-search/{domain_name}]
 Domain search
@@ -1113,20 +1084,20 @@ Domain search
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ 
-            "domain": "myshop.info", ... 
-        }]
-    }
+        {  
+                "data": [{ 
+                        "domain": "myshop.info", ... 
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Domain lock [/v1/domain/{domain}/lock]
 Set domain lock status
@@ -1142,22 +1113,22 @@ Set domain lock status
 
     + Body
 
-    { "lock": "on" }
+            { "lock": "on" }
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Domain Auto renew [/v1/domain/{domain}/auto-renew]
 ### Set/Get auto renew domain status
@@ -1171,29 +1142,24 @@ Set domain lock status
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
     + Body
 
-        { "auto_renew": "on" }
+                { "auto_renew": "on" }
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ### Set current status of auto renew [PUT]
 + Request
@@ -1201,24 +1167,24 @@ Set domain lock status
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Body (application/json)
+    + Body
 
-        { "auto_renew": "on" }
+            { "auto_renew": "on" }
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Domain Auto renew [/v1/domain/{domain}/who-is-privacy]
 ### Set/Get 'who is privacy' status
@@ -1234,22 +1200,22 @@ Set domain lock status
 
     + Body
 
-        { "whoisprivacy": "on" }
+            { "whoisprivacy": "on" }
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ### Set current status of whoisprivacy [PUT]
 + Request
@@ -1259,22 +1225,22 @@ Set domain lock status
 
    + Body
 
-        { "whoisprivacy": "on" }
+            { "whoisprivacy": "on" }
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Nameservers [/v1/domain/{domain}/nameservers]
 Update domain nameservers
@@ -1296,18 +1262,18 @@ Update domain nameservers
             
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Domain Contact Creation [/v1/domain/{domain}/contacts]
 + Parameters
@@ -1352,18 +1318,18 @@ Update domain nameservers
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Domain Contacts Management [/v1/domain/{domain}/contacts/{id}]
 Update domain contacts record
@@ -1420,18 +1386,18 @@ Update domain contacts record
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 # Group URL Forwarding
 URL forwarding related resources of the **ASAP API**
@@ -1448,27 +1414,27 @@ URL forwarding related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "rules": [
-                {
-                    "id": "ru_34effrth45y4",
-                    "pointing": "http://www.myothershop.info",
-                    "type": "MASKED",
-                    "page_title": "Forwarding Page"
-                }
-            ]
-            }]
-    }
+        {  
+                "data": [{
+                        "rules": [
+                                {
+                                        "id": "ru_34effrth45y4",
+                                        "pointing": "http://www.myothershop.info",
+                                        "type": "MASKED",
+                                        "page_title": "Forwarding Page"
+                                }
+                        ]
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ### Create forwarding rule record [POST]
 + Request
@@ -1486,18 +1452,18 @@ URL forwarding related resources of the **ASAP API**
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Manage email fowarding [/v1/domain/{domain}/email]
 + Parameters
@@ -1511,48 +1477,48 @@ URL forwarding related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "domain": "myshop.info",
-            "years": 2,
-            "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
-            "contact": [
-                {
-                    "type": "registrant",
-                    "first_name": "Jonathan",
-                    "last_name": "Doe",
-                    "organization": "Acme Inc",
-                    "email": "",
-                    "address1": "",
-                    "address2": "",
-                    "city": "",
-                    "state": "",
-                    "postal_code": "",
-                    "country": "",
-                    "phone1_type": "",
-                    "phone1_country_code": "",
-                    "phone1_number": "",
-                    "phone1_extension": "",
-                    "phone2_type": "",
-                    "phone2_country_code": "",
-                    "phone2_number": "",
-                    "phone2_extension": "",
-                    "fax1_type": "",
-                    "fax1_country_code": "",
-                    "fax1_number": ""
-                }
-            ]
-        }]
-    }
+        {  
+                "data": [{
+                        "domain": "myshop.info",
+                        "years": 2,
+                        "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
+                        "contact": [
+                                {
+                                        "type": "registrant",
+                                        "first_name": "Jonathan",
+                                        "last_name": "Doe",
+                                        "organization": "Acme Inc",
+                                        "email": "",
+                                        "address1": "",
+                                        "address2": "",
+                                        "city": "",
+                                        "state": "",
+                                        "postal_code": "",
+                                        "country": "",
+                                        "phone1_type": "",
+                                        "phone1_country_code": "",
+                                        "phone1_number": "",
+                                        "phone1_extension": "",
+                                        "phone2_type": "",
+                                        "phone2_country_code": "",
+                                        "phone2_number": "",
+                                        "phone2_extension": "",
+                                        "fax1_type": "",
+                                        "fax1_country_code": "",
+                                        "fax1_number": ""
+                                }
+                        ]
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Manage forwarding rule record [/v1/domain/{domain}/forwarding/{id}]
 + Parameters
@@ -1567,18 +1533,14 @@ URL forwarding related resources of the **ASAP API**
 
 + Response 204
 
-    {  
-        "data": [{ }]
-    }
-
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ### Update forwarding rule record [PUT]
 + Request
@@ -1597,18 +1559,18 @@ URL forwarding related resources of the **ASAP API**
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 # Group DNS
 DNS record related resources of the **ASAP API**
@@ -1625,35 +1587,35 @@ DNS record related resources of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "records": [
-                {
-                    "id": "d_fg3qg4535y",
-                    "type": "MX",
-                    "content": "mx1.myshop.info",
-                    "ttl": 300,
-                    "priority": 10
-                },
-                {
-                    "id": "d_3y4thr4t3h",
-                    "type": "MX",
-                    "content": "mx2.myshop.info",
-                    "ttl": 300,
-                    "priority": 20
-                }
-            ]
-        }]
-    }
+        {  
+                "data": [{
+                        "records": [
+                                {
+                                        "id": "d_fg3qg4535y",
+                                        "type": "MX",
+                                        "content": "mx1.myshop.info",
+                                        "ttl": 300,
+                                        "priority": 10
+                                },
+                                {
+                                        "id": "d_3y4thr4t3h",
+                                        "type": "MX",
+                                        "content": "mx2.myshop.info",
+                                        "ttl": 300,
+                                        "priority": 20
+                                }
+                        ]
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ### Create new DNS record [POST]
 + Request
@@ -1672,18 +1634,18 @@ DNS record related resources of the **ASAP API**
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## Manage DNS record [/v1/domain/{domain}/dns/{id}]
 + Parameters
@@ -1698,18 +1660,18 @@ DNS record related resources of the **ASAP API**
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
     
 ### Update DNS record [PUT]
 + Request
@@ -1728,18 +1690,18 @@ DNS record related resources of the **ASAP API**
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
         
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
 
 ## For future - Domain  [/v1/domains/{query}{?params}{?limit}{?offset}{?sortby}{?order}]
 
@@ -1759,13 +1721,13 @@ DNS record related resources of the **ASAP API**
         
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "x_wfefwef23r2", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-        }, {
-            "id": "x_2rrffrg2r24", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "x_wfefwef23r2", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
+                }, {
+                        "id": "x_2rrffrg2r24", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
+                }]
+        }
 
 ### Domains [POST]
 Create a new domain name order
@@ -1777,40 +1739,40 @@ Create a new domain name order
     + Body
     
             {
-            "domain": "myshop.info",
-            "years": 2,
-            "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
-            "contact": [{
-                    "type": "registrant",
-                    "first_name": "Jonathan",
-                    "last_name": "Doe",
-                    "organization": "Acme Inc",
-                    "email": "",
-                    "address1": "",
-                    "address2": "",
-                    "city": "",
-                    "state": "",
-                    "postal_code": "",
-                    "country": "",
-                    "phone1_type": "",
-                    "phone1_country_code": "",
-                    "phone1_number": "",
-                    "phone1_extension": "",
-                    "phone2_type": "",
-                    "phone2_country_code": "",
-                    "phone2_number": "",
-                    "phone2_extension": "",
-                    "fax1_type": "",
-                    "fax1_country_code": "",
-                    "fax1_number": ""
-            }]
+                    "domain": "myshop.info",
+                    "years": 2,
+                    "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
+                        "contact": [{
+                                        "type": "registrant",
+                                        "first_name": "Jonathan",
+                                        "last_name": "Doe",
+                                        "organization": "Acme Inc",
+                                        "email": "",
+                                        "address1": "",
+                                        "address2": "",
+                                        "city": "",
+                                        "state": "",
+                                        "postal_code": "",
+                                        "country": "",
+                                        "phone1_type": "",
+                                        "phone1_country_code": "",
+                                        "phone1_number": "",
+                                        "phone1_extension": "",
+                                        "phone2_type": "",
+                                        "phone2_country_code": "",
+                                        "phone2_number": "",
+                                        "phone2_extension": "",
+                                        "fax1_type": "",
+                                        "fax1_country_code": "",
+                                        "fax1_number": ""
+                        }]
             }
 
 + Response 201 (application/json)
 
-    {  
-        "data": [{ }]
-    }
+        {  
+                "data": [{ }]
+        }
 
 ## For future - Reseller  [/v1/resellers/{query}{?limit}{?offset}{?sortby}{?order}]
 
@@ -1829,13 +1791,13 @@ Create a new domain name order
         
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "r_3gfgsfsafh44", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-        }, {
-            "id": "r_5l5lfj23ntd1", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "r_3gfgsfsafh44", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
+                }, {
+                        "id": "r_5l5lfj23ntd1", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
+                }]
+        }
         
 ## For future - Product  [/v1/products/{query}{?limit}{?offset}{?sortby}{?order}]
 
@@ -1854,13 +1816,13 @@ Create a new domain name order
         
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "p_xcvbx4y434", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-        }, {
-            "id": "p_cvbncsthfh", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "p_xcvbx4y434", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
+                }, {
+                        "id": "p_cvbncsthfh", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
+                }]
+        }
         
 ## For future - Bundles  [/v1/bundles/{query}{?limit}{?offset}{?sortby}{?order}]
 
@@ -1879,13 +1841,13 @@ Create a new domain name order
         
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "id": "b_eysb454563", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-        }, {
-            "id": "b_dffn6r7853", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-        }]
-    }
+        {  
+                "data": [{
+                        "id": "b_eysb454563", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
+                }, {
+                        "id": "b_dffn6r7853", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
+                }]
+        }
         
 # Group Whois
 Whois lookup service of the **ASAP API**
@@ -1902,101 +1864,101 @@ Whois lookup service of the **ASAP API**
 
 + Response 200 (application/json)
 
-    {  
-        "data": [{
-            "record": 
-                "Domain Name:AFILIAS.INFO
-                Domain ID: D217-LRMS
-                Creation Date: 2001-07-25T14:11:20Z
-                Updated Date: 2014-06-30T14:22:47Z
-                Registry Expiry Date: 2021-07-25T14:11:20Z
-                Sponsoring Registrar:Afilias Ltd. (R145-LRMS)
-                Sponsoring Registrar IANA ID: 700023
-                WHOIS Server: 
-                Referral URL: 
-                Domain Status: ok
-                Registrant ID:C270-LRMS
-                Registrant Name:Afilias Limited
-                Registrant Organization:Afilias Ltd.
-                Registrant Street: 2 La Touche House
-                Registrant Street: IFSC
-                Registrant City:Dublin
-                Registrant State/Province:
-                Registrant Postal Code:1
-                Registrant Country:IE
-                Registrant Phone:+353.18541100
-                Registrant Phone Ext: 
-                Registrant Fax: +1.2157065701
-                Registrant Fax Ext: 
-                Registrant Email:support@afilias.info
-                Admin ID:C270-LRMS
-                Admin Name:Afilias Limited
-                Admin Organization:Afilias Ltd.
-                Admin Street: 2 La Touche House
-                Admin Street: IFSC
-                Admin City:Dublin
-                Admin State/Province:
-                Admin Postal Code:1
-                Admin Country:IE
-                Admin Phone:+353.18541100
-                Admin Phone Ext: 
-                Admin Fax: +1.2157065701
-                Admin Fax Ext: 
-                Admin Email:support@afilias.info
-                Billing ID:C270-LRMS
-                Billing Name:Afilias Limited
-                Billing Organization:Afilias Ltd.
-                Billing Street: 2 La Touche House
-                Billing Street: IFSC
-                Billing City:Dublin
-                Billing State/Province:
-                Billing Postal Code:1
-                Billing Country:IE
-                Billing Phone:+353.18541100
-                Billing Phone Ext: 
-                Billing Fax: +1.2157065701
-                Billing Fax Ext: 
-                Billing Email:support@afilias.info
-                Tech ID:C270-LRMS
-                Tech Name:Afilias Limited
-                Tech Organization:Afilias Ltd.
-                Tech Street: 2 La Touche House
-                Tech Street: IFSC
-                Tech City:Dublin
-                Tech State/Province:
-                Tech Postal Code:1
-                Tech Country:IE
-                Tech Phone:+353.18541100
-                Tech Phone Ext: 
-                Tech Fax: +1.2157065701
-                Tech Fax Ext: 
-                Tech Email:support@afilias.info
-                Name Server:A0.DIG.AFILIAS-NST.INFO
-                Name Server:B0.DIG.AFILIAS-NST.INFO
-                Name Server:C0.DIG.AFILIAS-NST.INFO
-                Name Server:D0.DIG.AFILIAS-NST.INFO
-                DNSSEC:signedDelegation
-                DS Created 1:2013-12-09T21:29:30Z
-                DS Key Tag 1:32709
-                Algorithm 1:5
-                Digest Type 1:2
-                Digest 1:4B5D67729CE8180BBF93D0ACD78053262F68BCD402D0C947E54E74A553E5994A
-                DS Maximum Signature Life 1:1814400 seconds
-                DS Created 2:2013-12-09T21:29:30Z
-                DS Key Tag 2:32709
-                Algorithm 2:5
-                Digest Type 2:1
-                Digest 2:BF4903176E0BE0664B511BFEAA4651A5CACCC733
-                DS Maximum Signature Life 2:1814400 seconds"
-        }]
-    }
+        {  
+                "data": [{
+                        "record": 
+                                "Domain Name:AFILIAS.INFO
+                                Domain ID: D217-LRMS
+                                Creation Date: 2001-07-25T14:11:20Z
+                                Updated Date: 2014-06-30T14:22:47Z
+                                Registry Expiry Date: 2021-07-25T14:11:20Z
+                                Sponsoring Registrar:Afilias Ltd. (R145-LRMS)
+                                Sponsoring Registrar IANA ID: 700023
+                                WHOIS Server: 
+                                Referral URL: 
+                                Domain Status: ok
+                                Registrant ID:C270-LRMS
+                                Registrant Name:Afilias Limited
+                                Registrant Organization:Afilias Ltd.
+                                Registrant Street: 2 La Touche House
+                                Registrant Street: IFSC
+                                Registrant City:Dublin
+                                Registrant State/Province:
+                                Registrant Postal Code:1
+                                Registrant Country:IE
+                                Registrant Phone:+353.18541100
+                                Registrant Phone Ext: 
+                                Registrant Fax: +1.2157065701
+                                Registrant Fax Ext: 
+                                Registrant Email:support@afilias.info
+                                Admin ID:C270-LRMS
+                                Admin Name:Afilias Limited
+                                Admin Organization:Afilias Ltd.
+                                Admin Street: 2 La Touche House
+                                Admin Street: IFSC
+                                Admin City:Dublin
+                                Admin State/Province:
+                                Admin Postal Code:1
+                                Admin Country:IE
+                                Admin Phone:+353.18541100
+                                Admin Phone Ext: 
+                                Admin Fax: +1.2157065701
+                                Admin Fax Ext: 
+                                Admin Email:support@afilias.info
+                                Billing ID:C270-LRMS
+                                Billing Name:Afilias Limited
+                                Billing Organization:Afilias Ltd.
+                                Billing Street: 2 La Touche House
+                                Billing Street: IFSC
+                                Billing City:Dublin
+                                Billing State/Province:
+                                Billing Postal Code:1
+                                Billing Country:IE
+                                Billing Phone:+353.18541100
+                                Billing Phone Ext: 
+                                Billing Fax: +1.2157065701
+                                Billing Fax Ext: 
+                                Billing Email:support@afilias.info
+                                Tech ID:C270-LRMS
+                                Tech Name:Afilias Limited
+                                Tech Organization:Afilias Ltd.
+                                Tech Street: 2 La Touche House
+                                Tech Street: IFSC
+                                Tech City:Dublin
+                                Tech State/Province:
+                                Tech Postal Code:1
+                                Tech Country:IE
+                                Tech Phone:+353.18541100
+                                Tech Phone Ext: 
+                                Tech Fax: +1.2157065701
+                                Tech Fax Ext: 
+                                Tech Email:support@afilias.info
+                                Name Server:A0.DIG.AFILIAS-NST.INFO
+                                Name Server:B0.DIG.AFILIAS-NST.INFO
+                                Name Server:C0.DIG.AFILIAS-NST.INFO
+                                Name Server:D0.DIG.AFILIAS-NST.INFO
+                                DNSSEC:signedDelegation
+                                DS Created 1:2013-12-09T21:29:30Z
+                                DS Key Tag 1:32709
+                                Algorithm 1:5
+                                Digest Type 1:2
+                                Digest 1:4B5D67729CE8180BBF93D0ACD78053262F68BCD402D0C947E54E74A553E5994A
+                                DS Maximum Signature Life 1:1814400 seconds
+                                DS Created 2:2013-12-09T21:29:30Z
+                                DS Key Tag 2:32709
+                                Algorithm 2:5
+                                Digest Type 2:1
+                                Digest 2:BF4903176E0BE0664B511BFEAA4651A5CACCC733
+                                DS Maximum Signature Life 2:1814400 seconds"
+                }]
+        }
 
 + Response 400 (application/json) 
 
-    {  
-        "errors": [{  
-            "code": 1234,
-            "message": "Domain not found"
-        }]
-    }
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
         
