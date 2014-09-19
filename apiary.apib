@@ -66,27 +66,7 @@ General token authentication and handling.
 + Response 204
 
 # Group Users
-## User Retrieval [/v1/users/{user_id}]
-
-+ Parameters
-    + user_id (required, string, `u_345f4h2b`) ... User ID to retrieve.
-    
-### Retrieve a specific user [GET]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-        
-+ Response 200 (application/json)
-
-        {  
-                "data": {
-                          "id": "u_345f4h2b", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-                }
-        }
-        
-## User Creation [/v1/users]
+## Users [/v1/users]
 ### Create a new user [POST]
 + Request
     + Headers
