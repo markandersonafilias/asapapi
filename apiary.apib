@@ -11,7 +11,7 @@ General token authentication and handling.
 ### Request new JWT token [POST]
 + Request
     
-        { "reseller_id": "r_35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
+        { "reseller_key": "dfservev35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
         
 + Response 201 (application/json)
 
@@ -22,13 +22,13 @@ General token authentication and handling.
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Login failed"
-                }
+                }]
         }
         
 ## Token Refresh [/v1/auth/token/refresh]
@@ -46,16 +46,17 @@ General token authentication and handling.
                 }
         }
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Token unknown or already expired"
-                }
+                }]
         }
 
 ## Token Invalidation [/v1/auth/token/revoke]
+
 ### Force JWT token expiration [DELETE]
 + Request
     + Headers
@@ -70,7 +71,8 @@ General token authentication and handling.
 + Parameters
     + user_id (required, string, `u_345f4h2b`) ... User ID to retrieve.
     
-### Retrieve a user [GET]
+### Retrieve a specific user [GET]
+
 + Request
     + Headers
     
@@ -79,11 +81,9 @@ General token authentication and handling.
 + Response 200 (application/json)
 
         {  
-                "data": [{
+                "data": {
                           "id": "u_345f4h2b", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-                }, {
-                          "id": "u_345f4h2b", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-                }]
+                }
         }
         
 ## User Creation [/v1/users]
@@ -105,16 +105,16 @@ General token authentication and handling.
                 }
         }
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Operation failed"
-                }
+                }]
         }
-        
-### List direct reseller admin users and customer users [GET]
+
+### List all users [GET]
 + Request
     + Headers
     
@@ -129,10 +129,34 @@ General token authentication and handling.
                           "id": "u_94gh4627", "first_name": "Bob", ...
                 }]
         }
+
+## Resend email verification link [/v1/user/{email}]
+Request to send activation email with verification link
+
++ Parameters
+    + email (required, string, `thomsan@afilias.com`) ... Email address of the user.
+
+### Querying the current status of the process [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
         
 ## User Management [/v1/users/{id}]
 + Parameters
-    + id (required, integer, `24`) ... User record id.
+    + id (required, string, `u_db3g3grg2r2g`) ... User record id.
 
 ### Retrieve specific user [GET]
 + Request
@@ -148,13 +172,13 @@ General token authentication and handling.
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ### Update user record [PUT]
@@ -165,28 +189,24 @@ General token authentication and handling.
 
     + Body
 
-            { "user_id": 50, "first_name", "Sam", "last_name": "Spade", "email": "bob@example.com", ... }
+            { "first_name", "Sam", "last_name": "Spade", "email": "bob@example.com", ... }
         
-+ Response 201 (application/json)
++ Response 200
+        
++ Response 404 (application/json) 
 
         {  
-                "data": { }
-        }
-        
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 # Group Passwords
 Password handling and reset.
 
-## Change Request [/v1/password/forgot]
-### Forgotten password email request [POST]
+## Forgotten Password Email Request [/v1/password/forgot]
+### Request forgotten email password email [POST]
 + Request
     + Headers
     
@@ -194,25 +214,21 @@ Password handling and reset.
 
     + Body
     
-            { "user_id": "u_345f4h2b" }
+            { "email": "bob@example.com" }
         
-+ Response 201 (application/json)
++ Response 200
+        
++ Response 404 (application/json) 
 
         {  
-                "data": { }
-        }
-        
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
-## Change Request [/v1/password/forgot/{verification_id}]
-### Change email request [POST]
+## Forgotten Password Change Request [/v1/password/forgot/{verification_id}]
+### Forgotten password verified change request [POST]
 + Request
     + Headers
     
@@ -220,28 +236,28 @@ Password handling and reset.
 
     + Body
     
-            { "user_id": "u_345f4h2b", "verification_token": "agerffsfv4g3qgqh" }
+            { "verification_token": "agerffsfv4g3qgqh", "password": "secret2" }
         
-+ Response 201 (application/json)
++ Response 200
+        
++ Response 404 (application/json) 
 
         {  
-                "data": { }
-        }
-        
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 # Group Verification
 New user verification of the **ASAP API**
 
 ## Verify New User [/v1/verification/{verification_key}]
-### Complete new user creation [GET]
+### Complete new user creation by verifying email address [GET]
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
 + Response 200 (application/json)
 
@@ -249,34 +265,17 @@ New user verification of the **ASAP API**
                 "data": { }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Verification code not found"
-                }
+                }]
         }
 
 # Group Resellers
 Reseller related resources of the **ASAP API**
-
-## List sub-resellers [/v1/resellers]
-### List all direct sub-resellers [GET]
-+ Request
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-            
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "id": "r_dfb3gwfsdfefw", "name": "Web.com", ...
-                }, {
-                          "id": "r_awrfedbe43tbe", "name": "1&1", ...
-                }]
-        }
 
 ## Specific reseller [/v1/resellers/{reseller_id}]
 ### Retrieve reseller record [GET]
@@ -289,17 +288,17 @@ Reseller related resources of the **ASAP API**
 
         {  
                 "data": {
-                        "id": "r_zxfvebererfdfbdfv" 
+                        "id": "r_zxfvebererfdfbdfv", "name": "Web.com", ...
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Reseller not found"
-                }
+                }]
         }
 
 ### Update reseller record [PUT]
@@ -312,19 +311,110 @@ Reseller related resources of the **ASAP API**
 
             { "name": "2&2", ... }
         
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Reseller not found"
-                }
+                }]
+        }
+
+## List sub-resellers [/v1/resellers/{reseller_id}/sub-resellers]
+### List all direct sub-resellers [GET]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
++ Response 200 (application/json)
+
+        {  
+                "data": [{
+                        "id": "r_dfb3gwfsdfefw", "name": "Web.com", ...
+                }, {
+                        "id": "r_awrfedbe43tbe", "name": "1&1", ...
+                }]
+        }
+
+## List resellers products [/v1/resellers/{reseller_id}/products]
+### List all reseller products [GET]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
++ Response 200 (application/json)
+
+        {  
+                "data": [{
+                        "id": "p_wfsdfefw", "name": ".info Domain", ...
+                }, {
+                        "id": "p_dbe43tbe", "name": "goMobi", ...
+                }]
+        }
+
+## Manage resellers products [/v1/resellers/{reseller_id}/products/{product_id}]
+### Update reseller product [PUT]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
+    + Body
+
+            { "id": "p_asdf3fcv", "name": "goMobi", ... }
+
++ Response 200 (application/json)
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Product not found"
+                }]
+        }
+
+## List resellers bundles [/v1/resellers/{reseller_id}/bundles]
+### List all reseller bundles [GET]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
++ Response 200 (application/json)
+
+        {  
+                "data": [{
+                        "id": "b_wfsdfefw", "name": "Startup Bunble", ...
+                }, {
+                        "id": "b_dbe43tbe", "name": "Mega Bundle", ...
+                }]
+        }
+
+## Manage resellers bundles [/v1/resellers/{reseller_id}/bundles/{bundle_id}]
+### Update reseller bundles [PUT]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
+    + Body
+
+            { "id": "b_asdf3fcv", "name": "Mini Bundle", ... }
+
++ Response 200 (application/json)
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Bundle not found"
+                }]
         }
 
 # Group Products
@@ -347,6 +437,51 @@ Product related resources of the **ASAP API**
                 }]
         }
 
+## Retrieve Specific Product [/v1/products/{product_id}]
+### Get a specific product [GET]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
++ Response 200 (application/json)
+
+        {  
+                "data": {
+                          "id": "p_asfar34t4f2f", "name": "TLD", ...
+                }
+        }
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Product not found"
+                }]
+        }
+
+### Update a specific product [PUT]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
+    + Body
+
+            { "name": "TLD", ... } 
+
++ Response 200 (application/json)
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Product not found"
+                }]
+        }
+
 ## Bundles List [/v1/products/bundles]
 ### List  offers [GET]
 + Request
@@ -361,6 +496,40 @@ Product related resources of the **ASAP API**
                           "id": "b_asffreb4432", "title": "Bundle #1", ...
                 }, {
                           "id": "b_a34t3gb2668", "title": "Bundle #2", ...
+                }]
+        }
+
+### Create new bundle [POST]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "title": "The Bundle", ... }
+
++ Response 200 (application/json)
+
+## Update Bundle [/v1/products/bundles/{bundle_id}]
+### Update an existing bundle [PUT]
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "title": "The Bundle", ... }
+            
++ Response 200 (application/json)
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Bundle not found"
                 }]
         }
 
@@ -379,13 +548,13 @@ Product related resources of the **ASAP API**
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Product not found"
-                }
+                }]
         }
 
 ### Update product upsell record [PUT]
@@ -398,55 +567,14 @@ Product related resources of the **ASAP API**
 
             { "name": "2&2", ... }
         
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Product not found"
-                }
-        }
-
-# Group TLDs
-## TLD List [/v1/domains/tlds]
-### List all available TLDs [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "id": 1, "tld": "organic", ...
-                }, {
-                        "id": 2, "tld": "info", ...
-                }]
-        }
-
-## TLD Categories [/v1/domains/tlds/categories]
-### List all TLD categories [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "id": 1, "category": "business", ...
-                }, {
-                        "id": 2, "category": "industry", ...
-                }, {
-                        "id": 3, "category": "personal", ...
                 }]
         }
 
@@ -473,13 +601,13 @@ Customer cart related resources of the **ASAP API**
                 }]
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ### Add to user's cart [POST]
@@ -490,21 +618,17 @@ Customer cart related resources of the **ASAP API**
 
     + Body
 
-            { "id": "i_45g3rsdfsdfsq", "name": "goMobi", "value": "", ... }
+            { "name": "goMobi", "value": "", ... }
 
-+ Response 200 (application/json)
++ Response 200
 
-        {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ## Manage Cart Items [/v1/users/{user_id}/cart/items/{item_id}]
@@ -532,21 +656,17 @@ Customer cart related resources of the **ASAP API**
 
     + Body
 
-            { "id": "i_45g3rsdfsdfsq", "name": "goMobi", "value": "", ... }
+            { "quantity": 5 }
 
-+ Response 200 (application/json)
++ Response 200
 
-        {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ## Reserving Domains [/v1/users/{user_id}/cart/items/{item_id}/reserve]
@@ -566,13 +686,13 @@ Customer cart related resources of the **ASAP API**
                 "data": { }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ## Cart Checkout [/v1/users/{user_id}/cart/checkout]
@@ -593,13 +713,13 @@ Customer cart related resources of the **ASAP API**
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ## Cart Complete [/v1/users/{user_id}/cart/complete]
@@ -612,6 +732,10 @@ Customer cart related resources of the **ASAP API**
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
+    + Body
+
+            { "encrypted_card_number": "xxxxxxxxxxxxxxx", "encrypted_card_ccv": "xxx" }
+
 + Response 200 (application/json)
 
         {  
@@ -620,13 +744,13 @@ Customer cart related resources of the **ASAP API**
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 # Group Wishlist
@@ -652,13 +776,13 @@ Wishlist related resources of the **ASAP API**
                 }]
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ### Add to wishlist [POST]
@@ -671,19 +795,15 @@ Wishlist related resources of the **ASAP API**
 
             { "id": "p_45g3rsdfsdfsq", "name": "goMobi", "value": "", ... }
             
-+ Response 200 (application/json)
++ Response 200
 
-          {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ### Delete entire wishlist [DELETE]
@@ -708,19 +828,15 @@ Wishlist related resources of the **ASAP API**
 
             { "id": "p_45g3rsdfsdfsq", "name": "goMobi", "value": "", ... }
             
-+ Response 200 (application/json)
++ Response 200
+
++ Response 404 (application/json) 
 
         {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ### Delete wishlist item [DELETE]
@@ -754,13 +870,13 @@ Orders related resources of the **ASAP API**
                 }]
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 ## List specific order [/v1/users/{user_id}/orders/{order_id}]
@@ -782,23 +898,25 @@ Orders related resources of the **ASAP API**
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "User not found"
-                }
+                }]
         }
 
 # Group Domains
 Domain related resources of the **ASAP API**
 
-## Check Availability [/v1/domain/{domain}/available]
+## Check Availability [/v1/domains/{domain}/available]
+
 + Parameters
     + domain (required, string, `myshop.info`) ... Name of domain to check availability for.
 
 ### Check availability of specific domain [GET]
+
 + Request
     + Headers
     
@@ -808,26 +926,17 @@ Domain related resources of the **ASAP API**
 
         {  
                 "data": {
-                        "available": 1 
+                        "available": true 
                 }
         }
 
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
-                        "code": 1234,
-                        "message": "User not found"
-                }
-        }
-
-## Suggest [/v1/domain-search/{query}]
-Perform a domain name suggestions search: Recommended, Most popular
+## Suggest [/v1/domains/{query}/tld-spin]
 
 + Parameters
     + query (required, string, `myshop`) ... String of the base name to spin domains for. 
 
 ### Retrieve list of domain suggestions [GET]
+
 + Request
     + Headers
     
@@ -835,39 +944,29 @@ Perform a domain name suggestions search: Recommended, Most popular
 
 + Response 200 (application/json)
 
-        {  
-                "data": {
-                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }
+        {
+            "data": [{
+                    "domain": "myshop.info",
+                    "category": "business",
+                    "price": "12.99"
+            }, {
+                    "domain": "myshophome.info", 
+                    "category": "personal", 
+                    "price": "15.00"
+            }, {
+                    "domain": "myshopweb.organic",
+                    "category": "leisure",
+                    "price": "9.99"
+            }]
         }
 
-## Suggest [/v1/domain-search/{query}/bulk]
-Perform a bulk domain name suggestions search
-
-+ Parameters
-    + query (required, string, `myshop.info, myshophome.info, myshopweb.organic`) ... String of the base name to spin domains for. 
-
-### Bulk domain search [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": {
-                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }
-        }
-
-## Suggest [/v1/domain/{query}/tld-spin]
-Perform a domain name suggestions search: Recommended, Most popular
+## Suggest [/v1/domains/{query}/domain-spin] 
 
 + Parameters
     + query (required, string, `myshop`) ... String of the base name to spin domains for. 
 
 ### Retrieve list of domain suggestions [GET]
+
 + Request
     + Headers
     
@@ -875,39 +974,23 @@ Perform a domain name suggestions search: Recommended, Most popular
 
 + Response 200 (application/json)
 
-        {  
-                "data": {
-                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }
+        {
+            "data": [{
+                    "domain": "myshop.info",
+                    "category": "business",
+                    "price": "12.99"
+            }, {
+                    "domain": "myshophome.info", 
+                    "category": "personal", 
+                    "price": "15.00"
+            }, {
+                    "domain": "myshopweb.organic",
+                    "category": "leisure",
+                    "price": "9.99"
+            }]
         }
 
-## Suggest [/v1/domain/{query}/domain-spin] 
-Perform a domain name suggestions search, ("domain spinning") : Related
-
-+ Parameters
-    + query (required, string, `myshop`) ... String of the base name to spin domains for. 
-
-### Retrieve list of domain suggestions [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": {
-                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }
-        }
-
-## List My Domains [/v1/domain/list{?limit}{?offset}{?sortby}{?order}]
-
-+ Parameters
-    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
-    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
-    + sortby (optional, string, `name`) ... Sort result set by specific column.
-    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
+## List User Domains [/v1/users/{user_id}/domains]
 
 ### Retrieve list of my domains [GET]
 + Request
@@ -919,70 +1002,18 @@ Perform a domain name suggestions search, ("domain spinning") : Related
 
         {  
                 "data": {
-                        "suggestions": [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
-                }
-        }
-        
-## Domain creation [/v1/domain/{domain}{?query}]
-### Domain Creation & Update [POST]
-Create a new domain name order - Asynchronous
-+ Parameters
-    + query (optional, string, `create`) ... register domain.
-    
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-    
-            {
-            "domain": "myshop.info",
-            "years": 2,
-            "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
-                "contact": [
-                    {
-                        "type": "registrant",
-                        "first_name": "Jonathan",
-                        "last_name": "Doe",
-                        "organization": "Acme Inc",
-                        "email": "",
-                        "address1": "",
-                        "address2": "",
-                        "city": "",
-                        "state": "",
-                        "postal_code": "",
-                        "country": "",
-                        "phone1_type": "",
-                        "phone1_country_code": "",
-                        "phone1_number": "",
-                        "phone1_extension": "",
-                        "phone2_type": "",
-                        "phone2_country_code": "",
-                        "phone2_number": "",
-                        "phone2_extension": "",
-                        "fax1_type": "",
-                        "fax1_country_code": "",
-                        "fax1_number": ""
-                    }
-                ]
-            }
-
-+ Response 202 (application/json)
-
-        {  
-                "data": {
-                        "status":"Accepted", "location": "/v1/query_status/{reference}" 
+                        [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
                 }
         }
 
-## Domain info [/v1/domain/{domain}]
+## Domain info [/v1/user/{user_id}/domains/{domain}]
 Retrieve domain details
 
 + Parameters
     + domain (required, string, `myshop.info`) ... String of the domain name.
 
-### Retrieve full domain info, contacts, DNS records, nameservers, domain lock [GET]
+### Retrieve full domain info, contacts, DNS records, nameservers, domain lock, etc [GET]
+
 + Request
     + Headers
     
@@ -996,116 +1027,19 @@ Retrieve domain details
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
-
-## Query status [/v1/query_status/{reference_id}]
-Retrieve current details
-
-+ Parameters
-    + reference_id (required, string, `TRXPROC-1234`) ... Reference id to get the status of the process.
-
-### Querying the current status of the process [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": {
-                        "reference": "TRXPROC-1234", 
-                        "message": "Problem in processing", 
-                        "errors": {
-                            "code":121, 
-                            "message": "Card expired"
-                        }
-                }
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
-                        "code": 1234,
-                        "message": "Process not found"
-                }
-        }
-
-## Send email [/v1/user/{email_id}{?action}]
-Request to send activation email - Asynchronous
-
-+ Parameters
-    + email_id (required, string, `thomsan@afilias.com`) ... mail id of the user.
-    + action (optional, string, `resend/activation`) ... Will re-send/activation mail to the user.
-
-### Querying the current status of the process [POST]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": {
-                        "email": thomsan@afilias.com, "message": "Success"
-                }
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
-                        "code": 1234,
-                        "message": "User not found"
-                }
-        }
-
-## Search [/v1/domain-search/{domain_name}]
-Domain search
-
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
-
-### Performs domain search [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": { 
-                        "domain": "myshop.info", ... 
-                }
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }
-        }
-
-## Domain lock [/v1/domain/{domain}/lock]
-Set domain lock status
-
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
+## Domain lock [/v1/domains/{domain}/lock]
 
 ### Set current status of domain lock [PUT]
+
 + Request
     + Headers
     
@@ -1113,55 +1047,23 @@ Set domain lock status
 
     + Body
 
-            { "lock": "on" }
+            { "lock": true }
 
-+ Response 200 (application/json)
++ Response 200
 
-        {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
-## Domain Auto renew [/v1/domain/{domain}/auto-renew]
-### Set/Get auto renew domain status
-
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
-
-### Set current status of auto renew [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-                { "auto_renew": "on" }
-
-+ Response 200 (application/json)
-
-        {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }
-        }
+## Domain Auto Renew [/v1/domain/{domain}/auto-renew]
 
 ### Set current status of auto renew [PUT]
+
 + Request
     + Headers
     
@@ -1171,53 +1073,21 @@ Set domain lock status
 
             { "auto_renew": "on" }
 
-+ Response 200 (application/json)
++ Response 200
+
++ Response 404 (application/json) 
 
         {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
-## Domain Auto renew [/v1/domain/{domain}/who-is-privacy]
-### Set/Get 'who is privacy' status
+## Domain Whois Privacy [/v1/domains/{domain}/whois-privacy]
 
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
+### Set current status of whois privacy [PUT]
 
-### Set current status of whoisprivacy [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            { "whoisprivacy": "on" }
-
-+ Response 200 (application/json)
-
-        {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }
-        }
-
-### Set current status of whoisprivacy [PUT]
 + Request
     + Headers
     
@@ -1225,30 +1095,23 @@ Set domain lock status
 
    + Body
 
-            { "whoisprivacy": "on" }
+            { "whois-privacy": true }
 
-+ Response 200 (application/json)
++ Response 200
 
-        {  
-                "data": { }
-        }
-
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
-## Nameservers [/v1/domain/{domain}/nameservers]
-Update domain nameservers
-
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name.
+## Domain Nameservers [/v1/domains/{domain}/nameservers]
 
 ### Update domain nameserver records [PUT]
+
 + Request
     + Headers
     
@@ -1260,85 +1123,27 @@ Update domain nameservers
                 "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...]
             }
             
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
-## Domain Contact Creation [/v1/domain/{domain}/contacts]
-+ Parameters
-    + domain (required, string, `myshop.info`) ... Domain name of new contact.
+## Domain Contacts Management [/v1/domains/{domain}/contacts/{id}]
 
-### Add domain contact records [POST]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            {
-                "contact": [
-                    {
-                        "type": "registrant",
-                        "first_name": "Jonathan",
-                        "last_name": "Doe",
-                        "organization": "Acme Inc",
-                        "email": "",
-                        "address1": "",
-                        "address2": "",
-                        "city": "",
-                        "state": "",
-                        "postal_code": "",
-                        "country": "",
-                        "phone1_type": "",
-                        "phone1_country_code": "",
-                        "phone1_number": "",
-                        "phone1_extension": "",
-                        "phone2_type": "",
-                        "phone2_country_code": "",
-                        "phone2_number": "",
-                        "phone2_extension": "",
-                        "fax1_type": "",
-                        "fax1_country_code": "",
-                        "fax1_number": ""
-                    }
-                ]
-            }
-
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
-        
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }
-        }
-
-## Domain Contacts Management [/v1/domain/{domain}/contacts/{id}]
 Update domain contacts record
 
 + Parameters
     + domain (required, string, `myshop.info`) ... String of the domain name.
-    + id (required, integer, `42`) ... Domain contact record id.
+    + id (required, string, `c_rtert4dsfwt`) ... Domain contact record id.
     
 ### Delete domain contact [DELETE]
+
 + Request
     + Headers
     
@@ -1347,6 +1152,7 @@ Update domain contacts record
 + Response 204 
 
 ### Update domain contact [PUT]
+
 + Request
     + Headers
     
@@ -1355,58 +1161,48 @@ Update domain contacts record
     + Body
     
             {
-                "id": "c_34ekjgk21f2g",
-                "contact": [
-                    {
-                        "type": "registrant",
-                        "first_name": "Jonathan",
-                        "last_name": "Doe",
-                        "organization": "Acme Inc",
-                        "email": "",
-                        "address1": "",
-                        "address2": "",
-                        "city": "",
-                        "state": "",
-                        "postal_code": "",
-                        "country": "",
-                        "phone1_type": "",
-                        "phone1_country_code": "",
-                        "phone1_number": "",
-                        "phone1_extension": "",
-                        "phone2_type": "",
-                        "phone2_country_code": "",
-                        "phone2_number": "",
-                        "phone2_extension": "",
-                        "fax1_type": "",
-                        "fax1_country_code": "",
-                        "fax1_number": ""
-                    }
-                ]
+                "type": "registrant",
+                "first_name": "Jonathan",
+                "last_name": "Doe",
+                "organization": "Acme Inc",
+                "email": "",
+                "address1": "",
+                "address2": "",
+                "city": "",
+                "state": "",
+                "postal_code": "",
+                "country": "",
+                "phone1_type": "",
+                "phone1_country_code": "",
+                "phone1_number": "",
+                "phone1_extension": "",
+                "phone2_type": "",
+                "phone2_country_code": "",
+                "phone2_number": "",
+                "phone2_extension": "",
+                "fax1_type": "",
+                "fax1_country_code": "",
+                "fax1_number": ""
             }
 
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
 # Group URL Forwarding
 URL forwarding related resources of the **ASAP API**
 
-## Manage domain fowarding rules [/v1/domain/{domain}/forwarding]
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name to list URL forwarding rules for.
+## Manage domain fowarding rules [/v1/domains/{domain}/forwarding]
     
 ### Retrieve list of URL forwarding rules [GET]
+
 + Request
     + Headers
     
@@ -1427,13 +1223,13 @@ URL forwarding related resources of the **ASAP API**
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
 ### Create forwarding rule record [POST]
@@ -1450,77 +1246,18 @@ URL forwarding related resources of the **ASAP API**
                 "page_title": "Forwarding Page"
             }
 
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
-        }
-
-## Manage email fowarding [/v1/domain/{domain}/email]
-+ Parameters
-    + domain (required, string, `myshop.info`) ... String of the domain name to list URL forwarding rules for.
-    
-### Retrieve list of URL forwarding rules [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "domain": "myshop.info",
-                        "years": 2,
-                        "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
-                        "contact": [
-                                {
-                                        "type": "registrant",
-                                        "first_name": "Jonathan",
-                                        "last_name": "Doe",
-                                        "organization": "Acme Inc",
-                                        "email": "",
-                                        "address1": "",
-                                        "address2": "",
-                                        "city": "",
-                                        "state": "",
-                                        "postal_code": "",
-                                        "country": "",
-                                        "phone1_type": "",
-                                        "phone1_country_code": "",
-                                        "phone1_number": "",
-                                        "phone1_extension": "",
-                                        "phone2_type": "",
-                                        "phone2_country_code": "",
-                                        "phone2_number": "",
-                                        "phone2_extension": "",
-                                        "fax1_type": "",
-                                        "fax1_country_code": "",
-                                        "fax1_number": ""
-                                }
-                        ]
                 }]
         }
 
-+ Response 400 (application/json) 
-
-        {  
-                "errors": {  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }
-        }
-
-## Manage forwarding rule record [/v1/domain/{domain}/forwarding/{id}]
+## Manage forwarding rule record [/v1/domains/{domain}/forwarding/{id}]
 + Parameters
     + domain (required, string, `myshop`) ... String of the base name to manage forwarding for. 
     + id (required, integer, `90`) ... Forwarding rule record id. 
@@ -1533,13 +1270,13 @@ URL forwarding related resources of the **ASAP API**
 
 + Response 204
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
 ### Update forwarding rule record [PUT]
@@ -1557,25 +1294,21 @@ URL forwarding related resources of the **ASAP API**
                 "page_title": "Forwarding Page"
             }
 
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
 # Group DNS
 DNS record related resources of the **ASAP API**
 
-## List [/v1/domain/{domain}/dns]
+## List [/v1/domains/{domain}/dns]
 + Parameters
     + domain (required, string, `myshop.info`) ... String of the domain name to list DNS records for.
 
@@ -1608,13 +1341,13 @@ DNS record related resources of the **ASAP API**
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
 ### Create new DNS record [POST]
@@ -1632,48 +1365,39 @@ DNS record related resources of the **ASAP API**
                 "priority": 10
             }
 
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
 
-## Manage DNS record [/v1/domain/{domain}/dns/{id}]
-+ Parameters
-    + domain (required, string, `myshop.info`) ... Domain name to manage DNS records for.
-    + id (required, string, `d_34ktjhgkhr`) ... Domain DNS record id. 
+## Manage DNS record [/v1/domains/{domain}/dns/{id}]
 
 ### Delete DNS record [DELETE]
+
 + Request
     + Headers
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
+                }]
         }
     
 ### Update DNS record [PUT]
+
 + Request
     + Headers
     
@@ -1688,164 +1412,14 @@ DNS record related resources of the **ASAP API**
                 "priority": 10
             }
 
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
++ Response 200
         
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }
-        }
-
-## For future - Domain  [/v1/domains/{query}{?params}{?limit}{?offset}{?sortby}{?order}]
-
-+ Parameters
-    + query (required, string, `jon`) ... Query string for user search.
-    + params (optional, string, `jon`) ... Query string for user search.
-    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
-    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
-    + sortby (optional, string, `name`) ... Sort result set by specific column.
-    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
-    
-### Domains [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-        
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "id": "x_wfefwef23r2", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-                }, {
-                        "id": "x_2rrffrg2r24", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-                }]
-        }
-
-### Domains [POST]
-Create a new domain name order
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-    
-            {
-                    "domain": "myshop.info",
-                    "years": 2,
-                    "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...],
-                        "contact": [{
-                                        "type": "registrant",
-                                        "first_name": "Jonathan",
-                                        "last_name": "Doe",
-                                        "organization": "Acme Inc",
-                                        "email": "",
-                                        "address1": "",
-                                        "address2": "",
-                                        "city": "",
-                                        "state": "",
-                                        "postal_code": "",
-                                        "country": "",
-                                        "phone1_type": "",
-                                        "phone1_country_code": "",
-                                        "phone1_number": "",
-                                        "phone1_extension": "",
-                                        "phone2_type": "",
-                                        "phone2_country_code": "",
-                                        "phone2_number": "",
-                                        "phone2_extension": "",
-                                        "fax1_type": "",
-                                        "fax1_country_code": "",
-                                        "fax1_number": ""
-                        }]
-            }
-
-+ Response 201 (application/json)
-
-        {  
-                "data": { }
-        }
-
-## For future - Reseller  [/v1/resellers/{query}{?limit}{?offset}{?sortby}{?order}]
-
-+ Parameters
-    + query (required, string, `jon`) ... Query string for reseller id/name.
-    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
-    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
-    + sortby (optional, string, `name`) ... Sort result set by specific column.
-    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
-    
-### Reseller [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-        
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "id": "r_3gfgsfsafh44", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-                }, {
-                        "id": "r_5l5lfj23ntd1", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-                }]
-        }
-        
-## For future - Product  [/v1/products/{query}{?limit}{?offset}{?sortby}{?order}]
-
-+ Parameters
-    + query (required, string, `jon`) ... Query string for product search.
-    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
-    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
-    + sortby (optional, string, `name`) ... Sort result set by specific column.
-    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
-    
-### Product [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-        
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "id": "p_xcvbx4y434", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-                }, {
-                        "id": "p_cvbncsthfh", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
-                }]
-        }
-        
-## For future - Bundles  [/v1/bundles/{query}{?limit}{?offset}{?sortby}{?order}]
-
-+ Parameters
-    + query (required, string, `jon`) ... Query string for user search.
-    + limit (optional, integer, `10`) ... Limit result set (ie. only return X results).
-    + offset (optional, integer, `10`) ... Offset result set (ie. return from result X).
-    + sortby (optional, string, `name`) ... Sort result set by specific column.
-    + order (optional, string, `asc`) ... Order result set either ASCending or DESCending.
-    
-### Bundles [GET]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-        
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "id": "b_eysb454563", "first_name": "Jonathon", "last_name": "Doe", "email": "jdoe@doe.com", ...
-                }, {
-                        "id": "b_dffn6r7853", "first_name": "J. E.", "last_name": "Smith", "email": "jonesmith@gmail.com", ...
                 }]
         }
         
@@ -1853,10 +1427,12 @@ Create a new domain name order
 Whois lookup service of the **ASAP API**
 
 ## List [/v1/whois/{domain}]
+
 + Parameters
     + domain (required, string, `myshop.info`) ... String of the domain name to list whois info for.
 
 ### Retrieve list of whois info [GET]
+
 + Request
     + Headers
     
@@ -1866,99 +1442,52 @@ Whois lookup service of the **ASAP API**
 
         {  
                 "data": {
-                        "record": 
-                                "Domain Name:AFILIAS.INFO
-                                Domain ID: D217-LRMS
-                                Creation Date: 2001-07-25T14:11:20Z
-                                Updated Date: 2014-06-30T14:22:47Z
-                                Registry Expiry Date: 2021-07-25T14:11:20Z
-                                Sponsoring Registrar:Afilias Ltd. (R145-LRMS)
-                                Sponsoring Registrar IANA ID: 700023
-                                WHOIS Server: 
-                                Referral URL: 
-                                Domain Status: ok
-                                Registrant ID:C270-LRMS
-                                Registrant Name:Afilias Limited
-                                Registrant Organization:Afilias Ltd.
-                                Registrant Street: 2 La Touche House
-                                Registrant Street: IFSC
-                                Registrant City:Dublin
-                                Registrant State/Province:
-                                Registrant Postal Code:1
-                                Registrant Country:IE
-                                Registrant Phone:+353.18541100
-                                Registrant Phone Ext: 
-                                Registrant Fax: +1.2157065701
-                                Registrant Fax Ext: 
-                                Registrant Email:support@afilias.info
-                                Admin ID:C270-LRMS
-                                Admin Name:Afilias Limited
-                                Admin Organization:Afilias Ltd.
-                                Admin Street: 2 La Touche House
-                                Admin Street: IFSC
-                                Admin City:Dublin
-                                Admin State/Province:
-                                Admin Postal Code:1
-                                Admin Country:IE
-                                Admin Phone:+353.18541100
-                                Admin Phone Ext: 
-                                Admin Fax: +1.2157065701
-                                Admin Fax Ext: 
-                                Admin Email:support@afilias.info
-                                Billing ID:C270-LRMS
-                                Billing Name:Afilias Limited
-                                Billing Organization:Afilias Ltd.
-                                Billing Street: 2 La Touche House
-                                Billing Street: IFSC
-                                Billing City:Dublin
-                                Billing State/Province:
-                                Billing Postal Code:1
-                                Billing Country:IE
-                                Billing Phone:+353.18541100
-                                Billing Phone Ext: 
-                                Billing Fax: +1.2157065701
-                                Billing Fax Ext: 
-                                Billing Email:support@afilias.info
-                                Tech ID:C270-LRMS
-                                Tech Name:Afilias Limited
-                                Tech Organization:Afilias Ltd.
-                                Tech Street: 2 La Touche House
-                                Tech Street: IFSC
-                                Tech City:Dublin
-                                Tech State/Province:
-                                Tech Postal Code:1
-                                Tech Country:IE
-                                Tech Phone:+353.18541100
-                                Tech Phone Ext: 
-                                Tech Fax: +1.2157065701
-                                Tech Fax Ext: 
-                                Tech Email:support@afilias.info
-                                Name Server:A0.DIG.AFILIAS-NST.INFO
-                                Name Server:B0.DIG.AFILIAS-NST.INFO
-                                Name Server:C0.DIG.AFILIAS-NST.INFO
-                                Name Server:D0.DIG.AFILIAS-NST.INFO
-                                DNSSEC:signedDelegation
-                                DS Created 1:2013-12-09T21:29:30Z
-                                DS Key Tag 1:32709
-                                Algorithm 1:5
-                                Digest Type 1:2
-                                Digest 1:4B5D67729CE8180BBF93D0ACD78053262F68BCD402D0C947E54E74A553E5994A
-                                DS Maximum Signature Life 1:1814400 seconds
-                                DS Created 2:2013-12-09T21:29:30Z
-                                DS Key Tag 2:32709
-                                Algorithm 2:5
-                                Digest Type 2:1
-                                Digest 2:BF4903176E0BE0664B511BFEAA4651A5CACCC733
-                                DS Maximum Signature Life 2:1814400 seconds"
+                        "record": "Domain Name:AFILIAS.INFO\nDomain ID: D217-LRMS\nCreation Date: 2001-07-25T14:11:20Z\nUpdated Date: 2014-06-30T14:22:47Z\nRegistry Expiry Date: 2021-07-25T14:11:20Z\nSponsoring Registrar:Afilias Ltd. (R145-LRMS)\nSponsoring Registrar IANA ID: 700023\nWHOIS Server: \nReferral URL: \nDomain Status: ok\nRegistrant ID:C270-LRMS\nRegistrant Name:Afilias Limited\nRegistrant Organization:Afilias Ltd.\nRegistrant Street: 2 La Touche House\nRegistrant Street: IFSC\nRegistrant City:Dublin\nRegistrant State/Province:\nRegistrant Postal Code:1\nRegistrant Country:IE\nRegistrant Phone:+353.18541100\nRegistrant Phone Ext: \nRegistrant Fax: +1.2157065701\nRegistrant Fax Ext: \nRegistrant Email:support@afilias.info\nAdmin ID:C270-LRMS\nAdmin Name:Afilias Limited\nAdmin Organization:Afilias Ltd.\nAdmin Street: 2 La Touche House\nAdmin Street: IFSC\nAdmin City:Dublin\nAdmin State/Province:\nAdmin Postal Code:1\nAdmin Country:IE\nAdmin Phone:+353.18541100\nAdmin Phone Ext: \nAdmin Fax: +1.2157065701\nAdmin Fax Ext: \nAdmin Email:support@afilias.info\nBilling ID:C270-LRMS\nBilling Name:Afilias Limited\nBilling Organization:Afilias Ltd.\nBilling Street: 2 La Touche House\nBilling Street: IFSC\nBilling City:Dublin\nBilling State/Province:\nBilling Postal Code:1\nBilling Country:IE\nBilling Phone:+353.18541100\nBilling Phone Ext: \nBilling Fax: +1.2157065701\nBilling Fax Ext: \nBilling Email:support@afilias.info\nTech ID:C270-LRMS\nTech Name:Afilias Limited\nTech Organization:Afilias Ltd.\nTech Street: 2 La Touche House\nTech Street: IFSC\nTech City:Dublin\nTech State/Province:\nTech Postal Code:1\nTech Country:IE\nTech Phone:+353.18541100\nTech Phone Ext: \nTech Fax: +1.2157065701\nTech Fax Ext: \nTech Email:support@afilias.info\nName Server:A0.DIG.AFILIAS-NST.INFO\nName Server:B0.DIG.AFILIAS-NST.INFO\nName Server:C0.DIG.AFILIAS-NST.INFO\nName Server:D0.DIG.AFILIAS-NST.INFO\nDNSSEC:signedDelegation\nDS Created 1:2013-12-09T21:29:30Z\nDS Key Tag 1:32709\nAlgorithm 1:5\nDigest Type 1:2\nDigest 1:4B5D67729CE8180BBF93D0ACD78053262F68BCD402D0C947E54E74A553E5994A\nDS Maximum Signature Life 1:1814400 seconds\nDS Created 2:2013-12-09T21:29:30Z\nDS Key Tag 2:32709\nAlgorithm 2:5\nDigest Type 2:1\nDigest 2:BF4903176E0BE0664B511BFEAA4651A5CACCC733\nDS Maximum Signature Life 2:1814400 seconds"
                 }
         }
 
-+ Response 400 (application/json) 
++ Response 404 (application/json) 
 
         {  
-                "errors": {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
                 }
         }
         
+# Group ASync Processes
+
+## ASync Status [/v1/status/{reference_id}]
+Retrieve current details
+
++ Parameters
+    + reference_id (required, string, `TRXPROC-1234`) ... Reference id of the async process.
+
+### Querying the current status of the process [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        {  
+                "data": {
+                        "reference": "TRXPROC-1234", 
+                        "message": "Problem in processing", 
+                        "errors": [{
+                            "code":121, 
+                            "message": "Card expired"
+                        }
+                }
+        }
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Process not found"
+                }]
+        }
