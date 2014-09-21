@@ -259,6 +259,26 @@ New user verification of the **ASAP API**
 
 + Response 200
 
+## Check email address availability [/v1/verification/email/{email}]
+
+### Check to see if an email address is already used by another user [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Email address does not exist"
+                }]
+        }
+
 # Group Resellers
 Reseller related resources of the **ASAP API**
 
