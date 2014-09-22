@@ -24,7 +24,7 @@ General token authentication and handling.
                 }
         }
 
-+ Response 404 (application/json) 
++ Response 400 (application/json) 
 
         {  
                 "errors": [{  
@@ -32,10 +32,19 @@ General token authentication and handling.
                         "message": "Login failed"
                 }]
         }
+
+### Force JWT token expiration [DELETE]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 204
         
 ## Token Refresh [/v1/auth/token/refresh]
 
-### Update JWT token to avoid expiration [PUT]
+### Update JWT token to avoid expiration [POST]
 
 + Request
     + Headers
@@ -59,17 +68,6 @@ General token authentication and handling.
                 }]
         }
 
-## Token Invalidation [/v1/auth/token/revoke]
-
-### Force JWT token expiration [DELETE]
-
-+ Request
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 204
-
 # Group Users
 
 ## Users [/v1/users]
@@ -92,15 +90,6 @@ General token authentication and handling.
                 "data": {
                         "id": "u_345f4h2b" 
                 }
-        }
-        
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Operation failed"
-                }]
         }
 
 ### List all users [GET]
@@ -195,6 +184,8 @@ Password handling and reset.
                 }]
         }
 
+## Reset Forgotten Password [/v1/password/reset]
+
 ### Forgotten password verified change request [PUT]
 
 + Request
@@ -220,14 +211,18 @@ Password handling and reset.
 # Group Verification
 New user verification of the **ASAP API**
 
-## Verify New User [/v1/verification/{verification_key}]
+## Verify New User [/v1/verification]
 
-### Complete new user creation by verifying email address [GET]
+### Complete new user creation by verifying email address [POST]
 
 + Request
     + Headers
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            { "verificationKey": "he4!!?#5w3getgwet%^£TG121DFG" }
 
 + Response 200 (application/json)
 
@@ -244,7 +239,7 @@ New user verification of the **ASAP API**
                 }]
         }
         
-## Resend Verification Link [/v1/verification]
+## Resend Verification Link [/v1/verification/resend]
 
 ### Request to resend activation email with verification link [POST]
 
@@ -799,7 +794,7 @@ Customer cart related resources of the **ASAP API**
 
 Wishlist related resources of the **ASAP API**
 
-## Wistlist Management [/users/{user_id}/wishlist]
+## Wistlist Management [/v1/users/{user_id}/wishlist]
 
 ### Add to wishlist [POST]
 
@@ -1032,7 +1027,7 @@ Domain related resources of the **ASAP API**
                 }
         }
 
-## Domain info [/v1/user/{user_id}/domains/{domain}]
+## Domain info [/v1/users/{user_id}/domains/{domain}]
 
 ### Retrieve full domain info, contacts, DNS records, nameservers, domain lock, etc [GET]
 
@@ -1048,6 +1043,28 @@ Domain related resources of the **ASAP API**
                         "domain": "myshop.info", ... 
                 }
         }
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+        
+### Update full domain info, contacts, DNS records, nameservers, domain lock, etc [PUT]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "domain": "myshop.info", ... }
+        
++ Response 200
 
 + Response 404 (application/json) 
 
@@ -1325,12 +1342,12 @@ DNS record related resources of the **ASAP API**
 
     + Body
 
-            {
+            {[
                 "type": "MX",
                 "content": "mx1.myshop.info",
                 "ttl": 300,
                 "priority": 10
-            }
+            ]}
 
 + Response 200
         
