@@ -92,6 +92,15 @@ General token authentication and handling.
                 }
         }
 
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Email address already in use"
+                }]
+        }
+
 ### List all users [GET]
 
 + Request
@@ -382,104 +391,6 @@ Reseller related resources of the **ASAP API**
                 }]
         }
 
-# Group Reseller Products
-
-## List resellers products [/v1/resellers/{reseller_id}/products]
-
-### List all reseller products [GET]
-
-+ Request
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-            
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                          "id": "p_asfar34t4f2f", "name": "TLD", "description": ".info", "category": "business", "price": "9.99"
-                }, {
-                          "id": "p_fgffr3134ddb", "name": "TLD", "description": ".com", "category": "business",  "price": "9.99"
-                }, {
-                          "id": "p_abbar34t4ffn", "name": "TLD", "description": ".organic", "category": "commercial",  "price": "19.99"
-                }, {
-                          "id": "p_q35a034t4f4m", "name": "TLD", "description": ".io", "category": "personal",  "price": "49.99"
-                }, {
-                          "id": "p_zsfau344h62b", "name": "TLD", "description": ".mobi", "category": "business",  "price": "19.99"
-                }, {
-                          "id": "p_adtrgt55353q", "name": "goMobi", "description": "Website builder package", "category": "", "price": "20.00"
-                }]
-        }
-
-## Manage resellers products [/v1/resellers/{reseller_id}/products/{product_id}]
-
-### Update reseller product [PUT]
-
-+ Request
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-            
-    + Body
-
-            { "id": "p_asdf3fcv", "name": "goMobi", ... }
-
-+ Response 200 (application/json)
-
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Product not found"
-                }]
-        }
-
-# Group Reseller Bundles
-
-## List resellers bundles [/v1/resellers/{reseller_id}/bundles]
-
-### List all reseller bundles [GET]
-
-+ Request
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-            
-+ Response 200 (application/json)
-
-        {  
-                "data": [{
-                        "id": "b_wfsdfefw", "name": "Startup Bunble", ...
-                }, {
-                        "id": "b_dbe43tbe", "name": "Mega Bundle", ...
-                }]
-        }
-
-## Manage resellers bundles [/v1/resellers/{reseller_id}/bundles/{bundle_id}]
-
-### Update reseller bundles [PUT]
-
-+ Request
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-            
-    + Body
-
-            { "id": "b_asdf3fcv", "name": "Mini Bundle", ... }
-
-+ Response 200 (application/json)
-
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Bundle not found"
-                }]
-        }
-
 # Group Products
 
 Product related resources of the **ASAP API**
@@ -558,6 +469,60 @@ Product related resources of the **ASAP API**
                         "message": "Product not found"
                 }]
         }
+        
+# Group Reseller Products
+Manage reseller configured products
+
+## List resellers products [/v1/resellers/{reseller_id}/products]
+
+### List all reseller products [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
++ Response 200 (application/json)
+
+        {  
+                "data": [{
+                          "id": "p_asfar34t4f2f", "name": "TLD", "description": ".info", "category": "business", "price": "9.99"
+                }, {
+                          "id": "p_fgffr3134ddb", "name": "TLD", "description": ".com", "category": "business",  "price": "9.99"
+                }, {
+                          "id": "p_abbar34t4ffn", "name": "TLD", "description": ".organic", "category": "commercial",  "price": "19.99"
+                }, {
+                          "id": "p_q35a034t4f4m", "name": "TLD", "description": ".io", "category": "personal",  "price": "49.99"
+                }, {
+                          "id": "p_zsfau344h62b", "name": "TLD", "description": ".mobi", "category": "business",  "price": "19.99"
+                }, {
+                          "id": "p_adtrgt55353q", "name": "goMobi", "description": "Website builder package", "category": "", "price": "20.00"
+                }]
+        }
+
+## Manage resellers products [/v1/resellers/{reseller_id}/products/{product_id}]
+
+### Update reseller product [PUT]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
+    + Body
+
+            { "id": "p_asdf3fcv", "name": "goMobi", ... }
+
++ Response 200 (application/json)
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Product not found"
+                }]
+        }
 
 # Group Bundles
 
@@ -612,6 +577,52 @@ Product related resources of the **ASAP API**
 
             { "title": "The Bundle", ... }
             
++ Response 200 (application/json)
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Bundle not found"
+                }]
+        }
+        
+# Group Reseller Bundles
+Manage reseller configured bundles
+
+## List resellers bundles [/v1/resellers/{reseller_id}/bundles]
+
+### List all reseller bundles [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
++ Response 200 (application/json)
+
+        {  
+                "data": [{
+                        "id": "b_wfsdfefw", "name": "Startup Bunble", ...
+                }, {
+                        "id": "b_dbe43tbe", "name": "Mega Bundle", ...
+                }]
+        }
+
+## Manage resellers bundles [/v1/resellers/{reseller_id}/bundles/{bundle_id}]
+
+### Update reseller bundles [PUT]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
+    + Body
+
+            { "id": "b_asdf3fcv", "name": "Mini Bundle", ... }
+
 + Response 200 (application/json)
 
 + Response 404 (application/json) 
