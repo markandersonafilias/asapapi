@@ -13,7 +13,7 @@ General token authentication and handling.
 
 + Request
     
-        { "reseller_key": "dfservev35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
+        { "resellerKey": "dfservev35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
         
 + Response 201 (application/json)
 
@@ -84,7 +84,7 @@ General token authentication and handling.
 
     + Body
     
-            { "reseller_id": "r_35gegsdfsr", "email": "bob@example.com", "password": "secret1", "first_name": "Bob", "last_name": "Smith" }
+            { "resellerId": "r_35gegsdfsr", "email": "bob@example.com", "password": "secret1", "firstName": "Bob", "lastName": "Smith" }
         
 + Response 201 (application/json)
 
@@ -114,9 +114,9 @@ General token authentication and handling.
 
         {  
                 "data": [{
-                          "id": "u_145f4h2b", "first_name": "Alice", ...
+                          "id": "u_145f4h2b", "firstName": "Alice", "lastName": "Wonderland", "email": "alice@madhatter.com"
                 }, {
-                          "id": "u_94gh4627", "first_name": "Bob", ...
+                          "id": "u_94gh4627", "firstName": "Bob", "lastName": "Blob", "email": "bob@example.com"
                 }]
         }
         
@@ -133,7 +133,7 @@ General token authentication and handling.
 
         {  
                 "data": {
-                        "id": "u_145f4h2b", "first_name": "Adam", "last_name", "Jones", "email": "ajones@yahoo.com", ... 
+                        "id": "u_145f4h2b", "firstName": "Adam", "lastName", "Jones", "email": "ajones@yahoo.com", ... 
                 }
         }
 
@@ -155,7 +155,7 @@ General token authentication and handling.
 
     + Body
 
-            { "first_name", "Sam", "last_name": "Spade", "email": "bob@example.com", ... }
+            { "firstName", "Sam", "lastName": "Spade", "email": "bob@example.com", ... }
         
 + Response 200
         
@@ -204,7 +204,7 @@ Password handling and reset.
 
     + Body
     
-            { "verification_code": "t5fgftehved24tege", "password": "secret2" }
+            { "verificationKey": "t5fgftehved24tege", "password": "secret2" }
         
 + Response 200
         
@@ -752,7 +752,7 @@ Customer cart related resources of the **ASAP API**
 
         {  
                 "data": {
-                        "order_id": "o_fvdfb3gervsf2es" 
+                        "orderId": "o_fvdfb3gervsf2es" 
                 }
         }
 
@@ -776,13 +776,13 @@ Customer cart related resources of the **ASAP API**
 
     + Body
 
-            { "encrypted_card_number": "xxxxxxxxxxxxxxx", "encrypted_card_ccv": "xxx" }
+            { "encryptedCardNumber": "xxxxxxxxxxxxxxx", "encryptedCardCcv": "xxx" }
 
 + Response 200 (application/json)
 
         {  
                 "data": {
-                        "payment_id": "bluesnap_12345" 
+                        "paymentId": "bluesnap_12345" 
                 }
         }
 
@@ -1093,7 +1093,7 @@ Domain related resources of the **ASAP API**
 
     + Body
 
-            { "auto_renew": "on" }
+            { "autoRenew": "on" }
 
 + Response 200
 
@@ -1117,7 +1117,7 @@ Domain related resources of the **ASAP API**
 
    + Body
 
-            { "whois-privacy": true }
+            { "whoisPrivacy": true }
 
 + Response 200
 
@@ -1169,27 +1169,27 @@ Domain related resources of the **ASAP API**
     
             {
                 "type": "registrant",
-                "first_name": "Jonathan",
-                "last_name": "Doe",
+                "firstName": "Jonathan",
+                "lastName": "Doe",
                 "organization": "Acme Inc",
                 "email": "",
                 "address1": "",
                 "address2": "",
                 "city": "",
                 "state": "",
-                "postal_code": "",
+                "postalCode": "",
                 "country": "",
-                "phone1_type": "",
-                "phone1_country_code": "",
-                "phone1_number": "",
-                "phone1_extension": "",
-                "phone2_type": "",
-                "phone2_country_code": "",
-                "phone2_number": "",
-                "phone2_extension": "",
-                "fax1_type": "",
-                "fax1_country_code": "",
-                "fax1_number": ""
+                "phone1Type": "",
+                "phone1Country_code": "",
+                "phone1Number": "",
+                "phone1Extension": "",
+                "phone2Type": "",
+                "phone2Country_code": "",
+                "phone2Number": "",
+                "phone2Extension": "",
+                "fax1Type": "",
+                "fax1CountryCode": "",
+                "fax1Number": ""
             }
 
 + Response 200
@@ -1219,7 +1219,7 @@ URL forwarding related resources of the **ASAP API**
             {
                 "pointing": "http://www.myothershop.info",
                 "type": "MASKED",
-                "page_title": "Forwarding Page"
+                "pageTitle": "Forwarding Page"
             }
 
 + Response 200
@@ -1249,7 +1249,7 @@ URL forwarding related resources of the **ASAP API**
                                         "id": "ru_34effrth45y4",
                                         "pointing": "http://www.myothershop.info",
                                         "type": "MASKED",
-                                        "page_title": "Forwarding Page"
+                                        "pageTitle": "Forwarding Page"
                                 }
                         ]
                 }
@@ -1279,7 +1279,7 @@ URL forwarding related resources of the **ASAP API**
                 "id": "ru_asdfer345345",
                 "pointing": "http://www.myothershop.info",
                 "type": "MASKED",
-                "page_title": "Forwarding Page"
+                "pageTitle": "Forwarding Page"
             }
 
 + Response 200
