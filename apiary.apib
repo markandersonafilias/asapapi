@@ -2,14 +2,15 @@ FORMAT: 1A
 HOST: https://api.internet.com/
 
 # ASAP Reseller API
-The ASAP Reseller API is a *platform* offering from Afilias. This document is a living document, a work in progress. Temporary comments are in () brackets. 
+The ASAP Reseller API is a *platform* offering from Afilias. This document is a living document, a work in progress. 
 
 # Group Token
 General token authentication and handling.
 
 ## Token Generation [/v1/auth/token]
 
-### Request new JWT token [POST]
+### Request new web token [POST]
+Request a new Json Web Token (JWT) either as a guest user or when logging in. 
 
 + Request
     
@@ -34,6 +35,7 @@ General token authentication and handling.
         }
 
 ### Force JWT token expiration [DELETE]
+Logout forcing the user's JWT to expire and be revoked from usage. 
 
 + Request
     + Headers
@@ -44,7 +46,8 @@ General token authentication and handling.
         
 ## Token Refresh [/v1/auth/token/refresh]
 
-### Update JWT token to avoid expiration [POST]
+### Update JWT session to avoid expiration [POST]
+Request a new web token which has a new expiry further into the future.
 
 + Request
     + Headers
@@ -73,7 +76,7 @@ General token authentication and handling.
 ## Users [/v1/users]
 
 ### Create a new user [POST]
-(Creating a new user should map the guest user token in use to the new user and keep their token valid.)
+Creating a new user will map the guest user token currently in user to the new user. 
 
 + Request
     + Headers
@@ -223,6 +226,7 @@ New user verification of the **ASAP API**
 ## Verify New User [/v1/verification]
 
 ### Complete new user creation by verifying email address [POST]
+Verificaion key is sent to new users as part of a web link. Ths key is sent to the API to verify the new user's email address. 
 
 + Request
     + Headers
@@ -251,6 +255,7 @@ New user verification of the **ASAP API**
 ## Resend Verification Link [/v1/verification/resend]
 
 ### Request to resend activation email with verification link [POST]
+Generate a new email verification key and send an email containing it.
 
 + Request
     + Headers
@@ -398,6 +403,7 @@ Product related resources of the **ASAP API**
 ## Product List [/v1/products]
 
 ### List all products [GET]
+Retrieve global product list.
 
 + Request
     + Headers
@@ -636,11 +642,10 @@ Manage reseller configured bundles
 
 # Group Cart
 
-Customer cart related resources of the **ASAP API**
-
 ## Manage Cart [/v1/users/{user_id}/cart/items]
 
 ### Add to user's cart [POST]
+Add a line item to the user's persistent cart.
 
 + Request
     + Headers
@@ -691,6 +696,7 @@ Customer cart related resources of the **ASAP API**
 ## Manage Cart Items [/v1/users/{user_id}/cart/items/{item_id}]
 
 ### Update item in user's cart [PUT]
+Update the quanity value of a cart line item. 
 
 + Request
     + Headers
@@ -728,6 +734,7 @@ Customer cart related resources of the **ASAP API**
 ## Reserving Domains [/v1/users/{user_id}/cart/items/{item_id}/reserve]
 
 ### Reserve a domain name [POST]
+Register and reserve a domain name on the user's behalf, requires user to be logged in (not a guest user).
 
 + Request
     + Headers
@@ -748,6 +755,7 @@ Customer cart related resources of the **ASAP API**
 ## Cart Checkout [/v1/users/{user_id}/cart/checkout]
 
 ### Submit order and get order id [POST]
+Begin ordering process, generate an order id and confirm cart line items. 
 
 + Request
     + Headers
@@ -774,6 +782,7 @@ Customer cart related resources of the **ASAP API**
 ## Cart Complete [/v1/users/{user_id}/cart/complete]
 
 ### Send payment reference and finalize purchase [POST]
+Transmit encrypted card details generated with Bluesnap front-end library to complete order process.
 
 + Request
     + Headers
@@ -802,8 +811,6 @@ Customer cart related resources of the **ASAP API**
         }
 
 # Group Wishlist
-
-Wishlist related resources of the **ASAP API**
 
 ## Wistlist Management [/v1/users/{user_id}/wishlist]
 
@@ -858,6 +865,7 @@ Wishlist related resources of the **ASAP API**
 ## Manage wishlist items [/v1/users/{user_id}/wishlist/{wish_id}]
 
 ### Update wishlist item [PUT]
+Update quantity value of a wishlist line item.
 
 + Request
     + Headers
@@ -866,7 +874,7 @@ Wishlist related resources of the **ASAP API**
 
     + Body
 
-            { "id": "p_45g3rsdfsdfsq", "name": "goMobi", "value": "", ... }
+            { "quanity": 23 }
             
 + Response 200
 
@@ -889,8 +897,6 @@ Wishlist related resources of the **ASAP API**
 + Response 204
 
 # Group Orders
-
-Orders related resources of the **ASAP API**
 
 ## List user's orders [/v1/users/{user_id}/orders]
 
@@ -948,8 +954,6 @@ Orders related resources of the **ASAP API**
 
 # Group Domains
 
-Domain related resources of the **ASAP API**
-
 ## Check Availability [/v1/domains/{domain}/available]
 
 ### Check availability of specific domain [GET]
@@ -970,6 +974,7 @@ Domain related resources of the **ASAP API**
 ## Suggest - TLD Spin [/v1/domains/{query}/tld-spin]
 
 ### Retrieve list of domain suggestions [GET]
+Fetch list of domain suggestions with various TLD's.
 
 + Request
     + Headers
@@ -997,6 +1002,7 @@ Domain related resources of the **ASAP API**
 ## Suggest - Domain & TLD Spin [/v1/domains/{query}/domain-spin] 
 
 ### Retrieve list of domain suggestions [GET]
+Fetch list of domain suggestions based on query root. 
 
 + Request
     + Headers
@@ -1023,7 +1029,8 @@ Domain related resources of the **ASAP API**
 
 ## List User Domains [/v1/users/{user_id}/domains]
 
-### Retrieve list of my domains [GET]
+### Retrieve list of user's domains [GET]
+List includes active domains, researved domains, transfer requests and pre-order domains.
 
 + Request
     + Headers
@@ -1121,7 +1128,7 @@ Domain related resources of the **ASAP API**
 
     + Body
 
-            { "autoRenew": "on" }
+            { "autoRenew": true }
 
 + Response 200
 
@@ -1232,11 +1239,11 @@ Domain related resources of the **ASAP API**
         }
 
 # Group URL Forwarding
-URL forwarding related resources of the **ASAP API**
 
 ## Manage domain fowarding rules [/v1/domains/{domain}/forwarding]
 
 ### Create forwarding rule record [POST]
+
 + Request
     + Headers
     
@@ -1340,7 +1347,6 @@ URL forwarding related resources of the **ASAP API**
         }
 
 # Group DNS
-DNS record related resources of the **ASAP API**
 
 ## List [/v1/domains/{domain}/dns]
 
@@ -1458,11 +1464,11 @@ DNS record related resources of the **ASAP API**
         }
         
 # Group Whois
-Whois lookup service of the **ASAP API**
 
 ## List [/v1/whois/{domain}]
 
-### Retrieve list of whois info [GET]
+### Retrieve whois info [GET]
+Execute a whois lookup on the queried domain and return result.
 
 + Request
     + Headers
@@ -1484,38 +1490,4 @@ Whois lookup service of the **ASAP API**
                         "code": 1234,
                         "message": "Domain not found"
                 }
-        }
-        
-# Group ASync Processes
-(There is debate over whether we need this endpoint.)
-
-## ASync Status [/v1/status/{reference_id}]
-
-### Querying the current status of the process [GET]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": {
-                        "reference": "TRXPROC-1234", 
-                        "message": "Problem in processing", 
-                        "errors": [{
-                            "code":121, 
-                            "message": "Card expired"
-                        }
-                }
-        }
-
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Process not found"
-                }]
         }
