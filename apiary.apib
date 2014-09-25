@@ -80,9 +80,6 @@ Request a new web token which has a new expiry further into the future.
 Creating a new user will map the guest user token currently in user to the new user. 
 
 + Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
     + Body
     
@@ -93,7 +90,7 @@ Creating a new user will map the guest user token currently in user to the new u
         {  
                 "data": {
                         "token": "ascabGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbajsdfhIZCrayNoVD47DEuFl1Qveqd2E"
-                        "id": "12345" 
+                        "id": 12345 
                 }
         }
 
@@ -106,14 +103,6 @@ Creating a new user will map the guest user token currently in user to the new u
                 }]
         }
         
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
 
 ### List all users [GET]
 
