@@ -283,9 +283,6 @@ New user verification of the **ASAP API**
 Verificaion key is sent to new users as part of a web link. Ths key is sent to the API to verify the new user's email address. 
 
 + Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
     + Body
     
@@ -293,18 +290,6 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
 
 + Response 200 (application/json)
 
-        {  
-                "data": { }
-        }
-        
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
 
 + Response 404 (application/json) 
 
@@ -321,9 +306,6 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
 Generate a new email verification key and send an email containing it.
 
 + Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
     + Body
     
@@ -331,14 +313,6 @@ Generate a new email verification key and send an email containing it.
 
 + Response 200
 
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
 
 ## Check email address availability [/v1/verification/email/{email}]
 
