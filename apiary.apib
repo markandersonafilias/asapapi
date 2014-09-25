@@ -21,7 +21,7 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in.
         {  
                 "data": {
                         "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", 
-                        "id": "u_asfvlsajdfoasjf" 
+                        "id": 12345 
                 }
         }
 
@@ -29,7 +29,7 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 400,
                         "message": "Login failed"
                 }]
         }
@@ -91,7 +91,8 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "data": {
-                        "id": "u_345f4h2b" 
+                        "token": "ascabGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbajsdfhIZCrayNoVD47DEuFl1Qveqd2E"
+                        "id": "u_345f4h2b"
                 }
         }
 
@@ -111,6 +112,25 @@ Creating a new user will map the guest user token currently in user to the new u
                         "code": 1234,
                         "message": "Token unknown or already expired"
                 }]
+        }
+## Users [/v1/users/guest]
+
+### Create a new user [POST]
+Creating a new user will map the guest user token currently in user to the new user. 
+
++ Request
+            
+    + Body
+    
+            { "resellerId": "r_35gegsdfsr" }
+        
++ Response 201 (application/json)
+
+        {  
+                "data": {
+                        "token": "ascabGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbajsdfhIZCrayNoVD47DEuFl1Qveqd2E"
+                        "id": "u_345f4h2b"
+                }
         }
 
 ### List all users [GET]
