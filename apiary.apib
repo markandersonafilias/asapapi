@@ -92,7 +92,7 @@ Creating a new user will map the guest user token currently in user to the new u
         {  
                 "data": {
                         "token": "ascabGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbajsdfhIZCrayNoVD47DEuFl1Qveqd2E"
-                        "id": "u_345f4h2b"
+                        "id": "u_345f4h2b" 
                 }
         }
 
@@ -112,25 +112,6 @@ Creating a new user will map the guest user token currently in user to the new u
                         "code": 1234,
                         "message": "Token unknown or already expired"
                 }]
-        }
-## Users [/v1/users/guest]
-
-### Create a new user [POST]
-Creating a new user will map the guest user token currently in user to the new user. 
-
-+ Request
-            
-    + Body
-    
-            { "resellerId": "r_35gegsdfsr" }
-        
-+ Response 201 (application/json)
-
-        {  
-                "data": {
-                        "token": "ascabGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbajsdfhIZCrayNoVD47DEuFl1Qveqd2E"
-                        "id": "u_345f4h2b"
-                }
         }
 
 ### List all users [GET]
@@ -158,6 +139,26 @@ Creating a new user will map the guest user token currently in user to the new u
                         "message": "Token unknown or already expired"
                 }]
         }
+
+## Users [/v1/users/guest]
+### Create a guest user [POST]
+Creating a new user will map the guest user token currently in user to the new user. 
+
++ Request
+
+    + Body
+    
+            { "resellerId": "r_35gegsdfsr" }
+        
++ Response 201 (application/json)
+
+        {  
+                "data": {
+                        "token": "ascabGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbajsdfhIZCrayNoVD47DEuFl1Qveqd2E"
+                        "id": "u_345f4h2b" 
+                }
+        }
+
         
 ## User Management [/v1/users/{id}]
 
@@ -203,7 +204,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
     + Body
 
-            { "firstName", "Sam", "lastName": "Spade", "email": "bob@example.com", ... }
+            { "firstName", "Sam", "lastName": "Spade", "email": "bob@example.com"}
         
 + Response 200
 
@@ -216,6 +217,8 @@ Creating a new user will map the guest user token currently in user to the new u
                 }]
         }
         
++ Response 304 (application/json) 
+
 + Response 404 (application/json) 
 
         {  
@@ -233,9 +236,6 @@ Password handling and reset.
 ### Request forgotten email password email [POST]
 
 + Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
     + Body
     
@@ -243,15 +243,6 @@ Password handling and reset.
         
 + Response 200
 
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-        
 + Response 404 (application/json) 
 
         {  
@@ -266,24 +257,13 @@ Password handling and reset.
 ### Forgotten password verified change request [PUT]
 
 + Request
-    + Headers
     
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
     + Body
     
             { "verificationKey": "t5fgftehved24tege", "password": "secret2" }
         
 + Response 200
 
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
         
 + Response 404 (application/json) 
 
