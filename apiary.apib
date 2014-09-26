@@ -1277,11 +1277,6 @@ Update quantity value of a wishlist line item.
 ### Retrieve list of domain suggestions [GET]
 Fetch list of domain suggestions with various TLD's.
 
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
 + Response 200 (application/json)
 
         {
@@ -1300,15 +1295,6 @@ Fetch list of domain suggestions with various TLD's.
             }]
         }
         
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
 ## Suggest - Domain & TLD Spin [/v1/domains/{query}/domain-spin] 
 
 ### Retrieve list of domain suggestions [GET]
