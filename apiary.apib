@@ -1254,11 +1254,6 @@ Update quantity value of a wishlist line item.
 
 ### Check availability of specific domain [GET]
 
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
 + Response 200 (application/json)
 
         {  
@@ -1268,12 +1263,12 @@ Update quantity value of a wishlist line item.
                 }
         }
         
-+ Response 401 (application/json) 
++ Response 400 (application/json) 
 
         {  
                 "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
+                        "code": 400,
+                        "message": "Bad Request"
                 }]
         }
 
