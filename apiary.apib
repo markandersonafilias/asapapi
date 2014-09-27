@@ -13,8 +13,14 @@ General token authentication and handling.
 Request a new Json Web Token (JWT) either as a guest user or when logging in. 
 
 + Request
-    
-        { "resellerKey": "dfservev35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
+
+  + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+  
+  + Body 
+  
+      { "resellerKey": "dfservev35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
         
 + Response 201 (application/json)
 
@@ -24,7 +30,12 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in.
                         "id": "u_4o3irjasofij" 
                 }
         }
-
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
 + Response 400 (application/json) 
 
         {  
