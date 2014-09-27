@@ -1099,7 +1099,7 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
 
 ## UpSell Packages [/v1/package/{packageId}/upsells]
 
-### Returns List of Packages
+### Returns List of Packages [GET]
 
 + Request
     + Headers
@@ -1107,9 +1107,11 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
     + Body
+    
             { "id":"u_jsdf"}
 
 + Response 200
+
         {  
                 "data": [
                     { "id":"u_jsdf", name:"Package Name", description:"Package Description", price:2832 },
