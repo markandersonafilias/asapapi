@@ -211,7 +211,7 @@ Creating a new user will map the guest user token currently in user to the new u
                 }]
         }
 
-### Update user record [PUT]
+### Update user record, or change the status of the user [PUT]
 
 + Request
     + Headers
@@ -220,7 +220,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
     + Body
 
-            { "firstName", "Sam", "lastName": "Spade", "email": "bob@example.com"}
+            { "firstName", "Sam", "lastName": "Spade", "email": "bob@example.com", status:"suspended"}
         
 + Response 200
 
@@ -1124,6 +1124,62 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
         }
 
 # Group Package
+
+## UpSell Packages [/v1/packagegroup/]
+
+### Returns All Package group available to the Reseller [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
+        {  
+                "data": [
+                    { "id":"u_jsdf", groupName:"Group Name1 ", status:"active"},
+                    { "id":"u_njsdf", groupName:"Group Name2 ", status:"Inactive"}, ...]
+        }
+
++ Response 204
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+## UpSell Packages [/v1/packagegroup/active]
+
+### Returns All active Package groups to the Reseller [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
+        {  
+                "data": [
+                    { "id":"u_jsdf", groupName:"Group Name1 ", status:"active"},
+                    { "id":"u_njsdf", groupName:"Group Name2 ", status:"Inactive"}, ...]
+        }
+
++ Response 204
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
 
 ## UpSell Packages [/v1/package/{packageId}/upsells]
 
