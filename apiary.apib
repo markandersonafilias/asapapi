@@ -20,7 +20,7 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in.
   
   + Body 
   
-      { "resellerKey": "dfservev35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
+            { "resellerKey": "dfservev35gegsdfsdfbgbr", "email": "bob@example.com", "password": "secret1" }
         
 + Response 201 (application/json)
 
@@ -93,6 +93,11 @@ Creating a new user will map the guest user token currently in user to the new u
 
 + Request
 
+
+  + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+  
     + Body
     
             { "resellerId": "r_35gegsdfsr", "email": "bob@example.com", "password": "secret1", "firstName": "Bob", "lastName": "Smith" }
@@ -114,7 +119,14 @@ Creating a new user will map the guest user token currently in user to the new u
                         "message": "Email address already in use"
                 }]
         }
-        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
 
 ### List all users [GET]
 
@@ -160,7 +172,14 @@ Creating a new user will map the guest user token currently in user to the new u
                         "id": "u_4o3irjasofij"
                 }
         }
++ Response 400 (application/json) 
 
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Invalid Reseller key"
+                }]
+        }
         
 ## User Management [/v1/users/{id}]
 
