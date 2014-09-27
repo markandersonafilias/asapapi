@@ -1431,6 +1431,85 @@ Returns claim id and the claim Dates.
                 }
         }
 
+
+## Domain Email Forwarding [/v1/domain/{domain}/email]
+
+### Domain Email Forwarding [GET]
+
++ Response 200 (application/json)
+
+        {  
+                "data": {
+                     {"from":"test@test.com","to":"test1@test.com"}
+                     {"from":"test2@test.com","to":"test21@test.com"}
+                }
+        }
+        
+
+
+
+### Domain Email Forwarding [POST]
+
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+    + Body
+            
+                {
+                     {"from":"test@test.com","to":"test1@test.com"}
+                     {"from":"test2@test.com","to":"test21@test.com"}
+                }
+
++ Response 200 (application/json)
+
+        {  
+                "data": {
+                     {"message": "Email forwarded succesfully"}
+                     }
+        }
+        
+
+
+
+## Domain Nameservers [/v1/domains/{domain}/child-nameservers]
+
+### Add child name servers for the supplied domain [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "cnameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...]
+            }
+            
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+
+
+
 ## List User Domains [/v1/users/{user_id}/domains]
 
 ### Retrieve list of user's domains [GET]
@@ -1493,7 +1572,7 @@ List includes active domains, researved domains, transfer requests and pre-order
 
     + Body
 
-            { "domain": "myshop.info", ... }
+            "data": { "domain": "myshop.info", ... }
         
 + Response 200
 
@@ -1514,7 +1593,244 @@ List includes active domains, researved domains, transfer requests and pre-order
                         "message": "Domain not found"
                 }]
         }
+        
 
+## Auto renew a domain [/v1/domains/{domain}/autorenew]
+
+### Auto Renew domain [PUT]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "renew": true }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+        
+   
+### Auto Renew domain [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+
++ Response 200
+
+                "data": { "renew": true }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+        
+
+## Enable or Disable whoisprivacy [/v1/domains/{domain}/whoisprivacy]
+
+### update whoisprivacy [PUT]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+             { "whoisprivacy": true }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+ 
+## Renew a domain [/v1/domains/{domain}/renew]
+
+### Renew a domain [PUT]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+             { "years": 1 }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+ 
+ 
+ 
+### update whoisprivacy [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+
++ Response 200
+
+                "data": { "whoisprivacy": true }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+        
+
+
+## Get EPP Code [/v1/domains/{domain}/epp]
+
+### Get the eppAuthCode [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+
++ Response 200
+            
+                "data": {
+                        "eppCode": "asdasd"
+                }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+        
+  
+## Move a domain [/v1/domains/{domain}/move]
+
+### Move a domain [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+  + Body
+
+            { "email": "test@test.com" }
+
++ Response 200
+            
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+ 
+       
+        
 ## Domain lock [/v1/domains/{domain}/lock]
 
 ### Set current status of domain lock [PUT]
@@ -1660,6 +1976,40 @@ List includes active domains, researved domains, transfer requests and pre-order
 
     + Body
     
+            {"registrantKey": "DKAJSHDSD", "administrativeKey": "DKAJSHDSD", "billingContactKey": "DKAJSHDSD", "technicalContactKey": "DKAJSHDSD"}
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Contact not found"
+                }]
+        }
+        
+
+## Domain Contacts Management [/v1/domains/{domain}/contacts]
+
+### Add domain contact [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
             {
                 "type": "registrant",
                 "firstName": "Jonathan",
@@ -1704,6 +2054,38 @@ List includes active domains, researved domains, transfer requests and pre-order
                         "message": "Domain not found"
                 }]
         }
+
+
+## Delete Domain [/v1/domains/{domain}]
+
+### Delete domain contact [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+   
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+
 
 # Group URL Forwarding
 
