@@ -307,7 +307,7 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
 
     + Body
     
-            { "verificationKey": "he4!!?#5w3getgwet%^£TG121DFG" }
+            { "verificationKey": "he4!!?#5w3getgwet%^£TG121DFG", "email": "bob@example.com", "password": "secret1"}
 
 + Response 200 (application/json)
 
@@ -317,7 +317,7 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
         {  
                 "errors": [{  
                         "code": 1234,
-                        "message": "Verification code not found"
+                        "message": "Invalid Verification key"
                 }]
         }
 
@@ -326,7 +326,15 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
         {  
                 "errors": [{  
                         "code": 400,
-                        "message": "Invalid Reseller key"
+                        "message": "Account already active"
+                }]
+        }
++ Response 400 (application/json) 
+
+        {
+                "errors": [{  
+                        "code": 400,
+                        "message": "Invalid Credential"
                 }]
         }
         
@@ -349,35 +357,6 @@ Generate a new email verification key and send an email containing it.
                 "errors": [{  
                         "code": 400,
                         "message": "Email Not found"
-                }]
-        }
-        
-## Check email address availability [/v1/verification/email/{email}]
-
-### Check to see if an email address is already used by another user [GET]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 401,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 400,
-                        "message": "Email address does not exist"
                 }]
         }
 
@@ -2421,4 +2400,35 @@ Execute a whois lookup on the queried domain and return result.
                         "code": 1234,
                         "message": "Domain not found"
                 }
+        }
+
+# Group UI
+
+## List Menu for User Role [/v1/ui/menu/]
+
+### Retrieve whois info [GET]
+Execute a whois lookup on the queried domain and return result.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        {  
+            "data":[{
+                          "id": "u_145f4h2b", name:"Home Page", action:"controller/abc"
+                }, {
+                          "id": "u_94gh4627", name:"Contact", action:"controller/contact/abc",menu:[{name:"Edit Contact", action:"controller/contact/edit"}]
+                }]
+        }
+        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
         }
