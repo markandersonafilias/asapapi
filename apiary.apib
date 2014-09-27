@@ -1125,7 +1125,7 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
 
 # Group Package
 
-## List Active Packages [/v1/packagegroup/active]
+## List Active Package Groups of the Reseller [/v1/packagegroup/active]
 
 ### Returns All active Package groups to the Reseller [GET]
 
@@ -1181,7 +1181,7 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
                 }]
         }
 
-### Reseller Updates the Status to Active/Inactive [PUT]
+### Reseller Updates the Status of Package Group [PUT]
 
 + Request
     
@@ -1209,6 +1209,7 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
         }
 
 ## Retrieve Package Group [/v1/packagegroup/{packageGroupId}]
+### Retrieve Package Group [GET]
 
 + Request
     + Headers
@@ -1294,7 +1295,9 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
                 }]
         }
 
-## Retrieve Package  [/v1/package/{packageId}]
+## Retrieve Package [/v1/package/{packageId}]
+
+### Retrieve Package by Package Id [GET]
 
 + Request
     + Headers
@@ -1327,6 +1330,8 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
 
 ## Retrieve Reseller Active Packages  [/v1/package/active]
 
+### Retrieve Reseller Active Packages [GET]
+
 + Request
     + Headers
     
@@ -1352,6 +1357,8 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
         }
 
 ## Retrieve Package By Package GroupId  [/v1/package/{packageGroupId}/packageGroup]
+
+### Retrieve Package By Package GroupId  [GET]
 
 + Request
     + Headers
