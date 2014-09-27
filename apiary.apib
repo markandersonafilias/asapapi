@@ -320,6 +320,15 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
                         "message": "Verification code not found"
                 }]
         }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Invalid Reseller key"
+                }]
+        }
         
 ## Resend Verification Link [/v1/verification/resend]
 
@@ -334,7 +343,15 @@ Generate a new email verification key and send an email containing it.
 
 + Response 200
 
++ Response 400 (application/json) 
 
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Email Not found"
+                }]
+        }
+        
 ## Check email address availability [/v1/verification/email/{email}]
 
 ### Check to see if an email address is already used by another user [GET]
@@ -350,16 +367,16 @@ Generate a new email verification key and send an email containing it.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 401,
                         "message": "Token unknown or already expired"
                 }]
         }
 
-+ Response 404 (application/json) 
++ Response 400 (application/json) 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 400,
                         "message": "Email address does not exist"
                 }]
         }
@@ -1330,11 +1347,6 @@ Fetch list of domain suggestions with various TLD's.
 ### Retrieve list of domain suggestions [GET]
 Fetch list of domain suggestions based on query root. 
 
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
 + Response 200 (application/json)
 
         {
@@ -1353,13 +1365,70 @@ Fetch list of domain suggestions based on query root.
             }]
         }
         
-+ Response 401 (application/json) 
+## Suggest - Domain spin with Landing TLD [/v1/domains/landing/{domain}] 
+
+### Retrieve list of domain with landing TLD [GET]
+Fetch list of domain suggestions based on query root. 
+
++ Response 200 (application/json)
+
+        {
+            "data": [{
+                    "domain": "myshop.organice",
+                    "price": "12.99"
+            }, {
+                    "domain": "myshophome.organic",
+                    "price": "15.00"
+            }, {
+                    "domain": "myshopweb.organic",
+                    "price": "9.99"
+            }]
+        }
+       
+## Suggest - Domain spin with Sunrise TLD [/v1/domains/sunrise/{domain}] 
+
+### Retrieve list of domain with landing TLD [GET]
+Fetch list of domain suggestions based on query root. 
+
++ Response 200 (application/json)
+
+        {
+            "data": [{
+                    "domain": "myshop.organice",
+                    "price": "12.99"
+            }, {
+                    "domain": "myshophome.organic",
+                    "price": "15.00"
+            }, {
+                    "domain": "myshopweb.organic",
+                    "price": "9.99"
+            }]
+        }
+        
+## List TLD's [/v1/domain/tld-category]
+
+### Retrieve list of TLD and respective Category [GET]
+List includes supported TLD's and respective Category.
+
++ Response 200 (application/json)
 
         {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
+                "data": {
+                    "tlds" : [{id:"4o3irjasofij", name:"info", catId:"1o3irjasofij", catName:"Business"}, {id:"3o3irjasofij", name:"club"}, {id:63o3irjasofij", name:"org", catId:"2o3irjasofij", catName:"Entertainment"},...]
+                }
+        }
+
+## List TLD's [/v1/domain/trademark/{lookupKey}]
+
+### Get a trademark check response for the given lookup key [GET]
+Returns claim id and the claim Dates.
+
++ Response 200 (application/json)
+
+        {  
+                "data": {
+                     {"notBefore":"2014-07-17T12:00:00.0Z","id":"e9b9a8980000000000000075745","notAfter":"2014-07-19T12:00:00.0Z"}
+                }
         }
 
 ## List User Domains [/v1/users/{user_id}/domains]
@@ -1470,11 +1539,11 @@ List includes active domains, researved domains, transfer requests and pre-order
                 }]
         }
 
-+ Response 404 (application/json) 
++ Response 400 (application/json) 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 400,
                         "message": "Domain not found"
                 }]
         }
@@ -1571,7 +1640,7 @@ List includes active domains, researved domains, transfer requests and pre-order
                 }]
         }
         
-+ Response 404 (application/json) 
++ Response 400 (application/json) 
 
         {  
                 "errors": [{  
