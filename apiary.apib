@@ -894,9 +894,9 @@ Add a line item to the user's persistent cart.
 
         {  
                 "data": [{
-                        "id": "i_45g3rsdfsdfsq", "product_id": "p_dfg34gwedaf", "name": "TLD", "description": ".mobi", "value": "gomobi.mobi", "quantity": 5, "price": "49.99"
+                        "id": "i_45g3rsdfsdfsq", "package_id": "p_dfg34gwedaf", "name": "TLD", "description": ".mobi", "value": "gomobi.mobi", "quantity": 5, "price": "49.99"
                 }, {
-                        "id": "i_asv5t3ggsdwfd", "product_id": "p_sf45grtbdfb", "name": "TLD", "description": ".info", "value": "wholefoods.organic", "quantity": 1, "price": "9.99"
+                        "id": "i_asv5t3ggsdwfd", "package_id": "p_sf45grtbdfb", "name": "TLD", "description": ".info", "value": "wholefoods.organic", "quantity": 1, "price": "9.99"
                 }]
         }
         
@@ -909,7 +909,7 @@ Add a line item to the user's persistent cart.
                 }]
         }
 
-+ Response 404 (application/json) 
++ Response 400 (application/json) 
 
         {  
                 "errors": [{  
@@ -943,7 +943,7 @@ Update the quanity value of a cart line item.
                 }]
         }
 
-+ Response 404 (application/json) 
++ Response 400 (application/json) 
 
         {  
                 "errors": [{  
@@ -951,7 +951,16 @@ Update the quanity value of a cart line item.
                         "message": "User not found"
                 }]
         }
+        
++ Response 400 (application/json) 
 
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Item Not Found"
+                }]
+        }
+        
 ### Remove item from user's cart [DELETE]
 
 + Request
@@ -959,8 +968,27 @@ Update the quanity value of a cart line item.
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
+
 + Response 204
 
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Item Not Found"
+                }]
+        }
+        
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
+        
 ## Reserving Domains [/v1/cart/{user_id}/items/{item_id}/reserve]
 
 ### Reserve a domain name [POST]
@@ -1067,6 +1095,42 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
                 }]
         }
 
+# Group Package/product/<pid>/upsells
+## UpSell Packages [/v1/package/<packageId>/upsells]
+### Returns List of Packages
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+            { "id":"u_jsdf"}
+
++ Response 200
+        {  
+                "data": [
+                    { "id":"u_jsdf", name:"Package Name", description:"Package Description", price:2832 },
+                    { "id":"u_jsdf", name:"Package Name", description:"Package Description", price:2832 }, ...]
+        }
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Package not found"
+                }]
+        }
+        
 # Group Wishlist
 
 ## Wistlist Management [/v1/users/{user_id}/wishlist]
