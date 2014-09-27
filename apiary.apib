@@ -2234,64 +2234,6 @@ List includes active domains, researved domains, transfer requests and pre-order
                 }]
         }
         
-
-## Domain Contacts Management [/v1/domains/{domain}/contacts]
-
-### Add domain contact [POST]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-    
-            {
-                "type": "registrant",
-                "firstName": "Jonathan",
-                "lastName": "Doe",
-                "organization": "Acme Inc",
-                "email": "",
-                "address1": "",
-                "address2": "",
-                "city": "",
-                "state": "",
-                "postalCode": "",
-                "country": "",
-                "phone1Type": "",
-                "phone1Country_code": "",
-                "phone1Number": "",
-                "phone1Extension": "",
-                "phone2Type": "",
-                "phone2Country_code": "",
-                "phone2Number": "",
-                "phone2Extension": "",
-                "fax1Type": "",
-                "fax1CountryCode": "",
-                "fax1Number": ""
-            }
-
-+ Response 200
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-        
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }]
-        }
-
-
 ## Delete Domain [/v1/domains/{domain}]
 
 ### Delete domain contact [DELETE]
@@ -2688,3 +2630,62 @@ Execute a whois lookup on the queried domain and return result.
                         "message": "Token unknown or already expired"
                 }]
         }
+
+# Group Contact
+
+## Domain Contacts Management [/v1/contact/]
+
+### Add domain contact [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+            {
+                "type": "registrant",
+                "firstName": "Jonathan",
+                "lastName": "Doe",
+                "organization": "Acme Inc",
+                "email": "",
+                "address1": "",
+                "address2": "",
+                "city": "",
+                "state": "",
+                "postalCode": "",
+                "country": "",
+                "phone1Type": "",
+                "phone1Country_code": "",
+                "phone1Number": "",
+                "phone1Extension": "",
+                "phone2Type": "",
+                "phone2Country_code": "",
+                "phone2Number": "",
+                "phone2Extension": "",
+                "fax1Type": "",
+                "fax1CountryCode": "",
+                "fax1Number": ""
+            }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+
