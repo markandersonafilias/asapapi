@@ -1153,6 +1153,34 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
                 }]
         }
 
+### Reseller Updates the Status to Active/Inactive [PUT]
+
++ Request
+    
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { packageId:"u_kaldk", "status:"active" }
+            
+
+        
++ Response 201
+
++ Response 204
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+
 ## UpSell Packages [/v1/packagegroup/active]
 
 ### Returns All active Package groups to the Reseller [GET]
