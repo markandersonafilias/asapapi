@@ -1693,40 +1693,7 @@ List includes active domains, researved domains, transfer requests and pre-order
                 }]
         }
  
-## Renew a domain [/v1/domains/{domain}/renew]
 
-### Renew a domain [PUT]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-             { "years": 1 }
-
-+ Response 200
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 400,
-                        "message": "Domain not found"
-                }]
-        }
- 
- 
  
 ### update whoisprivacy [GET]
 
@@ -1759,7 +1726,41 @@ List includes active domains, researved domains, transfer requests and pre-order
         }
         
 
+## Renew a domain [/v1/domains/{domain}/renew]
 
+### Renew a domain [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+             { "years": 1 }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+ 
+ 
+ 
 ## Get EPP Code [/v1/domains/{domain}/epp]
 
 ### Get the eppAuthCode [GET]
