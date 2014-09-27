@@ -30,12 +30,7 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in.
                         "id": "u_4o3irjasofij" 
                 }
         }
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
+
 + Response 400 (application/json) 
 
         {  
@@ -1100,6 +1095,34 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
                 }]
         }
 
+## Manage Cart [/v1/users/{userId}/cart/applycoupon/{couponCode}]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+
++ Response 200 (application/json)
+        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Invalid Coupon"
+                }]
+        }
+
 # Group Package
 
 ## UpSell Packages [/v1/package/{packageId}/upsells]
@@ -1260,7 +1283,7 @@ Update quantity value of a wishlist line item.
 
 # Group coupons
 
-## Coupons [/v1/coupon/create]
+## Coupons [/v1/coupon]
 
 ### Create Coupon [POST]
 
@@ -1274,7 +1297,7 @@ Update quantity value of a wishlist line item.
     
             {code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true}
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
     
 + Response 400 (application/json) 
 
@@ -1295,7 +1318,7 @@ Update quantity value of a wishlist line item.
         }
 
 
-### Create Coupon [GET]
+### List Coupons [GET]
 
 + Request
 
@@ -1305,18 +1328,114 @@ Update quantity value of a wishlist line item.
    
 
 + Response 200 (application/json)
+
+        "data": [ 
+            {code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true},
+            {code:"CM2014", description:"Description" value:"25", type:"Fixed Amount", packageId:"Ukclksadnf1", expiry:"25/12/2014:23:00", singleUse:false}
+            ]
+       
++ Response 204 (application/json) 
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+### Update Coupons [PUT]
+
++ Request
+
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+   
+    + Body
+    
+            {code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true}
+
++ Response 200 (application/json)
             
-        { code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true}
+            {code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true}
 
 + Response 400 (application/json) 
 
         {  
                 "errors": [{  
                         "code": 400,
-                        "message": "Coupon Code Exists"
+                        "message": "Coupon Doesn't exist"
                 }]
         }
 
+### DELETE Coupons [DELETE]
+
++ Request
+
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+   
+    + Body
+    
+            {code:"NY2015"}
+
++ Response 204 (application/json)
+            
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Coupon Doesn't exist"
+                }]
+        }
+        
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Coupon In use"
+                }]
+        }
+        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+## List user's orders [/v1/coupon/{couponCode}]
+
+### Retrieve the coupon [GET]
+
++ Request
+
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+   
+
++ Response 200 (application/json)
+                
+            data: {code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true}
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Coupon Doesn't exist"
+                }]
+        }
+        
 + Response 401 (application/json) 
 
         {  
