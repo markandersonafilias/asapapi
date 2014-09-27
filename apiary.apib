@@ -1351,10 +1351,59 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
 
         {  
                 "errors": [{  
+                        "code": 1234,+ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
                         "code": 1234,
                         "message": "Token unknown or already expired"
                 }]
         }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+ 
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+## Preorder a domain [/v1/domains/{domain}/preorder]
+
+### Preorder a domain [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+ 
 
 ## Retrieve Package By Package GroupId  [/v1/package/{packageGroupId}/packageGroup]
 
@@ -2254,6 +2303,83 @@ List includes active domains, researved domains, transfer requests and pre-order
                 }]
         }
  
+ ## Register a domain [/v1/domains/{domain}/register]
+
+### Register a domain [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+             { "years": 1 }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+ 
+ 
+ ## Transfer a domain [/v1/domains/{domain}/transfer]
+
+### Transfer a domain [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+             { "years": 1, epp:"kjashd" }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain not found"
+                }]
+        }
+ 
+ ## Reserve a domain [/v1/domains/{domain}/reserve]
+
+### Reserve a domain [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+
  
  
 ## Get EPP Code [/v1/domains/{domain}/epp]
