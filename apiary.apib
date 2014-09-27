@@ -229,6 +229,11 @@ Creating a new user will map the guest user token currently in user to the new u
         
 + Response 200
 
+        "data": {
+                        "token": "ascabGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbajsdfhIZCrayNoVD47DEuFl1Qveqd2E", 
+                        "id": "u_4o3irjasofij"
+                }
+
 + Response 401 (application/json) 
 
         {  
@@ -894,9 +899,9 @@ Add a line item to the user's persistent cart.
 
         {  
                 "data": [{
-                        "id": "i_45g3rsdfsdfsq", "package_id": "p_dfg34gwedaf", "name": "TLD", "description": ".mobi", "value": "gomobi.mobi", "quantity": 5, "price": "49.99"
+                        "id": "i_45g3rsdfsdfsq", "packageId": "p_dfg34gwedaf", "value": "gomobi.mobi", "quantity": 5, "price": "49.99"
                 }, {
-                        "id": "i_asv5t3ggsdwfd", "package_id": "p_sf45grtbdfb", "name": "TLD", "description": ".info", "value": "wholefoods.organic", "quantity": 1, "price": "9.99"
+                        "id": "i_asv5t3ggsdwfd", "packageId": "p_sf45grtbdfb", "value": "wholefoods.organic", "quantity": 1, "price": "9.99"
                 }]
         }
         
@@ -1106,10 +1111,6 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-    + Body
-    
-            { "id":"u_jsdf"}
-
 + Response 200
 
         {  
@@ -1257,6 +1258,74 @@ Update quantity value of a wishlist line item.
                 }]
         }
 
+# Group coupons
+
+## Coupons [/v1/coupon/create]
+
+### Create Coupon [POST]
+
++ Request
+
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+   
+    + Body
+    
+            {code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true}
+
++ Response 200 (application/json)
+    
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Coupon Code Exists"
+                }]
+        }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+
+### Create Coupon [GET]
+
++ Request
+
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+   
+
++ Response 200 (application/json)
+            
+        { code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true}
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Coupon Code Exists"
+                }]
+        }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
 # Group Orders
 
 ## List user's orders [/v1/users/{user_id}/orders]
@@ -1272,9 +1341,9 @@ Update quantity value of a wishlist line item.
 
         {  
                 "data": [{
-                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", "description":"product name"
+                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", "description":"product name", "quantity":5, "price":"5.2", "discount":"20" 
                 }, {
-                        "id": "o_asv5t3ggsdwfd", "created": "2014-02-27 10:30:18",  "description":"product name"
+                        "id": "o_asv5t3ggsdwfd", "created": "2014-02-27 10:30:18",  "description":"product name", "quantity":5, "price":"5.2", "discount":"20" 
                 }]
         }
         
