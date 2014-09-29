@@ -1887,6 +1887,40 @@ Update quantity value of a wishlist line item.
 
 # Group Domains
 
+## Check Availability for Bulk Domain Search [/v1/domains/bulk-domain/]
+
+### Check availability of specific domain [GET]
+Type is live|claim
+
++ Request 
+    
+    + Body
+    
+            {"domain":["abc", "xyz",...], "tld":["com","info",...]}        
+
++ Response 200 (application/json)
+
+        {  
+                "data": [ {
+                        "available": true, 
+                        "domain":"xyz.organic"
+                        "price": "9.99"
+                        }, {
+                        "available": false, 
+                        "domain":"xyz.organic"
+                        } , ...]
+        }
+        
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Bad Request"
+                }]
+        }
+
+
 ## Check Availability [/v1/domains/{domain}/available/{type}]
 
 ### Check availability of specific domain [GET]
