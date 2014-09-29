@@ -1896,18 +1896,18 @@ Type is live|claim
     
     + Body
     
-            {"domain":["abc", "xyz",...], "tld":["com","info",...]}        
+            {"domain":["abc", "xyz.com",...], "tld":["com","info",...]}        
 
 + Response 200 (application/json)
 
         {  
                 "data": [ {
                         "available": true, 
-                        "domain":"xyz.organic"
+                        "domain":"abc.info"
                         "price": "9.99"
                         }, {
                         "available": false, 
-                        "domain":"xyz.organic"
+                        "domain":"xyz.com"
                         } , ...]
         }
         
