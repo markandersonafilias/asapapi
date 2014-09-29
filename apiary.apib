@@ -1902,14 +1902,19 @@ Type is live|claim
 
         {  
                 "data": [ {
-                        "available": true, 
+                        "status": "Available", 
                         "domain":"abc.info"
                         "price": "9.99"
                         }, {
-                        "available": false, 
+                        "status": "Not Available", 
                         "domain":"xyz.com"
-                        } , ...]
+                        }, {
+                        "status": "Error", 
+                        "domain":"xyz.info"
+                        }, ...]
         }
+
++ Response 204 (application/json)
         
 + Response 400 (application/json) 
 
