@@ -1851,9 +1851,10 @@ Update quantity value of a wishlist line item.
 
 # Group Domains
 
-## Check Availability [/v1/domains/{domain}/available]
+## Check Availability [/v1/domains/{domain}/available/{type}]
 
 ### Check availability of specific domain [GET]
+Type is live|claim
 
 + Response 200 (application/json)
 
@@ -1883,24 +1884,27 @@ Fetch list of domain suggestions with various TLD's.
         {
             "data": [{
                     "domain": "myshop.info",
-                    "category": "business",
                     "price": "12.99"
             }, {
-                    "domain": "myshop.guru", 
-                    "category": "personal", 
+                    "domain": "myshop.guru",
                     "price": "15.00"
             }, {
                     "domain": "myshop.red",
-                    "category": "leisure",
                     "price": "9.99"
             }]
         }
         
-## Suggest - Domain & TLD Spin [/v1/domains/{query}/domain-spin] 
+## Suggest - Domain & TLD Spin [/v1/domains/{domain}/domain-spin] 
 
 ### Retrieve list of domain suggestions [GET]
-Fetch list of domain suggestions based on query root. 
+Fetch list of domain suggestions based tld, returns complete list if tld is empty
 
++ Request
+
+    + Body
+    
+            {"tld":"organic"}
+        
 + Response 200 (application/json)
 
         {
@@ -1916,49 +1920,10 @@ Fetch list of domain suggestions based on query root.
             }]
         }
         
-## Suggest - Domain spin with Landing TLD [/v1/domains/landing/{domain}] 
 
-### Retrieve list of domain with landing TLD [GET]
-Fetch list of domain suggestions based on query root. 
-
-+ Response 200 (application/json)
-
-        {
-            "data": [{
-                    "domain": "myshop.organice",
-                    "price": "12.99"
-            }, {
-                    "domain": "myshophome.organic",
-                    "price": "15.00"
-            }, {
-                    "domain": "myshopweb.organic",
-                    "price": "9.99"
-            }]
-        }
-       
-## Suggest - Domain spin with Sunrise TLD [/v1/domains/sunrise/{domain}] 
-
-### Retrieve list of domain with landing TLD [GET]
-Fetch list of domain suggestions based on query root. 
-
-+ Response 200 (application/json)
-
-        {
-            "data": [{
-                    "domain": "myshop.organice",
-                    "price": "12.99"
-            }, {
-                    "domain": "myshophome.organic",
-                    "price": "15.00"
-            }, {
-                    "domain": "myshopweb.organic",
-                    "price": "9.99"
-            }]
-        }
-        
 ## List TLD's [/v1/domain/tld-category]
 
-### Retrieve list of TLD and respective Category [GET]
+### Retrieve list of TLD and respective Category [POST]
 List includes supported TLD's and respective Category.
 
 
