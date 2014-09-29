@@ -150,7 +150,9 @@ Creating a new user will map the guest user token currently in user to the new u
         }
 
 ## Users [/v1/users/guest]
+
 ### Create a guest user [POST]
+
 Creating a new user will map the guest user token currently in user to the new user. 
 
 + Request
@@ -241,6 +243,32 @@ Creating a new user will map the guest user token currently in user to the new u
 + Response 304 (application/json) 
 
 + Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
+        
+## User Saved Cards [/v1/users/{id}/cards]
+
+### Retrieve specific user's saved card details [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+        
++ Response 200 (application/json)
+
+        {  
+                "data": [{
+                        "id": "c_3efgd34t", "censoredCardNumber": "xxxx xxxx xxxx 3526"
+                }]
+        }
+
++ Response 400 (application/json) 
 
         {  
                 "errors": [{  
