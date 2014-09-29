@@ -877,7 +877,7 @@ Manage reseller configured bundles
 
 # Group Cart
 
-## Manage Cart [/v1/cart/{user_id}/items]
+## Manage Cart [/v1/users/{user_id}/cart/items]
 
 ### Add to user's cart [POST]
 Add a line item to the user's persistent cart.
@@ -946,7 +946,7 @@ Add a line item to the user's persistent cart.
                 }]
         }
 
-## Manage Cart Items [/v1/cart/{user_id}/items/{item_id}]
+## Manage Cart Items [/v1/users/{user_id}/cart/items/{item_id}]
 
 ### Update item in user's cart [PUT]
 Update the quanity value of a cart line item. 
@@ -1017,7 +1017,7 @@ Update the quanity value of a cart line item.
                 }]
         }
         
-## Reserving Domains [/v1/cart/{user_id}/items/{item_id}/reserve]
+## Reserving Domains [/v1/users/{user_id}/cart/items/{item_id}/reserve]
 
 ### Reserve a domain name [POST]
 Register and reserve a domain name on the user's behalf, requires user to be logged in (not a guest user).
