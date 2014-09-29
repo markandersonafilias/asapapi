@@ -280,6 +280,42 @@ Creating a new user will map the guest user token currently in user to the new u
 # Group Passwords
 Password handling and reset.
 
+## Forgotten Password Email Request [/v1/password/change]
+
+### User Requests to change the password [PUT]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+            
+    + Body
+    
+            { "password":"secret1", "oldPassword":"secret2" }
+        
++ Response 201
+
++ Response 304
+
++ Response 400 (application/json) 
+
+        {
+                "errors": [{  
+                        "code": 400,
+                        "message": "Invalid Credential"
+                }]
+        }
+        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
 ## Forgotten Password Email Request [/v1/password/forgot]
 
 ### Request forgotten email password email [POST]
