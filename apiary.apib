@@ -1906,15 +1906,12 @@ Fetch list of domain suggestions based on query root.
         {
             "data": [{
                     "domain": "myshop.info",
-                    "category": "business",
                     "price": "12.99"
             }, {
-                    "domain": "myshophome.info", 
-                    "category": "personal", 
+                    "domain": "myshophome.info",
                     "price": "15.00"
             }, {
                     "domain": "myshopweb.organic",
-                    "category": "leisure",
                     "price": "9.99"
             }]
         }
@@ -1963,6 +1960,13 @@ Fetch list of domain suggestions based on query root.
 
 ### Retrieve list of TLD and respective Category [GET]
 List includes supported TLD's and respective Category.
+
+
++ Request
+
+    + Body
+    
+            tldNames:["com","in",...]
 
 + Response 200 (application/json)
 
