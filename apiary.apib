@@ -1057,8 +1057,8 @@ Begin ordering process, generate an order id and confirm cart line items.
 
 ## Cart Complete [/v1/users/{user_id}/cart/complete]
 
-### Send payment reference and finalize purchase [POST]
-Transmit encrypted card details generated with Bluesnap front-end library to complete order process.
+### Send payment details and finalize purchase [POST]
+Transmit encrypted card details generated with Bluesnap front-end library and user billing data to complete order process.
 
 + Request
     + Headers
@@ -1067,7 +1067,18 @@ Transmit encrypted card details generated with Bluesnap front-end library to com
 
     + Body
 
-            { "encryptedCardNumber": "xxxxxxxxxxxxxxx", "encryptedCardCcv": "xxx" }
+            { 
+                "firstName": "Bob", 
+                "lastName": "Dobbs", 
+                "phoneNumber": "34534535345324",
+                "address": "1 Main Street",
+                "city": "Los Angeles",
+                "state": "California",
+                "zipCode": "23423", 
+                "savedPaymentID": "123",
+                "encryptedCardNumber": "xxxxxxxxxxxxxxx", 
+                "encryptedCardCcv": "xxx" 
+            }
 
 + Response 200 (application/json)
 
