@@ -1355,34 +1355,9 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "data": [
-                    { "id":"u_jsdf", packageName:"Package Name1 ", groupId:"jakjs", description:"description"},
-                    { "id":"u_njsdf", groupName:"Group Name2 ", groupId:"jakjs", description:"description"}]
+                    { "id":"u_jsdf", packageName:"Package Name 1", groupId:"jakjs", description:"description"},
+                    { "id":"u_njsdf", packageName:"Package Name 2 ", description:"description"}]
         }
-
-+ Response 204
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-###  Reseller Updates the Status of Package [PUT]
-
-+ Request
-    
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
-
-+ Response 200
 
 + Response 204
 
@@ -1428,14 +1403,69 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
+###  Reseller Updates the Package [PUT]
+
++ Request
+    
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
+
++ Response 200
+
++ Response 204
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+###  Reseller Updates the Package [POST]
+
++ Request
+    
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
+
++ Response 200
+
++ Response 204
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
 ## Retrieve Reseller Active Packages  [/v1/package/active]
 
 ### Retrieve Reseller Active Packages [GET]
+Filters by Package Group Id (optional)
 
 + Request
     + Headers
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+    
+                {"id":"p_kjasdj"}
 
 + Response 200
 
@@ -1471,35 +1501,6 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
  
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-
-## Retrieve Package By Package GroupId  [/v1/package/{packageGroupId}/packageGroup]
-
-### Retrieve Package By Package GroupId  [GET]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200
-
-        {  
-            "data": [ {"id":"u_js23df", packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30"},
-             {"id":"u_jsdf", packageName:"Package Name2 ", groupId:"32jakjs", description:"description1", status:"active", resellerPrice:"29.32", customerPrice:"30"}
-             ...]
-        }
-
-+ Response 204
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
                         "message": "Token unknown or already expired"
                 }]
         }
