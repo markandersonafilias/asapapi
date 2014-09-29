@@ -1213,8 +1213,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "data": [
-                    { "id":"u_jsdf", groupName:"Group Name1 ", status:"active"},
-                    { "id":"u_njsdf", groupName:"Group Name2 ", status:"Inactive"}, ...]
+                    { "id":"u_jsdf", groupName:"Group Name1 ", status:"active", html:"<html>..</html>"},
+                    { "id":"u_njsdf", groupName:"Group Name2 ", status:"active", html:"<html>..</html>"}, ...]
         }
 
 + Response 204
@@ -1241,8 +1241,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "data": [
-                    { "id":"u_jsdf", groupName:"Group Name1 ", status:"active"},
-                    { "id":"u_njsdf", groupName:"Group Name2 ", status:"Inactive"}, ...]
+                    { "id":"u_jsdf", groupName:"Group Name1 ", status:"active", html:"<html>..</html>"},
+                    { "id":"u_njsdf", groupName:"Group Name2 ", status:"Inactive", html:"<html>..</html>"}, ...]
         }
 
 + Response 204
@@ -1255,8 +1255,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                         "message": "Token unknown or already expired"
                 }]
         }
-
-### Reseller Updates the Status of Package Group [PUT]
+        
+### Reseller Adds the Package Group [POST]
 
 + Request
     
@@ -1283,6 +1283,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
+
 ## Retrieve Package Group [/v1/packagegroup/{packageGroupId}]
 ### Retrieve Package Group [GET]
 
@@ -1294,7 +1295,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 + Response 200
 
         {  
-                "data": { "id":"u_jsdf", groupName:"Group Name1 ", status:"active", html:"<HTML>....</HTML>"}
+                "data": { "id":"u_jsdf", groupName:"Reseller Package Group Name1 ", status:"active", html:"<HTML>....</HTML>"}
         }
 
 + Response 400 (application/json) 
@@ -1315,6 +1316,30 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
+### Reseller Updates the Status and HTML of Package Group [PUT]
+
++ Request
+    
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { id:"u_kaldk", "status:"active", html:"<HTML>....</HTML>" }
+
++ Response 200
+
++ Response 204
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
 
 
 ## Packages [/v1/package/]
@@ -1330,8 +1355,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "data": [
-                    { "id":"u_jsdf", packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30"},
-                    { "id":"u_njsdf", groupName:"Group Name2 ", groupId:"jakjs", description:"description", status:"Inactive", resellerPrice:"29.32", customerPrice:"30"}]
+                    { "id":"u_jsdf", packageName:"Package Name1 ", groupId:"jakjs", description:"description"},
+                    { "id":"u_njsdf", groupName:"Group Name2 ", groupId:"jakjs", description:"description"}]
         }
 
 + Response 204
