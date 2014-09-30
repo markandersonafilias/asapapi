@@ -2159,7 +2159,7 @@ Returns claim id and the claim Dates.
 ## List User Domains [/v1/users/{user_id}/domains]
 
 ### Retrieve list of user's domains [GET]
-List includes active domains, researved domains, transfer requests and pre-order domains.
+List includes active domains, reserved domains, transfer requests and pre-order domains.
 
 + Request
     + Headers
@@ -2170,10 +2170,13 @@ List includes active domains, researved domains, transfer requests and pre-order
 
         {  
                 "data": {
-                    "domains" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
+                    "active_domains" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ],
+                    "transfers" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ],
+                    "reservations" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ],
+                    "preorders" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
                 }
         }
-
+        
 ## Domain info [/v1/users/{user_id}/domains/{domain}]
 
 ### Retrieve full domain info, contacts, DNS records, nameservers, domain lock, etc [GET]
@@ -2187,7 +2190,11 @@ List includes active domains, researved domains, transfer requests and pre-order
 
         {  
                 "data": {
-                        "domain": "myshop.info", ... 
+                        "domain": "myshop.info",
+                        "subscription_length": "1 Month",
+                        "purchase_date": "10/02/2010",
+                        "locked": true,
+                        "auto_renew": true
                 }
         }
         
