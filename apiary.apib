@@ -1086,7 +1086,7 @@ Register and reserve a domain name on the user's behalf, requires user to be log
 ## Order Summary [/v1/users/{user_id}/cart/ordersummary]
 
 ### Get summary of the Order [GET]
-Begin ordering process, generate an order id and confirm cart line items. 
+Get List of all items in the shopping cart, applicable taxes, discounts and grand total
 
 + Request
     + Headers
@@ -1101,6 +1101,7 @@ Begin ordering process, generate an order id and confirm cart line items.
                 {"id": "i_asv5t3ggsdwfd", "packageId": "p_sf45grtbdfb", "value": "wholefoods.organic", "quantity": 1, "price": "9.99", "subTotal":"9.99"}],
                 "tax":[{"taxName":"VAT", "taxRate":"6.2", "amount":"16.12"}
                 ,{"taxName":"State Tax", "taxRate":"10", "amount":"25.99"}],
+                "discounts":[{code:"NY2015",value:"20", type:"Percentage"}],
                 "grandTotal":"302.05" }
         }
         
