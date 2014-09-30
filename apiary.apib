@@ -1915,7 +1915,7 @@ Update quantity value of a wishlist line item.
 
 ## Check Availability for Bulk Domain Search [/v1/domains/bulk-domain/]
 
-### Check availability of specific domain [GET]
+### Check availability of specific domain [POST]
 Type is live|claim
 
 + Request 
@@ -2000,6 +2000,26 @@ Fetch list of domain suggestions with various TLD's.
 ### Retrieve list of domain suggestions [GET]
 Fetch list of domain suggestions based tld, returns complete list if tld is empty
 
+
++ Response 200 (application/json)
+
+        {
+            "data": [{
+                    "domain": "myshop.info",
+                    "price": "12.99"
+            }, {
+                    "domain": "myshophome.info",
+                    "price": "15.00"
+            }, {
+                    "domain": "myshopweb.organic",
+                    "price": "9.99"
+            }]
+        }
+        
+
+### Retrieve list of domain suggestions [POST]
+Fetch list of domain suggestions based tld, returns complete list if tld is empty
+
 + Request
 
     + Body
@@ -2021,7 +2041,6 @@ Fetch list of domain suggestions based tld, returns complete list if tld is empt
             }]
         }
         
-
 ## List TLD's [/v1/domain/tld-category]
 
 ### Retrieve list of TLD and respective Category [POST]
@@ -2032,7 +2051,7 @@ List includes supported TLD's and respective Category.
 
     + Body
     
-            tldNames:["com","in",...]
+            {"tld":["HEALTH","MLS",...]}
 
 + Response 200 (application/json)
 
@@ -2041,6 +2060,9 @@ List includes supported TLD's and respective Category.
                     "tlds" : [{id:"4o3irjasofij", name:"info", catId:"1o3irjasofij", catName:"Business"}, {id:"3o3irjasofij", name:"club"}, {id:63o3irjasofij", name:"org", catId:"2o3irjasofij", catName:"Entertainment"},...]
                 }
         }
+        
+        
++ Response 204 
 
 ## TMCH Lookup [/v1/domain/trademark/{lookupKey}]
 
