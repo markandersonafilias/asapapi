@@ -1083,9 +1083,9 @@ Register and reserve a domain name on the user's behalf, requires user to be log
                 }]
         }
 
-## Cart Checkout [/v1/users/{user_id}/cart/ordersummary]
+## Order Summary [/v1/users/{user_id}/cart/ordersummary]
 
-### Submit order and get order id [POST]
+### Get summary of the Order [GET]
 Begin ordering process, generate an order id and confirm cart line items. 
 
 + Request
@@ -1122,41 +1122,6 @@ Begin ordering process, generate an order id and confirm cart line items.
                 }]
         }
 
-## Cart Checkout [/v1/users/{user_id}/cart/checkout]
-
-### Submit order and get order id [POST]
-Begin ordering process, generate an order id and confirm cart line items. 
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200 (application/json)
-
-        {  
-                "data": {
-                        "orderId": "o_fvdfb3gervsf2es" 
-                }
-        }
-        
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-+ Response 404 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "User not found"
-                }]
-        }
 
 ## Cart Complete [/v1/users/{user_id}/cart/complete]
 
