@@ -1083,6 +1083,45 @@ Register and reserve a domain name on the user's behalf, requires user to be log
                 }]
         }
 
+## Cart Checkout [/v1/users/{user_id}/cart/ordersummary]
+
+### Submit order and get order id [POST]
+Begin ordering process, generate an order id and confirm cart line items. 
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        {  
+                "data": {
+                "items":[{"id": "i_45g3rsdfsdfsq", "packageId": "p_dfg34gwedaf", "value": "gomobi.mobi", "quantity": 5, "price": "49.99", "subTotal":"249.95"}, 
+                {"id": "i_asv5t3ggsdwfd", "packageId": "p_sf45grtbdfb", "value": "wholefoods.organic", "quantity": 1, "price": "9.99", "subTotal":"9.99"}],
+                "tax":[{"taxName":"VAT", "taxRate":"6.2", "amount":"16.12"}
+                ,{"taxName":"State Tax", "taxRate":"10", "amount":"25.99"}],
+                "grandTotal":"302.05" }
+        }
+        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
+
 ## Cart Checkout [/v1/users/{user_id}/cart/checkout]
 
 ### Submit order and get order id [POST]
@@ -3230,3 +3269,149 @@ Execute a whois lookup on the queried domain and return result.
                 }]
         }
 
+# Group Tax
+
+## Tax Rules Lookup [/v1/tax-lookup/{country}/{state}]
+
+### Get Tax Rules Based On Country and State [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+            
+            {  
+
+            "data":[{
+                          "country":"IRELAND", "state":"Leinster", "taxName":"VAT", "taxRate":"23"}
+                }]
+                
+            }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
+## Reseller Tax Rates [/v1/tax-rate/]
+
+### Get Reseller Tax Rates [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+        
+            {
+                {"country":"IRELAND", "state":"Leinster"}
+            }
+    
++ Response 200
+            
+            {  
+
+            "data":[{
+                          "id":"t_alkd","country":"IRELAND", "state":"Leinster", "taxName":"VAT", "taxRate":"23"}
+                }]
+                
+            }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+### Create Reseller Tax Rates [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+        
+            {
+            
+                "country":"IRELAND", "state":"Leinster", "taxName":"VAT", "taxRate":"23"}
+            
+            }
+    
++ Response 200
+            
+            {  
+
+            "data":{
+                          "id":"t_alkdwe"
+                }
+                
+            }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+### Update Reseller Tax Rates [PUT]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+        
+            { "id":"t_talksdw" }
+    
++ Response 200
+
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
+### Delete Reseller Tax Rates [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+        
+            {
+            
+                "id":"t_talksdw", "country":"IRELAND", "state":"Leinster", "taxName":"VAT", "taxRate":"23"}
+            
+            }
+    
++ Response 200
+            
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
