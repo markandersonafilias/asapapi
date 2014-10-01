@@ -1352,6 +1352,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 ## Packages [/v1/packages/]
 
 ### Returns All Packages available to the Reseller [GET]
+Hidden - If hidden is true for a package then the package can't be sold on its own.
 
 + Request
     + Headers
@@ -1362,8 +1363,10 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "data": [
-                    { "id":"u_jsdf", packageName:"Package Name 1", groupId:"jakjs", description:"description", "basePackages":[{"packageId":"abc"},{"packageId":"xyz"}]},
-                    { "id":"u_njsdf", packageName:"Package Name 2 ", description:"description", "basePackages":[{"packageId":"abc"},{"packageId":"xyz"}]}
+                    { "id":"u_jsdf", packageName:"Package Name 1", groupId:"jakjs", "description":"description", "hidden":"false",
+                    "basePackages":[{"packageId":"abc"},{"packageId":"xyz"}]},
+                    { "id":"u_njsdf", packageName:"Package Name 2 ", description:"description", "hidden":"true"
+                    "basePackages":[{"packageId":"abc"},{"packageId":"xyz"}]}
                     ]
         }
 
@@ -1390,7 +1393,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 + Response 200
 
         {  
-            "data": {packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30"}
+            "data": {packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30",
+            "applyTax":"true", "hidden":"false", "status":"active"}
         }
 
 + Response 400 (application/json) 
@@ -1421,7 +1425,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
     + Body
 
-            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
+            {packageName:"Reseller Package Name1", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30", 
+            "applyTax":"true", "hidden":"false", "status":"active"}
 
 + Response 200
 
@@ -1448,7 +1453,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
     + Body
 
-            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
+            { packageId:"u_kaldk", packageName:"Package Name1 ", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30",
+            "applyTax":"true", "hidden":"false", "status":"active"}
 
 + Response 200
 
