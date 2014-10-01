@@ -1203,9 +1203,9 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
-# Group Package
+# Group Packages
 
-## List Active Package Groups of the Reseller [/v1/packagegroup/active]
+## List Active Package Groups of the Reseller [/v1/packagegroups]
 
 ### Returns All active Package groups to the Reseller [GET]
 
@@ -1233,7 +1233,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
-## Package Groups [/v1/packagegroup/]
+## Package Groups [/v1/packagegroups/reseller]
 
 ### Returns All Package group available to the Reseller [GET]
 
@@ -1242,6 +1242,10 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
+    + Body
+    
+            {"status":"Active/Inactive"}
+            
 + Response 200
 
         {  
@@ -1271,10 +1275,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
     + Body
 
-            { id:"u_kaldk", "status:"active", html:"<HTML>....</HTML>" }
+            { id:"u_kaldk", "status:"active", "groupName":"Reseller Package Group Name", "html":"<HTML>....</HTML>" }
             
-
-        
 + Response 200
 
 + Response 204
@@ -1289,7 +1291,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
         }
 
 
-## Retrieve Package Group [/v1/packagegroup/{packageGroupId}]
+## Retrieve Package Group [/v1/packagegroups/reseller/{id}]
 ### Retrieve Package Group [GET]
 
 + Request
@@ -1331,7 +1333,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
     + Body
 
-            { id:"u_kaldk", "status:"active", html:"<HTML>....</HTML>" }
+            { groupName:"Reseller Package Group Name1", "status:"active", html:"<HTML>....</HTML>" }
 
 + Response 200
 
@@ -1347,7 +1349,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
         }
 
 
-## Packages [/v1/package/]
+## Packages [/v1/packages/]
 
 ### Returns All Packages available to the Reseller [GET]
 
@@ -1360,8 +1362,9 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "data": [
-                    { "id":"u_jsdf", packageName:"Package Name 1", groupId:"jakjs", description:"description"},
-                    { "id":"u_njsdf", packageName:"Package Name 2 ", description:"description"}]
+                    { "id":"u_jsdf", packageName:"Package Name 1", groupId:"jakjs", description:"description", "basePackages":"['b_adsj','b_kskd']"},
+                    { "id":"u_njsdf", packageName:"Package Name 2 ", description:"description", "basePackages":"['b_adsj','b_kskd']"}
+                    ]
         }
 
 + Response 204
@@ -1375,9 +1378,9 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
-## Retrieve Package [/v1/package/{packageId}]
+## Retrieve Reseller Package [/v1/packages/reseller/{id}]
 
-### Retrieve Package by Package Id [GET]
+### Retrieve Reseller Package by Package Id [GET]
 
 + Request
     + Headers
@@ -1387,7 +1390,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 + Response 200
 
         {  
-            "data": {"id":"u_jsdf", packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30"}
+            "data": {packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30"}
         }
 
 + Response 400 (application/json) 
@@ -1433,6 +1436,8 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
+## Retrieve Reseller Package [/v1/packages/reseller/]
+
 ###  Reseller Updates the Package [POST]
 
 + Request
@@ -1458,7 +1463,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
-## Retrieve Reseller Active Packages  [/v1/package/active]
+## Retrieve Reseller Active Packages  [/v1/package/reseller]
 
 ### Retrieve Reseller Active Packages [GET]
 Filters by Package Group Id (optional)
@@ -1470,7 +1475,7 @@ Filters by Package Group Id (optional)
 
     + Body
     
-                {"id":"p_kjasdj"}
+                {"id":"p_kjasdj", "status":"active/Inactive"}
 
 + Response 200
 
