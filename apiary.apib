@@ -2171,6 +2171,39 @@ Returns claim id and the claim Dates.
         }
 
 
+## Register Domain [/v1/domains/register]
+
+### Register domain using the supplied data [POST]
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {"Domain": "abc.info","years": 1,"contacts": {"firstName": "abc","lastName": "xyz","company": "ABC","address1": "abcd","address2": "abcd","city": "abc","state": "abc","zipCode": "123123","country": "US","phone": "+1.5059131115","fax": "123123","email": "test@test.com", "extension": "234"}}
+            
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Invalid details"
+                }]
+        }
+        
 
 ## List User Domains [/v1/users/{user_id}/domains]
 
