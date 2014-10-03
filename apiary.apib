@@ -913,7 +913,7 @@ Manage reseller configured bundles
 
 # Group Cart
 
-## Manage Cart [/v1/users/{user_id}/cart/items]
+## Manage Cart [/v1/cart/{customer_id}/items]
 
 ### Add to user's cart [POST]
 Add a line item to the user's persistent cart.
@@ -982,7 +982,7 @@ Add a line item to the user's persistent cart.
                 }]
         }
 
-## Manage Cart Items [/v1/users/{user_id}/cart/items/{item_id}]
+## Manage Cart Items [/v1/cart/{customer_id}/items/{item_id}]
 
 ### Update item in user's cart [PUT]
 Update the quanity value of a cart line item. 
@@ -1053,7 +1053,7 @@ Update the quanity value of a cart line item.
                 }]
         }
         
-## Reserving Domains [/v1/users/{user_id}/cart/items/{item_id}/reserve]
+## Reserving Domains [/v1/cart/{customer_id}/items/{item_id}/reserve]
 
 ### Reserve a domain name [POST]
 Register and reserve a domain name on the user's behalf, requires user to be logged in (not a guest user).
@@ -1083,7 +1083,7 @@ Register and reserve a domain name on the user's behalf, requires user to be log
                 }]
         }
 
-## Order Summary [/v1/users/{user_id}/cart/ordersummary]
+## Order Summary [/v1/cart/{customer_id}/ordersummary]
 
 ### Get summary of the Order [GET]
 Get List of all items in the shopping cart, applicable taxes, discounts and grand total
@@ -1124,7 +1124,7 @@ Get List of all items in the shopping cart, applicable taxes, discounts and gran
         }
 
 
-## Cart Complete [/v1/users/{user_id}/cart/complete]
+## Cart Complete [/v1/cart/{customer_id}/complete]
 
 ### Send payment details and finalize purchase [POST]
 Transmit encrypted card details generated with Bluesnap front-end library and user billing data to complete order process.
@@ -1175,7 +1175,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
-## Manage Cart [/v1/users/{userId}/cart/applycoupon/{couponCode}]
+## Manage Cart [/v1/cart/{customer_id}/applycoupon/{couponCode}]
 
 + Request
     + Headers
