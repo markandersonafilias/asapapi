@@ -7,7 +7,7 @@ The ASAP Reseller API is a *platform* offering from Afilias. This document is a 
 # Group Token
 General token authentication and handling.
 
-## Token Generation [/v1/auth/token]
+## Customer Token Generation [/v1/auth/token]
 
 ### Request new web token [POST]
 Request a new Json Web Token (JWT) either as a guest user or when logging in. Authorization header is optional, if it exists then it is considered as Guest User 
@@ -40,33 +40,13 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in. Au
                 }]
         }
 
-### Force JWT token expiration [DELETE]
-Logout forcing the user's JWT to expire and be revoked from usage. 
++ Response 400 (application/json) 
 
-+ Request
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 204
-
-## Token Generation [/v1/auth/reseller/token]        
-### Request new web token [POST]
-Request a new Json Web Token (JWT) for Reseller when logging in. 
-
-+ Request
-  
-  + Body 
-  
-            {"email": "reseller@example.com", "password": "secret1" }
-        
-+ Response 201 (application/json)
-
-        {
-                "data": {
-                        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", 
-                        "id": "u_4o3irjasofij" 
-                }
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Your account not activated"
+                }]
         }
 
 + Response 400 (application/json) 
@@ -74,12 +54,12 @@ Request a new Json Web Token (JWT) for Reseller when logging in.
         {  
                 "errors": [{  
                         "code": 400,
-                        "message": "Login failed"
+                        "message": "Invalid Reseller Key"
                 }]
         }
 
 ### Force JWT token expiration [DELETE]
-Logout forcing the user's JWT to expire and be revoked from usage. 
+Logout forcing the user's JWT to expire and be revoked from usage, Even Reseller would use the same call to logout
 
 + Request
     + Headers
@@ -111,8 +91,45 @@ Request a new web token which has a new expiry further into the future.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 401,
                         "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Token Missing"
+                }]
+        }
+
+## Token Generation [/v1/auth/reseller/token]        
+### Request new web token [POST]
+Request a new Json Web Token (JWT) for Reseller when logging in. 
+
++ Request
+  
+  + Body 
+  
+            {"email": "reseller@example.com", "password": "secret1" }
+        
++ Response 201 (application/json)
+
+        {
+                "data": {
+                        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", 
+                        "id": "u_4o3irjasofij" 
+                }
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Login failed"
                 }]
         }
 
