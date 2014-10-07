@@ -68,7 +68,7 @@ Logout forcing the user's JWT to expire and be revoked from usage, Even Reseller
 
 + Response 204
         
-## Token Refresh [/v1/auth/token/refresh]
+## Customer Token Refresh [/v1/auth/token/refresh]
 
 ### Update JWT session to avoid expiration [POST]
 Request a new web token which has a new expiry further into the future.
@@ -105,7 +105,7 @@ Request a new web token which has a new expiry further into the future.
                 }]
         }
 
-## Token Generation [/v1/auth/reseller/token]        
+## Reseller Token Generation [/v1/auth/reseller/token]        
 ### Request new web token [POST]
 Request a new Json Web Token (JWT) for Reseller when logging in. 
 
