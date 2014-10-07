@@ -133,6 +133,44 @@ Request a new Json Web Token (JWT) for Reseller when logging in.
                 }]
         }
 
+## Reseller Token Refresh [/v1/auth/token/reseller/refresh]
+
+### Update JWT session to avoid expiration [POST]
+Request a new Reseller web token which has a new expiry further into the future.
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 201 (application/json)
+
+        {  
+                "data": {
+                        "token": "abJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd44", 
+                        "id": "u_4o3irjasofij"
+                }
+        }
+        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 401,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Token Missing"
+                }]
+        }
+
+
 # Group Users
 
 ## Users [/v1/users]
