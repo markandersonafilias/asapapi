@@ -40,6 +40,16 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in. Au
                 }]
         }
 
+### Force JWT token expiration [DELETE]
+Logout forcing the user's JWT to expire and be revoked from usage. 
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 204
+
 ## Token Generation [/v1/auth/reseller/token]        
 ### Request new web token [POST]
 Request a new Json Web Token (JWT) for Reseller when logging in. 
