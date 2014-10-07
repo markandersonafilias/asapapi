@@ -10,7 +10,7 @@ General token authentication and handling.
 ## Token Generation [/v1/auth/token]
 
 ### Request new web token [POST]
-Request a new Json Web Token (JWT) either as a guest user or when logging in. 
+Request a new Json Web Token (JWT) either as a guest user or when logging in. Authorization header is optional, if it exists then it is considered as Guest User 
 
 + Request
 
@@ -39,7 +39,34 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in.
                         "message": "Login failed"
                 }]
         }
+
+## Token Generation [/v1/auth/reseller/token]        
+### Request new web token [POST]
+Request a new Json Web Token (JWT) for Reseller when logging in. 
+
++ Request
+  
+  + Body 
+  
+            {"email": "reseller@example.com", "password": "secret1" }
         
++ Response 201 (application/json)
+
+        {
+                "data": {
+                        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", 
+                        "id": "u_4o3irjasofij" 
+                }
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Login failed"
+                }]
+        }
 
 ### Force JWT token expiration [DELETE]
 Logout forcing the user's JWT to expire and be revoked from usage. 
