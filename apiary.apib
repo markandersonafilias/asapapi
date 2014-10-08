@@ -149,34 +149,7 @@ Creating a new user will map the guest user token currently in user to the new u
                 }]
         }
 
-## Users [/v1/users/guest]
 
-### Create a guest user [POST]
-
-Creating a new user will map the guest user token currently in user to the new user. 
-
-+ Request
-
-    + Body
-    
-            { "resellerId": "r_35gegsdfsr" }
-        
-+ Response 201 (application/json)
-
-        {  
-                "data": {
-                        "token": "ascabGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbajsdfhIZCrayNoVD47DEuFl1Qveqd2E", 
-                        "id": "u_4o3irjasofij"
-                }
-        }
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 400,
-                        "message": "Invalid Reseller key"
-                }]
-        }
         
 ## User Management [/v1/users/{id}]
 
