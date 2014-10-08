@@ -7,10 +7,10 @@ The ASAP Reseller API is a *platform* offering from Afilias. This document is a 
 # Group Token
 General token authentication and handling.
 
-## Customer Token Generation [/v1/auth/token]
+## Token Generation [/v1/auth/token]
 
 ### Request new web token [POST]
-Request a new Json Web Token (JWT) either as a guest user or when logging in. Authorization header is optional, if it exists then it is considered as Guest User 
+Request a new Json Web Token (JWT) either as a guest user or when logging in. 
 
 + Request
 
@@ -39,27 +39,10 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in. Au
                         "message": "Login failed"
                 }]
         }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 400,
-                        "message": "Your account not activated"
-                }]
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 400,
-                        "message": "Invalid Reseller Key"
-                }]
-        }
+        
 
 ### Force JWT token expiration [DELETE]
-Logout forcing the user's JWT to expire and be revoked from usage, Even Reseller would use the same call to logout
+Logout forcing the user's JWT to expire and be revoked from usage. 
 
 + Request
     + Headers
@@ -68,7 +51,7 @@ Logout forcing the user's JWT to expire and be revoked from usage, Even Reseller
 
 + Response 204
         
-## Customer Token Refresh [/v1/auth/token/refresh]
+## Token Refresh [/v1/auth/token/refresh]
 
 ### Update JWT session to avoid expiration [POST]
 Request a new web token which has a new expiry further into the future.
@@ -91,85 +74,10 @@ Request a new web token which has a new expiry further into the future.
 
         {  
                 "errors": [{  
-                        "code": 401,
+                        "code": 1234,
                         "message": "Token unknown or already expired"
                 }]
         }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 400,
-                        "message": "Token Missing"
-                }]
-        }
-
-## Reseller Token Generation [/v1/auth/reseller/token]        
-### Request new web token [POST]
-Request a new Json Web Token (JWT) for Reseller when logging in. 
-
-+ Request
-  
-  + Body 
-  
-            {"email": "reseller@example.com", "password": "secret1" }
-        
-+ Response 201 (application/json)
-
-        {
-                "data": {
-                        "token": "eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E", 
-                        "id": "u_4o3irjasofij" 
-                }
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 400,
-                        "message": "Login failed"
-                }]
-        }
-
-## Reseller Token Refresh [/v1/auth/token/reseller/refresh]
-
-### Update JWT session to avoid expiration [POST]
-Request a new Reseller web token which has a new expiry further into the future.
-
-+ Request
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 201 (application/json)
-
-        {  
-                "data": {
-                        "token": "abJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd44", 
-                        "id": "u_4o3irjasofij"
-                }
-        }
-        
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 401,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 400,
-                        "message": "Token Missing"
-                }]
-        }
-
 
 # Group Users
 
@@ -283,7 +191,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "data": {
-                        "id": "u_145f4h2b", "firstName": "Adam", "lastName", "Jones", "email": "ajones@yahoo.com", ... 
+                        "id": "u_145f4h2b", "firstName": "Adam", "lastName": "Jones", "email": "ajones@yahoo.com", "address": "1 Main Street", "city": "Cork", "state": "Munster", "zip": "123", "country": "Ireland", "phoneNumber": "23436345345"
                 }
         }
         
@@ -357,6 +265,8 @@ Creating a new user will map the guest user token currently in user to the new u
         {  
                 "data": [{
                         "id": "c_3efgd34t", "censoredCardNumber": "xxxx xxxx xxxx 3526"
+                }, {
+                        "id": "c_4b3asdft", "censoredCardNumber": "xxxx xxxx xxxx 7385"
                 }]
         }
 
@@ -366,6 +276,26 @@ Creating a new user will map the guest user token currently in user to the new u
                 "errors": [{  
                         "code": 1234,
                         "message": "User not found"
+                }]
+        }
+        
+## User Saved Cards [/v1/users/{id}/cards/{card_id}]
+
+### Delete user's saved card details [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 204
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Card not found"
                 }]
         }
 
@@ -1005,7 +935,7 @@ Manage reseller configured bundles
 
 # Group Cart
 
-## Manage Cart [/v1/cart/{customer_id}/items]
+## Manage Cart [/v1/users/{user_id}/cart/items]
 
 ### Add to user's cart [POST]
 Add a line item to the user's persistent cart.
@@ -1017,7 +947,7 @@ Add a line item to the user's persistent cart.
 
     + Body
 
-            { "id": "p_asdffegdf", "value": "domainname.shop", "quantity": 1 }
+            { "id": "p_asdffegdf", "value": "domainname.shop", "quantity": 1, "whoisPrivacy": true }
 
 + Response 200
 
@@ -1074,7 +1004,7 @@ Add a line item to the user's persistent cart.
                 }]
         }
 
-## Manage Cart Items [/v1/cart/{customer_id}/items/{item_id}]
+## Manage Cart Items [/v1/users/{user_id}/cart/items/{item_id}]
 
 ### Update item in user's cart [PUT]
 Update the quanity value of a cart line item. 
@@ -1145,7 +1075,7 @@ Update the quanity value of a cart line item.
                 }]
         }
         
-## Reserving Domains [/v1/cart/{customer_id}/items/{item_id}/reserve]
+## Reserving Domains [/v1/users/{user_id}/cart/items/{item_id}/reserve]
 
 ### Reserve a domain name [POST]
 Register and reserve a domain name on the user's behalf, requires user to be logged in (not a guest user).
@@ -1175,10 +1105,10 @@ Register and reserve a domain name on the user's behalf, requires user to be log
                 }]
         }
 
-## Order Summary [/v1/cart/{customer_id}/ordersummary]
+## Cart Checkout [/v1/users/{user_id}/cart/checkout]
 
-### Get summary of the Order [GET]
-Get List of all items in the shopping cart, applicable taxes, discounts and grand total
+### Submit order and get order id [POST]
+Begin ordering process, generate an order id and confirm cart line items. 
 
 + Request
     + Headers
@@ -1189,12 +1119,8 @@ Get List of all items in the shopping cart, applicable taxes, discounts and gran
 
         {  
                 "data": {
-                "items":[{"id": "i_45g3rsdfsdfsq", "packageId": "p_dfg34gwedaf", "value": "gomobi.mobi", "quantity": 5, "price": "49.99", "subTotal":"249.95"}, 
-                {"id": "i_asv5t3ggsdwfd", "packageId": "p_sf45grtbdfb", "value": "wholefoods.organic", "quantity": 1, "price": "9.99", "subTotal":"9.99"}],
-                "tax":[{"taxName":"VAT", "taxRate":"6.2", "amount":"16.12"}
-                ,{"taxName":"State Tax", "taxRate":"10", "amount":"25.99"}],
-                "discounts":[{code:"NY2015",value:"20", type:"Percentage"}],
-                "grandTotal":"302.05" }
+                        "orderId": "o_fvdfb3gervsf2es" 
+                }
         }
         
 + Response 401 (application/json) 
@@ -1215,8 +1141,7 @@ Get List of all items in the shopping cart, applicable taxes, discounts and gran
                 }]
         }
 
-
-## Cart Complete [/v1/cart/{customer_id}/complete]
+## Cart Complete [/v1/users/{user_id}/cart/complete]
 
 ### Send payment details and finalize purchase [POST]
 Transmit encrypted card details generated with Bluesnap front-end library and user billing data to complete order process.
@@ -1267,7 +1192,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
-## Manage Cart [/v1/cart/{customer_id}/applycoupon/{couponCode}]
+## Manage Cart [/v1/users/{userId}/cart/applycoupon/{couponCode}]
 
 + Request
     + Headers
@@ -1295,9 +1220,9 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
-# Group Packages
+# Group Package
 
-## List Active Package Groups of the Reseller [/v1/packagegroups]
+## List Active Package Groups of the Reseller [/v1/packagegroup/active]
 
 ### Returns All active Package groups to the Reseller [GET]
 
@@ -1325,7 +1250,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
                 }]
         }
 
-## Package Groups [/v1/packagegroups/reseller]
+## Package Groups [/v1/packagegroup/]
 
 ### Returns All Package group available to the Reseller [GET]
 
@@ -1334,10 +1259,6 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
     
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
 
-    + Body
-    
-            {"status":"Active/Inactive"}
-            
 + Response 200
 
         {  
@@ -1367,8 +1288,10 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
     + Body
 
-            { id:"u_kaldk", "status:"active", "groupName":"Reseller Package Group Name", "html":"<HTML>....</HTML>" }
+            { id:"u_kaldk", "status:"active", html:"<HTML>....</HTML>" }
             
+
+        
 + Response 200
 
 + Response 204
@@ -1383,7 +1306,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
         }
 
 
-## Retrieve Package Group [/v1/packagegroups/reseller/{id}]
+## Retrieve Package Group [/v1/packagegroup/{packageGroupId}]
 ### Retrieve Package Group [GET]
 
 + Request
@@ -1425,7 +1348,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
     + Body
 
-            { groupName:"Reseller Package Group Name1", "status:"active", html:"<HTML>....</HTML>" }
+            { id:"u_kaldk", "status:"active", html:"<HTML>....</HTML>" }
 
 + Response 200
 
@@ -1441,10 +1364,9 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
         }
 
 
-## Packages [/v1/packages/]
+## Packages [/v1/package/]
 
 ### Returns All Packages available to the Reseller [GET]
-Hidden - If hidden is true for a package then the package can't be sold on its own.
 
 + Request
     + Headers
@@ -1455,11 +1377,8 @@ Hidden - If hidden is true for a package then the package can't be sold on its o
 
         {  
                 "data": [
-                    { "id":"u_jsdf", packageName:"Package Name 1", groupId:"jakjs", "description":"description", "hidden":"false",
-                    "basePackages":[{"packageId":"abc"},{"packageId":"xyz"}]},
-                    { "id":"u_njsdf", packageName:"Package Name 2 ", description:"description", "hidden":"true"
-                    "basePackages":[{"packageId":"abc"},{"packageId":"xyz"}]}
-                    ]
+                    { "id":"u_jsdf", packageName:"Package Name 1", groupId:"jakjs", description:"description"},
+                    { "id":"u_njsdf", packageName:"Package Name 2 ", description:"description"}]
         }
 
 + Response 204
@@ -1473,9 +1392,9 @@ Hidden - If hidden is true for a package then the package can't be sold on its o
                 }]
         }
 
-## Retrieve Reseller Package [/v1/packages/reseller/{id}]
+## Retrieve Package [/v1/package/{packageId}]
 
-### Retrieve Reseller Package by Package Id [GET]
+### Retrieve Package by Package Id [GET]
 
 + Request
     + Headers
@@ -1485,8 +1404,7 @@ Hidden - If hidden is true for a package then the package can't be sold on its o
 + Response 200
 
         {  
-            "data": {packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30",
-            "applyTax":"true", "hidden":"false", "status":"active"}
+            "data": {"id":"u_jsdf", packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30"}
         }
 
 + Response 400 (application/json) 
@@ -1517,8 +1435,7 @@ Hidden - If hidden is true for a package then the package can't be sold on its o
 
     + Body
 
-            {packageName:"Reseller Package Name1", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30", 
-            "applyTax":"true", "hidden":"false", "status":"active"}
+            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
 
 + Response 200
 
@@ -1532,8 +1449,6 @@ Hidden - If hidden is true for a package then the package can't be sold on its o
                         "message": "Token unknown or already expired"
                 }]
         }
-
-## Retrieve Reseller Package [/v1/packages/reseller/]
 
 ###  Reseller Updates the Package [POST]
 
@@ -1545,8 +1460,7 @@ Hidden - If hidden is true for a package then the package can't be sold on its o
 
     + Body
 
-            { packageId:"u_kaldk", packageName:"Package Name1 ", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30",
-            "applyTax":"true", "hidden":"false", "status":"active"}
+            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
 
 + Response 200
 
@@ -1561,7 +1475,7 @@ Hidden - If hidden is true for a package then the package can't be sold on its o
                 }]
         }
 
-## Retrieve Reseller Active Packages  [/v1/package/reseller]
+## Retrieve Reseller Active Packages  [/v1/package/active]
 
 ### Retrieve Reseller Active Packages [GET]
 Filters by Package Group Id (optional)
@@ -1573,7 +1487,7 @@ Filters by Package Group Id (optional)
 
     + Body
     
-                {"id":"p_kjasdj", "status":"active/Inactive"}
+                {"id":"p_kjasdj"}
 
 + Response 200
 
@@ -1901,7 +1815,7 @@ Update quantity value of a wishlist line item.
                 }]
         }
 
-## Coupon Details [/v1/coupon/{couponCode}]
+## List user's orders [/v1/coupon/{couponCode}]
 
 ### Retrieve the coupon [GET]
 
@@ -1936,7 +1850,7 @@ Update quantity value of a wishlist line item.
 
 # Group Orders
 
-## List user's orders [/v1/orders/user/{user_id}]
+## List user's orders [/v1/users/{user_id}/orders]
 
 ### Retrieve all user orders [GET]
 
@@ -1975,7 +1889,7 @@ Update quantity value of a wishlist line item.
 
 + Response 204 (application/json) 
         
-## Retrieve specific order [/v1/orders/{order_id}/user/{user_id}]
+## Retrieve specific order [/v1/users/{user_id}/orders/{order_id}]
 
 ### Retrieve a specific user order [GET]
 
@@ -2060,10 +1974,9 @@ Type is live|claim
         }
 
 
-## Check Availability [/v1/domains/{domain}/available/{type}]
+## Check Availability [/v1/domains/{domain}/available]
 
 ### Check availability of specific domain [GET]
-Type is live|claim
 
 + Response 200 (application/json)
 
@@ -2165,7 +2078,7 @@ List includes supported TLD's and respective Category.
 
         {  
                 "data": {
-                    "tlds" : [{id:"4o3irjasofij", name:"info", catId:"1o3irjasofij", catName:"Business",order:10}, {id:"3o3irjasofij", name:"club",order:12}, {id:63o3irjasofij", name:"org", catId:"2o3irjasofij", catName:"Entertainment",order:15},...]
+                    "tlds" : [{id:"4o3irjasofij", name:"info", catId:"1o3irjasofij", catName:"Business"}, {id:"3o3irjasofij", name:"club"}, {id:63o3irjasofij", name:"org", catId:"2o3irjasofij", catName:"Entertainment"},...]
                 }
         }
         
@@ -2263,57 +2176,6 @@ Returns claim id and the claim Dates.
         }
 
 
-## Register Domain [/v1/domains/register]
-
-### Register domain using the supplied data [POST]
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            {
-                "Domain": "abc.info",
-                "years": 1,
-                "contacts": {
-                            "firstName": "abc",
-                            "lastName": "xyz",
-                            "company": "ABC",
-                            "address1": "abcd",
-                            "address2": "abcd",
-                            "city": "abc",
-                            "state": "abc",
-                            "zipCode": "123123",
-                            "country": "US",
-                            "phone": "+1.5059131115",
-                            "fax": "123123",
-                            "email": "test@test.com",
-                            "extension": "234"
-                            }
-            }
-            
-
-+ Response 200
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-        
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Invalid details"
-                }]
-        }
-        
 
 ## List User Domains [/v1/users/{user_id}/domains]
 
@@ -2329,10 +2191,56 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "data": {
-                    "active_domains" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ],
-                    "transfers" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ],
-                    "reservations" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ],
-                    "preorders" : [ "myshop.info", "myshophome.info", "myshopweb.organic" ]
+                    "active" : [{
+                            "domain": "myshop.info",
+                            "subscriptionLength": "1 Month",
+                            "purchaseDate": "10/02/2010",
+                            "locked": false,
+                            "autoRenew": true
+                        },
+                        {
+                            "domain": "myshop.com",
+                            "subscriptionLength": "1 Month",
+                            "purchaseDate": "10/02/2010",
+                            "locked": true,
+                            "autoRenew": false
+                    }],
+                    "transfers" : [{
+                            "domain": "myshop.info",
+                            "subscriptionLength": "1 Month",
+                            "purchaseDate": "10/02/2010",
+                            "status": "In Progress"
+                        },
+                        {
+                            "domain": "myshop.com",
+                            "subscriptionLength": "1 Month",
+                            "purchaseDate": "10/02/2010",
+                            "status": "Authorize transfer"
+                    }],
+                    "reservations" : [{
+                            "domain": "myshop.info",
+                            "reservationDate": "10/02/2010",
+                            "timeToBuy": 3,
+                            "auto_renew": true
+                        },
+                        {
+                            "domain": "myshop.com",
+                            "reservationDate": "11/02/2010",
+                            "timeToBuy": 5,
+                            "auto_renew": true
+                    }],
+                    "preorders" : [{
+                            "domain": "myshop.info",
+                            "purchaseDate": "10/02/2010",
+                            "expiry": "10/02/2011",
+                            "status": "Pending"
+                        },
+                        {
+                            "domain": "myshop.info",
+                            "purchaseDate": "10/02/2010",
+                            "expiry": "10/02/2011",
+                            "status": "Pending"
+                    }]
                 }
         }
         
@@ -2353,7 +2261,62 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                         "subscription_length": "1 Month",
                         "purchase_date": "10/02/2010",
                         "locked": true,
-                        "auto_renew": true
+                        "auto_renew": true,
+                        "nameservers": ["ns1.myseller.info", "ns2.myreseller.info"],
+                        "transferCode":"+VL3;4-poo9{dYd1",
+                        "DNS": [{
+                            "type": "MX",
+                            "content": "mx1.myshop.info",
+                            "ttl": 300,
+                            "priority": 10
+                        },{
+                            "type": "MX",
+                            "content": "mx1.myshop.com",
+                            "ttl": 300,
+                            "priority": 10
+                        },{
+                            "type": "MX",
+                            "content": "mx1.myshop.ie",
+                            "ttl": 300,
+                            "priority": 10
+                        }],
+                        "forwarding": [{
+                            "id": "ru_asdfer345345",
+                            "pointing": "http://www.myothershop.info",
+                            "type": "MASKED",
+                            "pageTitle": "Forwarding Page"
+                        },{
+                            "id": "ru_asdfer345344",
+                            "pointing": "http://www.myothershop.info",
+                            "type": "MASKED",
+                            "pageTitle": "Forwarding Page"
+                        },{
+                            "id": "ru_asdfer345343",
+                            "pointing": "http://www.myothershop.info",
+                            "type": "MASKED",
+                            "pageTitle": "Forwarding Page"
+                        }],
+                        "contacts": [{
+                            "name":"Rinu Madathil",
+                            "email":"rinu.mv@glowtouch.com",
+                            "address":"Maryhill, Mangalore - 575 015, Karnataka",
+                            "phoneNumber":"+91-824-2485306/7/8",
+                            "country":" India",
+                            "registrantContact": true,
+                            "administrativeContact": true,
+                            "technicalContact": true,
+                            "billingContact": true
+                        },{
+                            "name":"Rinu Madathil",
+                            "email":"rinu.mv@glowtouch.com",
+                            "address":"Maryhill, Mangalore - 575 015, Karnataka",
+                            "phoneNumber":"+91-824-2485306/7/8",
+                            "country":" India",
+                            "registrantContact": false,
+                            "administrativeContact": false,
+                            "technicalContact": false,
+                            "billingContact": false
+                        }]
                 }
         }
         
@@ -2934,7 +2897,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                 }]
         }
         
-## Delete Domain [/v1/domains/{domain}/delete]
+## Delete Domain [/v1/domains/{domain}]
 
 ### Delete domain contact [DELETE]
 
@@ -3386,152 +3349,5 @@ Execute a whois lookup on the queried domain and return result.
                 "errors": [{  
                         "code": 1234,
                         "message": "Domain not found"
-                }]
-        }
-
-# Group Tax
-
-## Tax Rules Lookup [/v1/tax-lookup/{country}/{state}]
-
-### Get Tax Rules Based On Country and State [GET]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-+ Response 200
-            
-            {  
-
-            "data":[{
-                          "country":"IRELAND", "state":"Leinster", "taxName":"VAT", "taxRate":"23"}
-                }]
-                
-            }
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-        
-## Reseller Tax Rates [/v1/tax-rate/]
-
-### Get Reseller Tax Rates [GET]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-        
-            {
-                {"country":"IRELAND", "state":"Leinster"}
-            }
-    
-+ Response 200
-            
-            {  
-
-            "data":[{
-                          "id":"t_alkd","country":"IRELAND", "state":"Leinster", "taxName":"VAT", "taxRate":"23"}
-                }]
-                
-            }
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-### Create Reseller Tax Rates [POST]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-        
-            {
-            
-                "country":"IRELAND", "state":"Leinster", "taxName":"VAT", "taxRate":"23"}
-            
-            }
-    
-+ Response 200
-            
-            {  
-
-            "data":{
-                          "id":"t_alkdwe"
-                }
-                
-            }
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-### Update Reseller Tax Rates [PUT]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-        
-            { "id":"t_talksdw" }
-    
-+ Response 200
-
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-
-### Delete Reseller Tax Rates [DELETE]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-        
-            {
-            
-                "id":"t_talksdw", "country":"IRELAND", "state":"Leinster", "taxName":"VAT", "taxRate":"23"}
-            
-            }
-    
-+ Response 200
-            
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
                 }]
         }
