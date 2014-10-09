@@ -2226,18 +2226,26 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                                 "expiredDate": "10/02/2010"
                             }]
                     },
-                    "preorders" : [{
-                            "domain": "myshop.info",
-                            "purchaseDate": "10/02/2010",
-                            "expiry": "10/02/2011",
-                            "status": "Pending"
-                        },
-                        {
-                            "domain": "myshop.info",
-                            "purchaseDate": "10/02/2010",
-                            "expiry": "10/02/2011",
-                            "status": "Pending"
-                    }]
+                    "preorders" : {
+                        "pending":[{
+                                "domain": "myshop.info",
+                                "purchasedDate": "10/02/2010"
+                            },
+                            {
+                                "domain": "myshop.info",
+                                "purchasedDate": "10/02/2010"
+                            }],
+                        "expired": [{
+                                "domain": "myshop.info",
+                                "purchasedDate": "10/02/2010",
+                                "completedDate": "10/02/2010"
+                            },
+                            {
+                                "domain": "myshop.info",
+                                "purchasedDate": "10/02/2010",
+                                "completedDate": "10/02/2010"
+                            }]
+                    }
                 }
         }
         
