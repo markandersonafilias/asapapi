@@ -1377,7 +1377,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 + Response 200
 
         {  
-            "data": {"id":"u_jsdf", packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30"}
+            "data": {"id":"u_jsdf", packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30.00"}
         }
 
 + Response 400 (application/json) 
@@ -1408,7 +1408,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
     + Body
 
-            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
+            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30.00"}
 
 + Response 200
 
@@ -1433,7 +1433,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
     + Body
 
-            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30"}
+            { packageId:"u_kaldk", "status:"active", description:"lksajfalksd", resellerPrice:"29.32", customerPrice:"30.00"}
 
 + Response 200
 
@@ -1465,8 +1465,8 @@ Filters by Package Group Id (optional)
 + Response 200
 
         {  
-            "data": [ {"id":"u_js23df", packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30"},
-             {"id":"u_jsdf", packageName:"Package Name2 ", groupId:"32jakjs", description:"description1", status:"active", resellerPrice:"29.32", customerPrice:"30"}
+            "data": [ {"id":"u_js23df", packageName:"Package Name1 ", groupId:"jakjs", description:"description", status:"active", resellerPrice:"29.32", customerPrice:"30.00"},
+             {"id":"u_jsdf", packageName:"Package Name2 ", groupId:"32jakjs", description:"description1", status:"active", resellerPrice:"29.32", customerPrice:"30.00"}
              ...]
         }
 
@@ -1514,8 +1514,8 @@ Filters by Package Group Id (optional)
 
         {  
                 "data": [
-                    { "id":"u_jsdf", name:"Package Name", description:"Package Description", price:2832 },
-                    { "id":"u_jsdf", name:"Package Name", description:"Package Description", price:2832 }, ...]
+                    { "id":"u_jsdf", name:"Package Name", description:"Package Description", price:28.32 },
+                    { "id":"u_jsdf", name:"Package Name", description:"Package Description", price:28.32 }, ...]
         }
 + Response 401 (application/json) 
 
@@ -1836,9 +1836,9 @@ Update quantity value of a wishlist line item.
 
         {  
                 "data": [{
-                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", "description":"product name", "quantity":5, "price":"5.2", "discount":"20" 
+                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33", "description":"product name", "quantity":5, "price":"5.20", "discount":"20" 
                 }, {
-                        "id": "o_asv5t3ggsdwfd", "created": "2014-02-27 10:30:18",  "description":"product name", "quantity":5, "price":"5.2", "discount":"20" 
+                        "id": "o_asv5t3ggsdwfd", "created": "2014-02-27 10:30:18",  "description":"product name", "quantity":5, "price":"5.20", "discount":"20" 
                 }]
         }
         
@@ -1875,7 +1875,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "data": {
-                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33",  "description":"product name", "quantity":5, "price":"5.2", "discount":"20" 
+                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33",  "description":"product name", "quantity":5, "price":"5.20", "discount":"20" 
                 }
         }
         
