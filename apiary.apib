@@ -2202,18 +2202,33 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                                 "completedDate": "12/03/2010"
                         }]
                     },
-                    "reservations" : [{
-                            "domain": "myshop.info",
-                            "reservationDate": "10/02/2010",
-                            "timeToBuy": 3,
-                            "auto_renew": true
-                        },
-                        {
-                            "domain": "myshop.com",
-                            "reservationDate": "11/02/2010",
-                            "timeToBuy": 5,
-                            "auto_renew": true
-                    }],
+                    "reservations" : {
+                        "pending":[{
+                                "domain": "myshop.info",
+                                "reservationDate": "10/02/2010",
+                                "timeToBuy": 3,
+                                "auto_renew": true
+                            },
+                            {
+                                "domain": "myshop.com",
+                                "reservationDate": "11/02/2010",
+                                "timeToBuy": 5,
+                                "auto_renew": true
+                            }],
+                        "expired": [{
+                                "domain": "myshop.info",
+                                "reservationDate": "10/02/2010",
+                                "expiredDate": "10/02/2010"
+                            },
+                            {
+                                "domain": "myshop.com",
+                                "reservationDate": "11/02/2010",
+                                "expiredDate": "10/02/2010"
+                            }],
+                    },
+                    
+                    
+                    ,
                     "preorders" : [{
                             "domain": "myshop.info",
                             "purchaseDate": "10/02/2010",
