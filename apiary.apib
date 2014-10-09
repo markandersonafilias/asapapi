@@ -2178,18 +2178,30 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                             "locked": true,
                             "autoRenew": false
                     }],
-                    "transfers" : [{
-                            "domain": "myshop.info",
-                            "subscriptionLength": "1 Month",
-                            "purchaseDate": "10/02/2010",
-                            "status": "In Progress"
-                        },
-                        {
-                            "domain": "myshop.com",
-                            "subscriptionLength": "1 Month",
-                            "purchaseDate": "10/02/2010",
-                            "status": "Authorize transfer"
-                    }],
+                    "transfers" : {
+                        "pending": [{
+                                "domain": "myshop.info",
+                                "subscriptionLength": "1 Month",
+                                "purchaseDate": "10/02/2010",
+                                "status": "In Progress"
+                            },
+                            {
+                                "domain": "myshop.com",
+                                "subscriptionLength": "1 Month",
+                                "purchaseDate": "10/02/2010",
+                                "status": "Authorize transfer"
+                        }],
+                        "completed": [{
+                                "domain": "myshop.ie",
+                                "purchaseDate": "10/02/2010",
+                                "completedDate": "12/03/2010"
+                            },
+                            {
+                                "domain": "myshop.org",
+                                "purchaseDate": "10/02/2010",
+                                "completedDate": "12/03/2010"
+                        }]
+                    },
                     "reservations" : [{
                             "domain": "myshop.info",
                             "reservationDate": "10/02/2010",
