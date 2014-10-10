@@ -2607,6 +2607,33 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                         "message": "Domain not found"
                 }]
         }
+        
+### Delete a pending domain transfer request [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain transfer request not found"
+                }]
+        }
  
 ## Reserve a domain [/v1/domains/{domain}/reserve]
 
@@ -2636,6 +2663,33 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                         "message": "Domain not found"
                 }]
         }
+        
+### Remove a pending domain reservation [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain reservation not found"
+                }]
+        }
  
 ## Preorder a domain [/v1/domains/{domain}/preorder]
 
@@ -2663,6 +2717,33 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                 "errors": [{  
                         "code": 400,
                         "message": "Domain not found"
+                }]
+        }
+        
+### Remove a pending domain preorder [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 400 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 400,
+                        "message": "Domain Pre-order not found"
                 }]
         }
  
