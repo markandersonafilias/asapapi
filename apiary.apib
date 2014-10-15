@@ -1673,7 +1673,13 @@ Update quantity value of a wishlist line item.
     
             {code:"NY2015", description:"Description" value:"20", type:"Percentage/Fixed Amount", packageId:"Ukclksadnf", expiry:"20/9/2015:20:00", singleUse:true}
 
-+ Response 201 (application/json)
++ Response 201 (application/json) 
+
+        {  
+                "data": [{  
+                        "id": "12345"
+                }]
+        }
     
 + Response 400 (application/json) 
 
@@ -3039,7 +3045,13 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                 "pageTitle": "Forwarding Page"
             }
 
-+ Response 200
++ Response 201 (application/json) 
+
+        {  
+                "data": [{  
+                        "id": "12345"
+                }]
+        }
 
 + Response 401 (application/json) 
 
@@ -3183,8 +3195,14 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                 "ttl": 300,
                 "priority": 10
             ]}
+            
++ Response 201 (application/json) 
 
-+ Response 200
+        {  
+                "data": [{  
+                        "id": "r_th4y4dgfehth"
+                }]
+        }
 
 + Response 401 (application/json) 
 
@@ -3424,7 +3442,13 @@ Execute a whois lookup on the queried domain and return result.
                 "fax1Number": ""
             }
 
-+ Response 200
++ Response 201 (application/json) 
+
+        {  
+                "data": [{  
+                        "id": "c_th4y4dgfehth"
+                }]
+        }
 
 + Response 401 (application/json) 
 
