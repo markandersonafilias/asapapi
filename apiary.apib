@@ -2275,8 +2275,22 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                         "purchase_date": "10/02/2010",
                         "locked": true,
                         "auto_renew": true,
-                        "nameservers": ["ns1.idomains.com", "ns2.idomains.com"],
-                        "nameservers_default": ["ns1.idomains.com", "ns2.idomains.com"],
+                        "nameservers": [
+                            {
+                                "nameserver": "ns1.idomains.com"
+                            },
+                            {
+                                "nameserver": "ns2.idomains.com"
+                            }
+                        ],
+                        "nameservers_default": [
+                            {
+                                "nameserver": "ns1.idomains.com"
+                            },
+                            {
+                                "nameserver": "ns2.idomains.com"
+                            }
+                        ],
                         "transferCode":"+VL3;4-poo9{dYd1",
                         "DNS": [{
                             "id": "d_fg3qg4535y",
