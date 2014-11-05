@@ -908,6 +908,40 @@ Manage reseller configured bundles
 
 # Group Cart
 
+## Manage Cart Coupons [/v1/users/{user_id}/cart/coupon]
+
+### Add coupon code to user's cart [POST]
+Add a coupon code to the user's persistent cart.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            { "coupon": "n4wnjgw9" }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Coupon unknown or not applicable"
+                }]
+        }
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "User not found"
+                }]
+        }
+
 ## Manage Cart [/v1/users/{user_id}/cart/items]
 
 ### Add to user's cart [POST]
@@ -969,40 +1003,6 @@ Add a line item to the user's persistent cart.
         }
 
 + Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "User not found"
-                }]
-        }
-
-## Manage Cart Coupons [/v1/users/{user_id}/cart/coupon]
-
-### Add coupon code to user's cart [POST]
-Add a coupon code to the user's persistent cart.
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            { "coupon": "n4wnjgw9" }
-
-+ Response 200
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Coupon unknown or not applicable"
-                }]
-        }
-
-+ Response 404 (application/json) 
 
         {  
                 "errors": [{  
@@ -2309,8 +2309,22 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                         "purchase_date": "10/02/2010",
                         "locked": true,
                         "auto_renew": true,
-                        "nameservers": ["ns1.myseller.info", "ns2.myreseller.info"],
-                        "nameservers_default": ["ns1.myseller.info", "ns2.myreseller.info"],
+                        "nameservers": [
+                            {
+                                "nameserver": "ns1.idomains.com"
+                            },
+                            {
+                                "nameserver": "ns2.idomains.com"
+                            }
+                        ],
+                        "nameservers_default": [
+                            {
+                                "nameserver": "ns1.idomains.com"
+                            },
+                            {
+                                "nameserver": "ns2.idomains.com"
+                            }
+                        ],
                         "transferCode":"+VL3;4-poo9{dYd1",
                         "DNS": [{
                             "id": "d_fg3qg4535y",
@@ -2397,6 +2411,15 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                             "contactAdministrative": false,
                             "contactTechnical": false,
                             "contactBilling": false
+                        }],
+                        "domainHosts": [{
+                            "id": 1,
+                            "nameserver": "http://www.myothershop.info",
+                            "ip": "192.168.1.112"
+                        },{
+                            "id": 2,
+                            "nameserver": "http://www.myothershop.info",
+                            "ip": "192.168.1.111"
                         }]
                 }
         }
@@ -2991,41 +3014,6 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                 }]
         }
 
-## Domain Nameservers [/v1/domains/{domain}/nameservers]
-
-### Update domain nameserver records [PUT]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
-
-    + Body
-
-            {
-                "nameservers": ["ns1.myseller.info", "ns2.myreseller.info", ...]
-            }
-            
-+ Response 200
-
-+ Response 401 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Token unknown or already expired"
-                }]
-        }
-        
-+ Response 400 (application/json) 
-
-        {  
-                "errors": [{  
-                        "code": 1234,
-                        "message": "Domain not found"
-                }]
-        }
-
 ## Domain Contacts Management [/v1/domains/{domain}/contacts/{id}]
 
 ### Update domain contact [PUT]
@@ -3240,6 +3228,306 @@ List includes active domains, reserved domains, transfer requests and pre-order 
                 }]
         }
 
+# Group Domain Nameservers
+
+## List [/v1/domains/{domain}/nameservers]
+
+### Create nameserver record [POST]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {[
+                "nameserver": "ns1.idomains.com"
+            ]}
+            
++ Response 201 (application/json) 
+
+        {  
+                "data": [{  
+                        "id": "ns_th4y4dgfehth"
+                }]
+        }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+        
+### Retrieve list of domain Nameservers [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        {  
+                "data": {
+                        "hosts": [
+                                {
+                                    "nameserver": "ns1.idomains.com"
+                                },
+                                {
+                                    "nameserver": "ns2.idomains.com"
+                                }
+                        ]
+                }
+        }
+        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+        
+## Manage Domain Nameservers [/v1/domains/{domain}/nameservers/{id}]
+
+### Update Domain Nameserver [PUT]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "nameserver": "ns3.idomains.com"
+            }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+
+### Delete Domain Nameserver [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+        
+# Group Domain Hosts
+
+## List [/v1/domains/{domain}/hosts]
+
+### Create Domain Host Record [POST]
+
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {[
+                "nameserver": "idomains.com",
+                "ip": "127.0.0.1"
+            ]}
+            
++ Response 201 (application/json) 
+
+        {  
+                "data": [{  
+                        "id": "dh_th4y4dgfehth"
+                }]
+        }
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+        
+### Retrieve list of domain Hosts [GET]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200 (application/json)
+
+        {  
+                "data": {
+                        "hosts": [
+                                {
+                                    "id": 1,
+                                    "nameserver": "idomains.com",
+                                    "ip": "127.0.0.1"
+                                },
+                                {
+                                    "id": 2,
+                                    "nameserver": "internet.com",
+                                    "ip": "127.0.0.2"
+                                }
+                        ]
+                }
+        }
+        
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+        
+## Manage Domain Hosts [/v1/domains/{domain}/hosts/{id}]
+
+### Update Domain Host [PUT]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
+    + Body
+
+            {
+                "type": "MX",
+                "content": "mx1.myshop.info",
+                "ttl": 300,
+                "priority": 10
+            }
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+
+### Delete Domain Host [DELETE]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp.zpsEabFfYMGkbIZCrayNoVD47DEuFl1Qveqd2E
+
++ Response 200
+
++ Response 401 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Token unknown or already expired"
+                }]
+        }
+        
++ Response 404 (application/json) 
+
+        {  
+                "errors": [{  
+                        "code": 1234,
+                        "message": "Domain not found"
+                }]
+        }
+
+        
 # Group DNS
 
 ## List [/v1/domains/{domain}/dns]
