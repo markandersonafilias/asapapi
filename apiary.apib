@@ -35,7 +35,7 @@ Request a new Json Web Token (JWT) either as a guest user or when logging in.
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 101,
                         "message": "Login failed"
                 }]
         }
@@ -74,7 +74,7 @@ Request a new web token which has a new expiry further into the future.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -110,7 +110,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 103,
                         "message": "Email address already in use"
                 }]
         }
@@ -118,7 +118,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -144,7 +144,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -172,7 +172,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -181,7 +181,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -208,7 +208,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -219,7 +219,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -247,7 +247,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -267,7 +267,7 @@ Creating a new user will map the guest user token currently in user to the new u
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 105,
                         "message": "Card not found"
                 }]
         }
@@ -297,8 +297,8 @@ Password handling and reset.
 
         {
                 "errors": [{  
-                        "code": 400,
-                        "message": "Invalid Credential"
+                        "code": 106,
+                        "message": "Invalid Credentials"
                 }]
         }
         
@@ -306,7 +306,7 @@ Password handling and reset.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -327,7 +327,7 @@ Password handling and reset.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -349,7 +349,7 @@ Password handling and reset.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 107,
                         "message": "Invalid Verification key"
                 }]
         }
@@ -375,7 +375,7 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 107,
                         "message": "Invalid Verification key"
                 }]
         }
@@ -384,7 +384,7 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 108,
                         "message": "Account already active"
                 }]
         }
@@ -392,7 +392,7 @@ Verificaion key is sent to new users as part of a web link. Ths key is sent to t
 
         {
                 "errors": [{  
-                        "code": 400,
+                        "code": 106,
                         "message": "Invalid Credential"
                 }]
         }
@@ -414,7 +414,7 @@ Generate a new email verification key and send an email containing it.
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 109,
                         "message": "Invalid Email"
                 }]
         }
@@ -447,7 +447,7 @@ Reseller related resources of the **ASAP API**
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -473,7 +473,7 @@ Reseller related resources of the **ASAP API**
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -499,7 +499,7 @@ Reseller related resources of the **ASAP API**
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -508,7 +508,7 @@ Reseller related resources of the **ASAP API**
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 110,
                         "message": "Reseller not found"
                 }]
         }
@@ -530,7 +530,7 @@ Reseller related resources of the **ASAP API**
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -539,7 +539,7 @@ Reseller related resources of the **ASAP API**
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 110,
                         "message": "Reseller not found"
                 }]
         }
@@ -567,7 +567,7 @@ Reseller related resources of the **ASAP API**
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -608,7 +608,7 @@ Retrieve global product list.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -634,7 +634,7 @@ Retrieve global product list.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -643,7 +643,7 @@ Retrieve global product list.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 111,
                         "message": "Product not found"
                 }]
         }
@@ -665,7 +665,7 @@ Retrieve global product list.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -674,7 +674,7 @@ Retrieve global product list.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 111,
                         "message": "Product not found"
                 }]
         }
@@ -713,7 +713,7 @@ Manage reseller configured products
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -737,7 +737,7 @@ Manage reseller configured products
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -746,7 +746,7 @@ Manage reseller configured products
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 111,
                         "message": "Product not found"
                 }]
         }
@@ -776,7 +776,7 @@ Manage reseller configured products
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -804,7 +804,7 @@ Manage reseller configured products
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -828,7 +828,7 @@ Manage reseller configured products
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -837,7 +837,7 @@ Manage reseller configured products
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 112,
                         "message": "Bundle not found"
                 }]
         }
@@ -868,7 +868,7 @@ Manage reseller configured bundles
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -892,7 +892,7 @@ Manage reseller configured bundles
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -901,7 +901,7 @@ Manage reseller configured bundles
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 112,
                         "message": "Bundle not found"
                 }]
         }
@@ -928,7 +928,7 @@ Add a coupon code to the user's persistent cart.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 113,
                         "message": "Coupon unknown or not applicable"
                 }]
         }
@@ -937,7 +937,7 @@ Add a coupon code to the user's persistent cart.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -962,7 +962,7 @@ Add a line item to the user's persistent cart.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -971,7 +971,7 @@ Add a line item to the user's persistent cart.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -997,7 +997,7 @@ Add a line item to the user's persistent cart.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1006,7 +1006,7 @@ Add a line item to the user's persistent cart.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1031,7 +1031,7 @@ Update the quanity value of a cart line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1040,7 +1040,7 @@ Update the quanity value of a cart line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1049,7 +1049,7 @@ Update the quanity value of a cart line item.
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 114,
                         "message": "Item Not Found"
                 }]
         }
@@ -1068,7 +1068,7 @@ Update the quanity value of a cart line item.
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 114,
                         "message": "Item Not Found"
                 }]
         }
@@ -1077,7 +1077,7 @@ Update the quanity value of a cart line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1098,7 +1098,7 @@ Register and reserve a domain name on the user's behalf, requires user to be log
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1107,7 +1107,7 @@ Register and reserve a domain name on the user's behalf, requires user to be log
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1134,7 +1134,7 @@ Begin ordering process, generate an order id and confirm cart line items.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1143,7 +1143,7 @@ Begin ordering process, generate an order id and confirm cart line items.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1185,7 +1185,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1194,7 +1194,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1213,7 +1213,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1222,7 +1222,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 115,
                         "message": "Invalid Coupon"
                 }]
         }
@@ -1252,7 +1252,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1280,7 +1280,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1307,7 +1307,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1331,7 +1331,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 116,
                         "message": "Bad Request"
                 }]
         }
@@ -1340,7 +1340,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1365,7 +1365,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1394,7 +1394,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1418,7 +1418,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 116,
                         "message": "Bad Request"
                 }]
         }
@@ -1427,7 +1427,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1452,7 +1452,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1477,7 +1477,7 @@ Transmit encrypted card details generated with Bluesnap front-end library and us
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1510,13 +1510,15 @@ Filters by Package Group Id (optional)
 
         {  
                 "errors": [{  
-                        "code": 1234,+ Response 200
+                        "code": 1234
+                }]
+        }
 
 + Response 401 (application/json) 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1525,7 +1527,7 @@ Filters by Package Group Id (optional)
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -1555,7 +1557,7 @@ Filters by Package Group Id (optional)
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1564,7 +1566,7 @@ Filters by Package Group Id (optional)
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 118,
                         "message": "Package not found"
                 }]
         }
@@ -1590,7 +1592,7 @@ Filters by Package Group Id (optional)
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1599,7 +1601,7 @@ Filters by Package Group Id (optional)
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1625,7 +1627,7 @@ Filters by Package Group Id (optional)
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1634,7 +1636,7 @@ Filters by Package Group Id (optional)
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1659,7 +1661,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1668,7 +1670,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1686,7 +1688,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1719,8 +1721,8 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 400,
-                        "message": "Coupon Code Exists"
+                        "code": 119,
+                        "message": "Coupon code already exists"
                 }]
         }
 
@@ -1728,7 +1730,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1756,7 +1758,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1781,7 +1783,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 120,
                         "message": "Coupon Doesn't exist"
                 }]
         }
@@ -1805,7 +1807,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 120,
                         "message": "Coupon Doesn't exist"
                 }]
         }
@@ -1814,7 +1816,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 121,
                         "message": "Coupon In use"
                 }]
         }
@@ -1823,7 +1825,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1847,7 +1849,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 120,
                         "message": "Coupon Doesn't exist"
                 }]
         }
@@ -1856,7 +1858,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1886,7 +1888,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1895,7 +1897,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1923,7 +1925,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -1932,7 +1934,7 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 104,
                         "message": "User not found"
                 }]
         }
@@ -1941,8 +1943,8 @@ Update quantity value of a wishlist line item.
 
         {  
                 "errors": [{  
-                        "code": 400,
-                        "message": "Order Item Not found"
+                        "code": 122,
+                        "message": "Order item not found"
                 }]
         }
 
@@ -1981,7 +1983,7 @@ Type is live|claim
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 116,
                         "message": "Bad Request"
                 }]
         }
@@ -2004,7 +2006,7 @@ Type is live|claim
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 116,
                         "message": "Bad Request"
                 }]
         }
@@ -2174,7 +2176,7 @@ Returns claim id and the claim Dates.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2183,7 +2185,7 @@ Returns claim id and the claim Dates.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2428,7 +2430,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2437,7 +2439,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2459,7 +2461,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2468,7 +2470,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2493,7 +2495,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2502,7 +2504,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2524,7 +2526,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2533,7 +2535,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2558,7 +2560,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2567,7 +2569,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2590,7 +2592,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2599,7 +2601,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2624,7 +2626,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2633,7 +2635,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2657,7 +2659,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2666,7 +2668,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2691,7 +2693,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2700,7 +2702,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2718,7 +2720,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2727,7 +2729,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 123,
                         "message": "Domain transfer request not found"
                 }]
         }
@@ -2747,7 +2749,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2756,7 +2758,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2774,7 +2776,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2783,7 +2785,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 124,
                         "message": "Domain reservation not found"
                 }]
         }
@@ -2803,7 +2805,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2812,7 +2814,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2830,7 +2832,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2839,7 +2841,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 125,
                         "message": "Domain Pre-order not found"
                 }]
         }
@@ -2864,7 +2866,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2873,7 +2875,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2899,7 +2901,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2908,7 +2910,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2934,7 +2936,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2943,7 +2945,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 400,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -2967,7 +2969,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -2976,7 +2978,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3000,7 +3002,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3009,7 +3011,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3033,7 +3035,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3042,7 +3044,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 126,
                         "message": "Contact not found"
                 }]
         }
@@ -3063,7 +3065,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3072,7 +3074,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3109,7 +3111,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3118,7 +3120,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3149,7 +3151,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3158,7 +3160,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3187,7 +3189,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3196,7 +3198,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3214,7 +3216,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3223,7 +3225,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3257,7 +3259,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3266,7 +3268,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3297,7 +3299,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3306,7 +3308,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3332,7 +3334,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3341,7 +3343,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3359,7 +3361,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3368,7 +3370,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3404,7 +3406,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3413,7 +3415,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3448,7 +3450,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3457,7 +3459,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3486,7 +3488,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3495,7 +3497,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3513,7 +3515,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3522,7 +3524,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3560,7 +3562,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3569,7 +3571,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3608,7 +3610,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3617,7 +3619,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3646,7 +3648,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3655,7 +3657,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3673,7 +3675,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3682,7 +3684,7 @@ List includes active domains, reserved domains, transfer requests and pre-order 
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
@@ -3711,7 +3713,7 @@ Execute a whois lookup on the queried domain and return result.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3720,7 +3722,7 @@ Execute a whois lookup on the queried domain and return result.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }
         }
@@ -3751,7 +3753,7 @@ Execute a whois lookup on the queried domain and return result.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3808,7 +3810,7 @@ Execute a whois lookup on the queried domain and return result.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 102,
                         "message": "Token unknown or already expired"
                 }]
         }
@@ -3817,7 +3819,7 @@ Execute a whois lookup on the queried domain and return result.
 
         {  
                 "errors": [{  
-                        "code": 1234,
+                        "code": 117,
                         "message": "Domain not found"
                 }]
         }
