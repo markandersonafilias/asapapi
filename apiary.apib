@@ -1946,7 +1946,28 @@ Update quantity value of a wishlist line item.
 
         {  
                 "data": {
-                        "id": "o_45g3rsdfsdfsq", "created": "2014-01-16 12:04:33",  "description":"product name", "quantity":5, "price":"5.20", "discount":"20" 
+                        "id": "o_45g3rsdfsdfsq", 
+                        "orderNumber": "452",
+                        "created": "2014-01-16 12:04:33", 
+                        "tax": "$1.23",
+                        "total": "$61.17",
+                        "status": "COMPLETE",
+                        "lines": [
+                            {
+                                "productId": 12,
+                                "description": ".com domain name - 'myshop.com'",
+                                "quanity": 5,
+                                "price": "$9.99",
+                                "total": "$49.95"
+                            },
+                            {
+                                "productId": 14,
+                                "description": ".mobi domain name - 'myshop.mobi'",
+                                "quanity": 1,
+                                "price": "$9.99",
+                                "total": "$9.99"
+                            }
+                        ]
                 }
         }
         
